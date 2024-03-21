@@ -1,18 +1,36 @@
 using UnityEngine;
 
-public class PoolableEffect : MonoBehaviour, ObjectPool.IPoolable {
-	public ObjectPool.PoolObject Poolable { get; set; }
+namespace ObjectPooling
+{
+	public class PoolableEffect : MonoBehaviour, IPoolable
+	{
+        #region PROPERTIES
 
-	public void AssignPoolable (ObjectPool.PoolObject poolable) {
-		Poolable = poolable;
-	}
+        public ObjectPool.PoolObject Poolable { get; set; }
 
-	void OnParticleSystemStopped () {
-		OnEffectFinish ();
-		ObjectPool.Instance.ReturnToPool (this);
-	}
-	protected virtual void OnEffectFinish () {
+		#endregion
 
-	}
+		#region UNITY_METHODS
 
+		void OnParticleSystemStopped()
+		{
+			OnEffectFinish();
+			ObjectPool.Instance.ReturnToPool(this);
+		}
+
+		#endregion
+
+		#region METHODS
+
+		public void AssignPoolable(ObjectPool.PoolObject poolable)
+		{
+			Poolable = poolable;
+		}
+
+		protected virtual void OnEffectFinish()
+		{
+
+		}
+        #endregion
+    }
 }

@@ -1,9 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T> {
-	static T _instance;
-	public static T Instance {
+
+    #region VARIABLES
+
+    private static T _instance;
+
+    #endregion
+
+    #region PROPERTIES
+
+    public static T Instance {
 		get {
 			return _instance;
 		}
@@ -12,7 +19,11 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
 		}
 	}
 
-	protected virtual void Awake () {
+    #endregion
+
+    #region UNITY_METHODS
+
+    protected virtual void Awake () {
 		{
 			if (_instance == null)
 				_instance = this as T;
@@ -22,4 +33,6 @@ public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T
 			}
 		}
 	}
+
+    #endregion
 }
