@@ -9,6 +9,7 @@ namespace GlobalEventSystem
 
         private static UIEvents _ui;
         private static GameplayEvents _gameplay;
+        private static ModifiableValueEvents _modValue;
 
         #endregion
 
@@ -33,6 +34,17 @@ namespace GlobalEventSystem
                 return _gameplay;
             }
         }
+
+        public static ModifiableValueEvents ModValue
+        {
+            get
+            {
+                if (_modValue == null)
+                    _modValue = new ModifiableValueEvents();
+                return _modValue;
+            }
+        }
+
 
         #endregion
 

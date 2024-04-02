@@ -6,17 +6,34 @@ namespace GlobalEventSystem
 	{
         #region PROPERTIES
 
+        public Timing Time { get; private set; } = new Timing();
         public Moving Move { get; private set; } = new Moving();
 		public Invnentory Equipment { get; private set; } = new Invnentory();
 
-        #endregion
+		#endregion
 
-        #region CLASSES
+		#region CLASSES
 
-        /// <summary>
-        /// Events of player moving
-        /// </summary>
-        public class Moving
+		/// <summary>
+		/// Events of timing
+		/// </summary>
+		public class Timing
+		{
+			/// <summary>
+			/// Called on time ticking
+			/// </summary>
+			public Events.Event OnTick = new Events.Event();
+			/// <summary>
+			/// Called on rare time ticking
+			/// </summary>
+			public Events.Event OnRareTick = new Events.Event();
+			
+		}
+
+		/// <summary>
+		/// Events of player moving
+		/// </summary>
+		public class Moving
 		{
 			/// <summary>
 			/// Called when player jump
