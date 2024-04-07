@@ -4,15 +4,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class ModifiableValue: IUpdatableValue
+public class ModifiableValue : IUpdatableValue
 {
     #region VARIABLES
 
     public event Action OnValueChanged;
 
     [SerializeField] private float baseValue;
-    [SerializeField] private float currentValue;
-    [SerializeField] private List<Modifier> modifiers;
+    [SerializeField, HideInInspector] private float currentValue;
+    [SerializeField, HideInInspector] private List<Modifier> modifiers;
 
     #endregion
 
@@ -23,7 +23,18 @@ public class ModifiableValue: IUpdatableValue
 
     #endregion
 
+    #region CONSTRUCTORS
+
+    public ModifiableValue() { }
+
+    #endregion
+
     #region METHODS
+
+    public void SetBaseValue(float value)
+    {
+        baseValue = value;
+    }
 
     public void AddModifier(Modifier modifier)
     {

@@ -16,14 +16,14 @@ public class ModifiableValuesManager : MonoSingleton<ModifiableValuesManager>
     #region UNITY_METHODS
     private void Start()
     {
-        Events.Gameplay.Time.OnTick += HandeTimePassedForValues;
+        Events.Gameplay.Time.OnRareTick += HandeTimePassedForValues;
         Events.ModValue.Modifiers.OnAddModifier += HandleAddedModifierToModValue;
         Events.ModValue.Modifiers.OnRemoveModifier += HandleRemovedModifierToModValue;
     }
 
     private void OnDestroy()
     {
-        Events.Gameplay.Time.OnTick -= HandeTimePassedForValues;
+        Events.Gameplay.Time.OnRareTick -= HandeTimePassedForValues;
         Events.ModValue.Modifiers.OnAddModifier -= HandleAddedModifierToModValue;
         Events.ModValue.Modifiers.OnRemoveModifier -= HandleRemovedModifierToModValue;
     }

@@ -15,7 +15,7 @@ public class ScritableSingleton<T> : ScriptableObject where T : ScritableSinglet
         get
         {
             if (_instance == null)
-                SetInstane();
+                SetInstance();
             return _instance;
         }
     }
@@ -24,7 +24,7 @@ public class ScritableSingleton<T> : ScriptableObject where T : ScritableSinglet
 
     #region METHODS
 
-    private static void SetInstane()
+    private static void SetInstance()
     {
         _instance = Resources.Load("Singletons/" + typeof(T).ToString(), typeof(T)) as T;
         if (_instance == null)
