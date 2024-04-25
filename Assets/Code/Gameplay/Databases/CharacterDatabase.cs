@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Database/Characters", fileName = "CharactersDatabase")]
-public class CharacterDatabase : ScritableSingleton<CharacterDatabase>
+public class CharacterDatabase : ScriptableSingleton<CharacterDatabase>
 {
     [SerializeField] private CharacterData playerData;
 
