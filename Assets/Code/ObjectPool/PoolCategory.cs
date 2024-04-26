@@ -22,6 +22,16 @@ namespace ObjectPooling
 
         #endregion
 
+        #region CONSTRUCTORS
+
+        public PoolCategory() { }
+        public PoolCategory(string name)
+        {
+            categoryName = name;
+        }
+
+        #endregion
+
         #region METHODS
 
         public void AddInstance(PoolInstance instance)

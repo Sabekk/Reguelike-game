@@ -29,9 +29,9 @@ namespace Editor
             List<PoolCategory> allObjectPoolCategories = new List<PoolCategory>(ObjectPoolDatabase.Instance.PoolCategories);
             allObjectPoolCategories.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
 
-            foreach (var objectPoolCategory in allObjectPoolCategories)
+            for (int i = 0; i < allObjectPoolCategories.Count; i++)
             {
-                tree.AddObjectAtPath(objectPoolCategory.CategoryName, objectPoolCategory);
+                tree.AddObjectAtPath(i + " - " + allObjectPoolCategories[i].CategoryName, allObjectPoolCategories[i]);
             }
 
             return tree;
@@ -49,6 +49,21 @@ namespace Editor
             if (GUILayout.Button("AddNewCategory", SirenixGUIStyles.Button))
             {
                 AddNewCategory();
+            }
+
+            if (GUILayout.Button("DeleteCategory", SirenixGUIStyles.Button))
+            {
+                DeleteCategory();
+            }
+
+
+            SirenixEditorGUI.EndHorizontalToolbar();
+
+            SirenixEditorGUI.BeginHorizontalToolbar();
+
+            if (GUILayout.Button("Refresh", SirenixGUIStyles.Button))
+            {
+                ForceMenuTreeRebuild();
             }
 
             SirenixEditorGUI.EndHorizontalToolbar();
@@ -76,7 +91,23 @@ namespace Editor
 
         private void AddNewCategory()
         {
+            ObjectPoolDatabase.Instance.AddCategory("NewCatoregy");
 
+            ForceMenuTreeRebuild();
+        }
+
+        private void DeleteCategory()
+        {
+            PoolCategory categoryToDelete = MenuTree.Selection.SelectedValue as PoolCategory;
+
+            if (categoryToDelete != null)
+            {
+                if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this category?", categoryToDelete.CategoryName), "Yes", "Cancel") == false)
+                    return;
+
+                ObjectPoolDatabase.Instance.RemoveCategory(categoryToDelete);
+                ForceMenuTreeRebuild();
+            }
         }
     }
 }

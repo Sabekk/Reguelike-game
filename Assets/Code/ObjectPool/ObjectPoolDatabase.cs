@@ -21,6 +21,16 @@ namespace ObjectPooling
 
         #region METHODS
 
+        public void AddCategory(string name)
+        {
+            poolCategories.Add(new PoolCategory(name));
+        }
+
+        public void RemoveCategory(PoolCategory categoryToDelete)
+        {
+            poolCategories.Remove(categoryToDelete);
+        }
+
         #endregion
     }
 }
