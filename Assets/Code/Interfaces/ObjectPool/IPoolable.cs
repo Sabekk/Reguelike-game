@@ -1,4 +1,4 @@
-using static ObjectPooling.ObjectPool;
+using ObjectPooling;
 
 public interface IPoolable
 {

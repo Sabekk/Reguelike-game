@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolCategories:
   - categoryName: ENEMY
-    instances:
-    - name: 
-      poolObject: {fileID: 0}
-      size: 0
+    instances: []
+  - categoryName: PREFABS
+    instances: []

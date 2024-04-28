@@ -6,7 +6,7 @@ namespace ObjectPooling
 	{
         #region PROPERTIES
 
-        public ObjectPool.PoolObject Poolable { get; set; }
+        public PoolObject Poolable { get; set; }
 
 		#endregion
 
@@ -22,7 +22,7 @@ namespace ObjectPooling
 
 		#region METHODS
 
-		public void AssignPoolable(ObjectPool.PoolObject poolable)
+		public void AssignPoolable(PoolObject poolable)
 		{
 			Poolable = poolable;
 		}

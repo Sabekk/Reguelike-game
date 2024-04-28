@@ -26,7 +26,7 @@ namespace Editor
             OdinMenuTreeDrawingConfig style = new OdinMenuTreeDrawingConfig();
             OdinMenuTree tree = new OdinMenuTree(false, style);
 
-            List<PoolCategory> allObjectPoolCategories = new List<PoolCategory>(ObjectPoolDatabase.Instance.PoolCategories);
+            List<PoolCategoryData> allObjectPoolCategories = new List<PoolCategoryData>(ObjectPoolDatabase.Instance.PoolCategories);
             allObjectPoolCategories.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
 
             for (int i = 0; i < allObjectPoolCategories.Count; i++)
@@ -98,7 +98,7 @@ namespace Editor
 
         private void DeleteCategory()
         {
-            PoolCategory categoryToDelete = MenuTree.Selection.SelectedValue as PoolCategory;
+            PoolCategoryData categoryToDelete = MenuTree.Selection.SelectedValue as PoolCategoryData;
 
             if (categoryToDelete != null)
             {

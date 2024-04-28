@@ -9,13 +9,13 @@ namespace ObjectPooling
     {
         #region VARIABLES
 
-        [SerializeField] private List<PoolCategory> poolCategories;
+        [SerializeField] private List<PoolCategoryData> poolCategories;
 
         #endregion
 
         #region PROPERTIES
         public new static ObjectPoolDatabase Instance => GetInstance("Singletons/ObjectPoolDatabase");
-        public List<PoolCategory> PoolCategories => poolCategories;
+        public List<PoolCategoryData> PoolCategories => poolCategories;
 
         #endregion
 
@@ -23,10 +23,10 @@ namespace ObjectPooling
 
         public void AddCategory(string name)
         {
-            poolCategories.Add(new PoolCategory(name));
+            poolCategories.Add(new PoolCategoryData(name));
         }
 
-        public void RemoveCategory(PoolCategory categoryToDelete)
+        public void RemoveCategory(PoolCategoryData categoryToDelete)
         {
             poolCategories.Remove(categoryToDelete);
         }

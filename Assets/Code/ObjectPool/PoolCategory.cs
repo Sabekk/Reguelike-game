@@ -1,7 +1,7 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace ObjectPooling
 {
@@ -10,38 +10,53 @@ namespace ObjectPooling
     {
         #region VARIABLES
 
-        [SerializeField] private string categoryName;
+        [SerializeField] private PoolCategoryData data;
+        [SerializeField] private Transform categoryTransform;
         [SerializeField] private List<PoolInstance> instances;
 
         #endregion
 
         #region PROPERTIES
 
-        public string CategoryName => categoryName;
-        public List<PoolInstance> Instances => instances;
+        public string Name => data.CategoryName;
 
         #endregion
 
         #region CONSTRUCTORS
 
         public PoolCategory() { }
-        public PoolCategory(string name)
+        public PoolCategory(PoolCategoryData data)
         {
-            categoryName = name;
+            this.data = data;
         }
+
+        #endregion
+
+        #region PROPERTIES
 
         #endregion
 
         #region METHODS
 
-        public void AddInstance(PoolInstance instance)
+        public void Initialzie()
         {
-            instances.Add(instance);
+            instances = new List<PoolInstance>();
+
+            categoryTransform = new GameObject(data.CategoryName).transform;
+            categoryTransform.SetParent(ObjectPool.Instance.MainPoolParent);
+
+            foreach (var instanceData in data.Instances)
+                instances.Add(new PoolInstance(instanceData, data.CategoryName, categoryTransform));
         }
 
-        public void RemoveInstance(PoolInstance instance)
+        public PoolInstance TryGetInstance(string instanceName)
         {
-            instances.Remove(instance);
+            foreach (var instance in instances)
+            {
+                if (instance.Name == instanceName)
+                    return instance;
+            }
+            return null;
         }
 
         #endregion
