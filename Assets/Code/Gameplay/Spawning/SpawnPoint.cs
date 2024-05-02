@@ -15,27 +15,22 @@ namespace Gameplay.Arena
         public const string GET_POOL_CATEGORY_INSTANCES_METHOD = "@GetChoosenCategoryInstances(categoryName)";
 
         [SerializeField]
-        [ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)] 
+        [ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)]
         public string categoryName;
         [SerializeField]
         [ValueDropdown(GET_POOL_CATEGORY_INSTANCES_METHOD)]
         private string instanceName;
 
-        [SerializeField]
-        private bool useObjectPool = true;
-
         #endregion
 
         #region PROPERTIES
 
+        public string CategoryName => categoryName;
+        public string InstanceName => instanceName;
+
         #endregion
 
         #region METHODS
-
-        private void Start()
-        {
-            SpawnObject();
-        }
 
         public static IEnumerable GetChoosenCategoryInstances(string categoryName)
         {
@@ -52,13 +47,18 @@ namespace Gameplay.Arena
             return values;
         }
 
+        public T SpawnAndGetObject<T>() where T : Component
+        {
+            PoolObject polledObject = ObjectPool.Instance.GetFromPool(instanceName, categoryName);
+            polledObject.Prefab.transform.SetParent(transform);
+            T spawnedObject = polledObject.GetComponent<T>();
+            return spawnedObject;
+        }
+
         public void SpawnObject()
         {
-            if (useObjectPool)
-            {
-                var gameObj = ObjectPool.Instance.GetFromPool(instanceName, categoryName);
-                gameObj.Prefab.transform.SetParent(transform);
-            }
+            var gameObj = ObjectPool.Instance.GetFromPool(instanceName, categoryName);
+            gameObj.Prefab.transform.SetParent(transform);
         }
 
         #endregion
