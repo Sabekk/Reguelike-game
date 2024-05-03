@@ -60,6 +60,16 @@ namespace ObjectPooling
             poolCategories.Remove(categoryToDelete);
         }
 
+        public PoolCategoryData FindCategoryData(string categoryDataName)
+        {
+            foreach (var poolCategory in PoolCategories)
+            {
+                if (poolCategory.CategoryName == categoryDataName)
+                    return poolCategory;
+            }
+            return null;
+        }
+
         #endregion
     }
 }

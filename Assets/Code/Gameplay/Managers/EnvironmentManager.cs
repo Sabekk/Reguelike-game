@@ -9,6 +9,9 @@ namespace Gameplay.Arena
     {
         #region VARIABLES
 
+        [BoxGroup("Cheat")]
+        [SerializeField] private BiomType biomTypeCheat;
+
         #endregion
 
         #region PROPERTIES
@@ -20,14 +23,27 @@ namespace Gameplay.Arena
         #endregion
 
         #region EDITOR_METHODS
+
+        [BoxGroup("Cheat")]
         [Button]
-        public void SpawnPrefabs()
+        private void SpawnPrefabs()
         {
             foreach (var spawnPoint in spawnPoints)
             {
-                spawnPoint.SpawnObject();
+                spawnPoint.SpawnObject(biomTypeCheat, false);
             }
         }
+
+        [BoxGroup("Cheat")]
+        [Button]
+        private void ClearSpawnPoints()
+        {
+            foreach (var spawnPoint in spawnPoints)
+            {
+                spawnPoint.ClearChildren();
+            }
+        }
+
         #endregion
     }
 }

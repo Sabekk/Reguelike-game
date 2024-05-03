@@ -19,7 +19,7 @@ namespace ObjectPooling
         #region PROPERTIES
 
         public string Name => name;
-        public GameObject PoolObject=> poolObject;
+        public GameObject PoolObject => poolObject;
         public int Size => size;
 
         #endregion

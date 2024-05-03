@@ -44,6 +44,17 @@ namespace ObjectPooling
             instances.Remove(instance);
         }
 
+        public PoolInstanceData FindInstanceData(string instanceDataName)
+        {
+            foreach (var instanceData in Instances)
+            {
+                if (instanceData.Name == instanceDataName)
+                    return instanceData;
+            }
+
+            return null;
+        }
+
         #endregion
     }
 }

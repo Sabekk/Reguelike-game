@@ -33,7 +33,7 @@ namespace Gameplay.Arena
         #region EDITOR_METHODS
 
         [Button]
-        private void ValidateSpawnPointsOfEnemy()
+        private void ValidateSpawnPoints()
         {
             spawnPoints.Clear();
 
@@ -41,7 +41,7 @@ namespace Gameplay.Arena
             foundedSpawnPoints.AddRange(FindObjectsByType<SpawnPoint>(FindObjectsSortMode.None));
 
             foreach (var spawnPoint in foundedSpawnPoints)
-                if (spawnPoint.CategoryName == categoryOfObjects)
+                if (spawnPoint.VariantsContainCategory(categoryOfObjects))
                     spawnPoints.Add(spawnPoint);
         }
 
