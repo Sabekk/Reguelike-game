@@ -19,4 +19,16 @@ MonoBehaviour:
       poolObject: {fileID: 3665806011371310988, guid: 94b49064959a3584bb9b65b07d99ff67, type: 3}
       size: 5
   - categoryName: PREFABS
-    instances: []
+    instances:
+    - name: Cube
+      poolObject: {fileID: 1396126744804500699, guid: 74d9f2a06f745bc498e463592ffd5d6a, type: 3}
+      size: 5
+    - name: Sphere
+      poolObject: {fileID: 28536912901491910, guid: 851203590fa3a3846b90ac53acc8eb17, type: 3}
+      size: 5
+    - name: Capsule
+      poolObject: {fileID: 3801882830187069914, guid: 10f1f72119e986640b79d0e5b3a2f056, type: 3}
+      size: 5
+    - name: Cylinder
+      poolObject: {fileID: 2842577236933452976, guid: 96b6e7158bddd6145b124466528ae4dc, type: 3}
+      size: 5

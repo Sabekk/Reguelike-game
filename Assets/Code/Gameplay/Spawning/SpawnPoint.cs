@@ -19,14 +19,14 @@ namespace Gameplay.Arena
         public string categoryName;
         [SerializeField]
         [ValueDropdown(GET_POOL_CATEGORY_INSTANCES_METHOD)]
-        private string instanceName;
+        private string[] instanceName;
 
         #endregion
 
         #region PROPERTIES
 
         public string CategoryName => categoryName;
-        public string InstanceName => instanceName;
+        public string[] InstanceName => instanceName;
 
         #endregion
 
@@ -49,7 +49,7 @@ namespace Gameplay.Arena
 
         public T SpawnAndGetObject<T>() where T : Component
         {
-            PoolObject polledObject = ObjectPool.Instance.GetFromPool(instanceName, categoryName);
+            PoolObject polledObject = ObjectPool.Instance.GetFromPool(GetRandomInstanceName(), categoryName);
             polledObject.Prefab.transform.SetParent(transform);
             T spawnedObject = polledObject.GetComponent<T>();
             return spawnedObject;
@@ -57,8 +57,14 @@ namespace Gameplay.Arena
 
         public void SpawnObject()
         {
-            var gameObj = ObjectPool.Instance.GetFromPool(instanceName, categoryName);
-            gameObj.Prefab.transform.SetParent(transform);
+            var spawnedObject = ObjectPool.Instance.GetFromPool(GetRandomInstanceName(), categoryName);
+            spawnedObject.Prefab.transform.SetParent(transform);
+            spawnedObject.Prefab.transform.localPosition = Vector3.zero;
+        }
+
+        private string GetRandomInstanceName()
+        {
+            return instanceName[UnityEngine.Random.Range(0, instanceName.Length - 1)];
         }
 
         #endregion

@@ -10,7 +10,7 @@ namespace Gameplay.Arena
     {
         #region VARIABLES
 
-        [SerializeField] protected List<SpawnPoint> spawnPoints;
+        [SerializeReference] protected List<SpawnPoint> spawnPoints;
         [SerializeField]
         [ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)]
         private string categoryOfObjects;
@@ -33,7 +33,7 @@ namespace Gameplay.Arena
         #region EDITOR_METHODS
 
         [Button]
-        public void ValidateSpawnPointsOfEnemy()
+        private void ValidateSpawnPointsOfEnemy()
         {
             spawnPoints.Clear();
 

@@ -38,7 +38,7 @@ namespace Gameplay.Arena
         #region EDITOR_METHODS
 
         [Button]
-        public void SpawnEnemies()
+        private void SpawnEnemies()
         {
             SpawnAllOfEnemies();
         }
