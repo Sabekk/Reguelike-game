@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b83c98a449646cd45877399344666ac5, type: 3}
+  m_Name: EnemiesDatabase
+  m_EditorClassIdentifier: 
+  enemyBiomData:
+  - biomType: 0
+    enemyTypes: []
+  - biomType: 1
+    enemyTypes:
+    - enemyType: 0
+      enemyData:
+      - id: 
+        values:
+          hp:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          stamina:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          strenght:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          agility:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+      - id: 
+        values:
+          hp:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          stamina:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          strenght:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          agility:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+      - id: 
+        values:
+          hp:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          stamina:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          strenght:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          agility:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+      - id: 
+        values:
+          hp:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          stamina:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          strenght:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          agility:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+      - id: 
+        values:
+          hp:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          stamina:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          strenght:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []
+          agility:
+            baseValue: 0
+            currentValue: 0
+            modifiers: []

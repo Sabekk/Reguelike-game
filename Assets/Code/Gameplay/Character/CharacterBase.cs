@@ -13,7 +13,9 @@ namespace Gameplay.Character
         #endregion
 
         #region PROPERTIES
+
         public CharacterValues Values => values;
+
         #endregion
 
         #region CONSTRUCTORS
@@ -30,7 +32,6 @@ namespace Gameplay.Character
         public virtual void Initialize(CharacterData data)
         {
             SetDataValues(data);
-
         }
 
         public virtual void SetDataValues(CharacterData data)
