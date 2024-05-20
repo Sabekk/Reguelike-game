@@ -70,7 +70,7 @@ namespace Gameplay.Arena
         {
             ClearChildren();
 
-                SpawnVariant? variant = GetVariantForBiom(biomType);
+            SpawnVariant? variant = GetVariantForBiom(biomType);
             if (variant == null)
             {
                 Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawnie ustawiony biom dla spawn point! {0}", biomType, this));

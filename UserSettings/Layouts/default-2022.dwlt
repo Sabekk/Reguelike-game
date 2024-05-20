@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Project
+  m_Title: Inspector
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -311,7 +311,7 @@ MonoBehaviour:
     m_SaveData: []
     m_OverlaysVisible: 1
   m_SearchFilter:
-    m_NameFilter: chara
+    m_NameFilter: 
     m_ClassNames: []
     m_AssetLabels: []
     m_AssetBundleNames: []
@@ -321,24 +321,24 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/GameData/Characters
+    - Assets/Resources/Singletons
     m_Globs: []
-    m_OriginalText: chara
+    m_OriginalText: 
     m_ImportLogFlags: 0
     m_FilterByTypeIntersection: 0
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/GameData/Characters
+  - Assets/Resources/Singletons
   m_LastFoldersGridSize: 16
   m_LastProjectPath: D:\Projekty\Reguelike-game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 207}
-    m_SelectedIDs: 5a4c0000
-    m_LastClickedID: 19546
-    m_ExpandedIDs: 000000003c4b00003e4b0000404b0000424b00008c4b000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 434}
+    m_SelectedIDs: a44d0000
+    m_LastClickedID: 19876
+    m_ExpandedIDs: 000000003c4b00003e4b0000404b0000424b0000444b0000724b0000764b0000984b000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -366,7 +366,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 000000003c4b00003e4b0000404b0000424b0000
+    m_ExpandedIDs: 000000003c4b00003e4b0000404b0000424b0000444b0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -393,22 +393,22 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 0
+    m_HadKeyboardFocusLastEvent: 1
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: Characters
-      m_OriginalName: Characters
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 19492
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 5}
     m_CreateAssetUtility:
@@ -506,9 +506,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 344a0000
+      m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 1afbffff26fbffff484a00008e4a0000924a0000a24a0000
+      m_ExpandedIDs: 10fbffff20fbffff26fbffff484a00008e4a0000924a0000a24a0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -862,9 +862,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -9.154444, y: -4.418413, z: 4.469909}
+    m_Target: {x: -9.472716, y: -2.960763, z: 4.5284667}
     speed: 2
-    m_Value: {x: -9.154444, y: -4.418413, z: 4.469909}
+    m_Value: {x: -9.472716, y: -2.960763, z: 4.5284667}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -910,13 +910,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.12988709, y: 0.5772263, z: -0.093631886, w: -0.80073327}
+    m_Target: {x: -0.0942242, y: 0.6378812, z: -0.07905783, w: -0.7602507}
     speed: 2
-    m_Value: {x: -0.129887, y: 0.57722586, z: -0.09363182, w: -0.8007327}
+    m_Value: {x: -0.09434259, y: 0.63673955, z: -0.078916326, w: -0.761206}
   m_Size:
-    m_Target: 12.7514
+    m_Target: 13.084319
     speed: 2
-    m_Value: 12.7514
+    m_Value: 12.52088
   m_Ortho:
     m_Target: 0
     speed: 2

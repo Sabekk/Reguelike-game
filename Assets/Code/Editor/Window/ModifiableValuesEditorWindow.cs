@@ -8,13 +8,13 @@ using UnityEngine;
 
 namespace Editor
 {
-    public class ObjectPoolEditorWindow : OdinMenuEditorWindow
+    public class ModifiableValuesEditorWindow : OdinMenuEditorWindow
     {
-        [MenuItem("Tools/ObjectPool Editor")]
+        [MenuItem("Tools/Modifiable values")]
 
         public static void OpenWindow()
         {
-            ObjectPoolEditorWindow window = GetWindow<ObjectPoolEditorWindow>(string.Format("ObjectPool Editor"));
+            ModifiableValuesEditorWindow window = GetWindow<ModifiableValuesEditorWindow>(string.Format("Modifiable values Editor"));
             window.minSize = new Vector2(800f, 800f);
             window.maxSize = new Vector2(800f, 800f);
 
@@ -26,12 +26,12 @@ namespace Editor
             OdinMenuTreeDrawingConfig style = new OdinMenuTreeDrawingConfig();
             OdinMenuTree tree = new OdinMenuTree(false, style);
 
-            List<PoolCategoryData> allObjectPoolCategories = new List<PoolCategoryData>(ObjectPoolDatabase.Instance.PoolCategories);
-            allObjectPoolCategories.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
+            List<ModifiableValuesCategory> allCategories = new List<ModifiableValuesCategory>(ModifiableValuesDatabase.Instance.ModifiableValueCategories);
+            allCategories.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
 
-            for (int i = 0; i < allObjectPoolCategories.Count; i++)
+            for (int i = 0; i < allCategories.Count; i++)
             {
-                tree.AddObjectAtPath(i + " - " + allObjectPoolCategories[i].CategoryName, allObjectPoolCategories[i]);
+                tree.AddObjectAtPath(i + " - " + allCategories[i].CategoryName, allCategories[i]);
             }
 
             return tree;
@@ -67,13 +67,22 @@ namespace Editor
             }
 
             SirenixEditorGUI.EndHorizontalToolbar();
+
+            SirenixEditorGUI.BeginHorizontalToolbar();
+
+            if (GUILayout.Button("Generate scripts", SirenixGUIStyles.Button))
+            {
+                ModifiableValuesDatabase.Instance.GenerateScripts();
+            }
+
+            SirenixEditorGUI.EndHorizontalToolbar();
         }
 
         protected override void OnDestroy()
         {
             base.OnDestroy();
 
-            Debug.Log("ObjectPool Saving");
+            Debug.Log("ModifiableValues Saving");
             SaveThisAsset();
         }
 
@@ -91,21 +100,20 @@ namespace Editor
 
         private void AddNewCategory()
         {
-            ObjectPoolDatabase.Instance.AddCategory("NewCategory");
-
+            ModifiableValuesDatabase.Instance.AddCategory(new ModifiableValuesCategory());
             ForceMenuTreeRebuild();
         }
 
         private void DeleteCategory()
         {
-            PoolCategoryData categoryToDelete = MenuTree.Selection.SelectedValue as PoolCategoryData;
+            ModifiableValuesCategory categoryToDelete = MenuTree.Selection.SelectedValue as ModifiableValuesCategory;
 
             if (categoryToDelete != null)
             {
                 if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this category?", categoryToDelete.CategoryName), "Yes", "Cancel") == false)
                     return;
 
-                ObjectPoolDatabase.Instance.RemoveCategory(categoryToDelete);
+                ModifiableValuesDatabase.Instance.RemoveCategory(categoryToDelete);
                 ForceMenuTreeRebuild();
             }
         }
