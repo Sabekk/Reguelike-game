@@ -93,7 +93,7 @@ namespace Editor
                 return;
             }
 
-            EditorUtility.SetDirty(ObjectPoolDatabase.Instance);
+            EditorUtility.SetDirty(ModifiableValuesDatabase.Instance);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
