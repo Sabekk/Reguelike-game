@@ -29,19 +29,6 @@ namespace Gameplay.Character
 
         #region METHODS
 
-        public virtual void Initialize(CharacterData data)
-        {
-            SetDataValues(data);
-        }
-
-        public virtual void SetDataValues(CharacterData data)
-        {
-            values.HP.SetBaseValue(data.Values.HP.BaseValue);
-            values.Stamina.SetBaseValue(data.Values.Stamina.BaseValue);
-            values.Strenght.SetBaseValue(data.Values.Strenght.BaseValue);
-            values.Agility.SetBaseValue(data.Values.Agility.BaseValue);
-        }
-
         #endregion
     }
 }

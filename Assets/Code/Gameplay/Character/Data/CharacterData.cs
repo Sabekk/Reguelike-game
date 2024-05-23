@@ -7,14 +7,14 @@ public class CharacterData
     #region VARIABLES
 
     [SerializeField] private string id;
-    [SerializeField] private CharacterValues values;
+    [SerializeField] private List<CharacterStartingValue> startingValues;
 
     #endregion
 
     #region PROPERTIES
 
     public string Id => id;
-    public CharacterValues Values => values;
+    public List<CharacterStartingValue> StartingValues => startingValues;
 
     #endregion
 }

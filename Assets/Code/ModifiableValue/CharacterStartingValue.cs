@@ -1,7 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
+[Serializable]
 public class CharacterStartingValue : StartingValue
 {
     #region VARIABLES
@@ -14,9 +13,9 @@ public class CharacterStartingValue : StartingValue
 
     #region METHODS
 
-    protected override List<string> GetStartingValue()
+    protected override string GetCategory()
     {
-        return null;
+        return ModifiableValuesDefinitions.CharacterValuesCategory;
     }
 
     #endregion

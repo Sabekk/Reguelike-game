@@ -14,13 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyBiomData:
   - biomType: 0
-    enemyTypes: []
-  - biomType: 1
     enemyTypes:
     - enemyType: 0
       enemyData:
-      - id: 
-      - id: 
-      - id: 
-      - id: 
-      - id: 
+      - id: Warrior_test
+        startingValues:
+        - valueName: HP
+          value: 10
+  - biomType: 1
+    enemyTypes: []

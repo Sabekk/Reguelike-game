@@ -1,8 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
-using ModifiableValues;
 
-namespace Editor
+namespace ModifiableValues
 {
     [CreateAssetMenu(menuName = "Database/ModifiableValuesDatabase", fileName = "ModifiableValuesDatabase")]
     public class ModifiableValuesDatabase : ScriptableSingleton<ModifiableValuesDatabase>
@@ -53,6 +52,18 @@ namespace Editor
                 ScriptsGenerator.GenerateScript(category);
 
             ScriptsGenerator.GenerateDefinitions(modifiableValueCategories);
+        }
+
+        public List<string> GetAllModifiableNamesFromCategory(string categoryName)
+        {
+            List<string> listOfNames = new List<string>();
+
+            foreach (var category in modifiableValueCategories)
+                if (category.CategoryName == categoryName)
+                    foreach (var modifiableValueData in category.ModifiableValueDatas)
+                        listOfNames.Add(modifiableValueData.ValueName);
+
+            return listOfNames;
         }
 
         #endregion
