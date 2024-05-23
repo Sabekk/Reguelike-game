@@ -1,6 +1,6 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using ModifiableValues;
 
 namespace Editor
 {
@@ -51,6 +51,8 @@ namespace Editor
         {
             foreach (var category in modifiableValueCategories)
                 ScriptsGenerator.GenerateScript(category);
+
+            ScriptsGenerator.GenerateDefinitions(modifiableValueCategories);
         }
 
         #endregion

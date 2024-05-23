@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using ModifiableValues;
 
 public class ModifiableValuesScriptsGenerator
 {
@@ -42,6 +43,54 @@ public class ModifiableValuesScriptsGenerator
         scriptText.AppendLine("}");
 
         SaveClassToFile(className);
+    }
+
+    public void GenerateDefinitions(List<ModifiableValuesCategory> categories)
+    {
+        scriptText.Clear();
+        string className = "ModifiableValuesDefinitions";
+        CreateClassHeader(className);
+
+        CreateDefinitionCategories(categories);
+        CreateDefinitionCategoryElements(categories);
+
+        scriptText.AppendLine("}");
+
+        SaveClassToFile(className);
+    }
+
+    private void CreateDefinitionCategories(List<ModifiableValuesCategory> categories)
+    {
+        scriptText.AppendLine("\t#region CATEGORIES");
+        scriptText.AppendLine();
+        foreach (var category in categories)
+            AddDefinition(ConvertToPascalCase(category.CategoryName), "\t", "Category");
+
+        scriptText.AppendLine();
+        scriptText.AppendLine("\t#endregion");
+    }
+    private void CreateDefinitionCategoryElements(List<ModifiableValuesCategory> categories)
+    {
+        scriptText.AppendLine();
+        scriptText.AppendLine("\t#region CATEGORY_ELEMENTS");
+
+        foreach (var category in categories)
+        {
+            scriptText.AppendLine();
+            scriptText.AppendLine(StringBuilderScaler.GetScaledText("\tpublic static class {0}", category.CategoryName));
+            scriptText.AppendLine("\t{");
+            foreach (var modifiableData in category.ModifiableValueDatas)
+                AddDefinition(modifiableData.ValueName, "\t\t");
+            scriptText.AppendLine("\t}");
+        }
+
+        scriptText.AppendLine();
+        scriptText.AppendLine("\t#endregion");
+    }
+
+    private void AddDefinition(string definitionName, string space, string additionalText = "")
+    {
+        scriptText.AppendLine(StringBuilderScaler.GetScaledText("{0}public const string {1}{2} = \"{1}\";", space, definitionName, additionalText));
     }
 
     private void CreateClassUses()
