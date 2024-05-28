@@ -21,5 +21,11 @@ MonoBehaviour:
         startingValues:
         - valueName: HP
           value: 10
+      - id: Warrior test 2
+        startingValues: []
   - biomType: 1
-    enemyTypes: []
+    enemyTypes:
+    - enemyType: 1
+      enemyData:
+      - id: fire archer
+        startingValues: []
