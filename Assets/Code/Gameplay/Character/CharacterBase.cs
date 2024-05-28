@@ -8,13 +8,13 @@ namespace Gameplay.Character
     {
         #region VARIABLES
 
-        [SerializeField] private CharacterValues values;
+        //[SerializeField] private CharacterValues values;
 
         #endregion
 
         #region PROPERTIES
 
-        public CharacterValues Values => values;
+        //public CharacterValues Values => values;
 
         #endregion
 

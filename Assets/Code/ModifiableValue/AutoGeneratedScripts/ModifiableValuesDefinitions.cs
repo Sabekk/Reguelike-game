@@ -12,9 +12,9 @@
 	{
 		public const string HP = "HP";
 		public const string Mana = "Mana";
-		public const string Stamina = "Stamina";
-		public const string Strenght = "Strenght";
+		public const string Strengh = "Strengh";
 		public const string Agility = "Agility";
+		public const string Stamina = "Stamina";
 	}
 
 	#endregion

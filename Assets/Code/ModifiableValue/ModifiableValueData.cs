@@ -8,7 +8,7 @@ namespace ModifiableValues
     {
         #region VARIABLES
 
-        [SerializeField] private string valueName;
+        [SerializeField] private string id;
         [SerializeField] private Sprite icon;
         [SerializeField] private bool canApplyModifiers;
         [SerializeField] private bool hasMinValue;
@@ -20,7 +20,7 @@ namespace ModifiableValues
 
         #region PROPERTIES
 
-        public string ValueName => valueName;
+        public string Id => id;
         public Sprite Icon => icon;
         public bool CanApplyModifiers => canApplyModifiers;
         public bool HasMinValue => hasMinValue;

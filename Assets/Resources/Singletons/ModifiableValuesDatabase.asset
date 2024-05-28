@@ -15,35 +15,35 @@ MonoBehaviour:
   modifiableValueCategories:
   - categoryName: CharacterValues
     modifiableValueDatas:
-    - valueName: HP
+    - id: HP
       icon: {fileID: 0}
       canApplyModifiers: 1
       hasMinValue: 1
       hasMaxValue: 0
       minValue: 0
       maxValue: 0
-    - valueName: Mana
+    - id: Mana
       icon: {fileID: 0}
       canApplyModifiers: 1
       hasMinValue: 1
       hasMaxValue: 0
       minValue: 0
       maxValue: 0
-    - valueName: Stamina
+    - id: Strengh
       icon: {fileID: 0}
       canApplyModifiers: 1
       hasMinValue: 1
       hasMaxValue: 0
       minValue: 0
       maxValue: 0
-    - valueName: Strenght
+    - id: Agility
       icon: {fileID: 0}
       canApplyModifiers: 1
       hasMinValue: 1
       hasMaxValue: 0
       minValue: 0
       maxValue: 0
-    - valueName: Agility
+    - id: Stamina
       icon: {fileID: 0}
       canApplyModifiers: 1
       hasMinValue: 1

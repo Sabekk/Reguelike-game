@@ -54,6 +54,37 @@ namespace ModifiableValues
             ScriptsGenerator.GenerateDefinitions(modifiableValueCategories);
         }
 
+        public ModifiableValueData FindData(string dataId, string categoryName)
+        {
+            foreach (var category in modifiableValueCategories)
+            {
+                if (category.CategoryName != categoryName)
+                    continue;
+
+                foreach (var data in category.ModifiableValueDatas)
+                {
+                    if (data.Id == dataId)
+                        return data;
+                }
+            }
+
+            return null;
+        }
+
+        public ModifiableValueData FindData(string dataId)
+        {
+            foreach (var category in modifiableValueCategories)
+            {
+                foreach (var data in category.ModifiableValueDatas)
+                {
+                    if (data.Id == dataId)
+                        return data;
+                }
+            }
+
+            return null;
+        }
+
         public List<string> GetAllModifiableNamesFromCategory(string categoryName)
         {
             List<string> listOfNames = new List<string>();
@@ -61,7 +92,7 @@ namespace ModifiableValues
             foreach (var category in modifiableValueCategories)
                 if (category.CategoryName == categoryName)
                     foreach (var modifiableValueData in category.ModifiableValueDatas)
-                        listOfNames.Add(modifiableValueData.ValueName);
+                        listOfNames.Add(modifiableValueData.Id);
 
             return listOfNames;
         }

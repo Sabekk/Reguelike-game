@@ -1,4 +1,5 @@
 using GlobalEventSystem;
+using ModifiableValues;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,16 +11,29 @@ public class ModifiableValue : IUpdatableValue
 
     public event Action OnValueChanged;
 
+    [SerializeField] private string id;
     [SerializeField] private float baseValue;
     [SerializeField, HideInInspector] private float currentValue;
     [SerializeField, HideInInspector] private List<Modifier> modifiers;
+    [SerializeField, HideInInspector] private ModifiableValueData data;
 
     #endregion
 
     #region PROPERTIES
 
+    public string Id => id;
     public float BaseValue => baseValue;
     public float CurrentValue => currentValue;
+
+    public ModifiableValueData Data
+    {
+        get
+        {
+            if (data == null)
+                data = ModifiableValuesDatabase.Instance.FindData(id);
+            return data;
+        }
+    }
 
     #endregion
 
@@ -30,6 +44,12 @@ public class ModifiableValue : IUpdatableValue
     #endregion
 
     #region METHODS
+
+    public void InitializeData(ModifiableValueData data)
+    {
+        id = data.Id;
+        this.data = data;
+    }
 
     public void SetBaseValue(float value)
     {

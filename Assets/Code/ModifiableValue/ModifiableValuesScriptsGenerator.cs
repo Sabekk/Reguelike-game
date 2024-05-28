@@ -34,7 +34,8 @@ public class ModifiableValuesScriptsGenerator
     public void GenerateScript(ModifiableValuesCategory category)
     {
         scriptText.Clear();
-        string className = ConvertToPascalCase(category.CategoryName);
+        string fileName = ConvertToPascalCase(category.CategoryName);
+        string className = StringBuilderScaler.GetScaledText("{0} : ModifiableValuesContainer", fileName);
 
         CreateClassUses();
         scriptText.AppendLine();
@@ -42,7 +43,7 @@ public class ModifiableValuesScriptsGenerator
         CreateValues(category.ModifiableValueDatas);
         scriptText.AppendLine("}");
 
-        SaveClassToFile(className);
+        SaveClassToFile(fileName);
     }
 
     public void GenerateDefinitions(List<ModifiableValuesCategory> categories)
@@ -80,7 +81,7 @@ public class ModifiableValuesScriptsGenerator
             scriptText.AppendLine(StringBuilderScaler.GetScaledText("\tpublic static class {0}", category.CategoryName));
             scriptText.AppendLine("\t{");
             foreach (var modifiableData in category.ModifiableValueDatas)
-                AddDefinition(modifiableData.ValueName, "\t\t");
+                AddDefinition(modifiableData.Id, "\t\t");
             scriptText.AppendLine("\t}");
         }
 
@@ -96,6 +97,7 @@ public class ModifiableValuesScriptsGenerator
     private void CreateClassUses()
     {
         scriptText.AppendLine("using UnityEngine;");
+        scriptText.AppendLine("using ModifiableValues;");
     }
 
     private void CreateClassHeader(string className)
@@ -123,12 +125,12 @@ public class ModifiableValuesScriptsGenerator
 
     private void AddVariable(ModifiableValueData valueSettings)
     {
-        scriptText.AppendLine("\t\tprivate " + nameof(ModifiableValue) + " " + ConvertToCamelCase(valueSettings.ValueName) + " = new ();");
+        scriptText.AppendLine("\tprivate " + nameof(ModifiableValue) + " " + ConvertToCamelCase(valueSettings.Id) + " = new();");
     }
 
     private void AddProperty(ModifiableValueData valueSettings)
     {
-        scriptText.AppendLine("\t\tpublic " + nameof(ModifiableValue) + " " + valueSettings.ValueName + " => " + ConvertToCamelCase(valueSettings.ValueName) + ";");
+        scriptText.AppendLine("\tpublic " + nameof(ModifiableValue) + " " + valueSettings.Id + " => " + ConvertToCamelCase(valueSettings.Id) + ";");
     }
 
     private void CloseRegion()
