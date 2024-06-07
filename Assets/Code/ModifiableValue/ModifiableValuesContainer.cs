@@ -2,14 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using System;
 
 namespace ModifiableValues
 {
+    [Serializable]
     public class ModifiableValuesContainer
     {
         #region VARIABLES
 
-        [SerializeField] private List<ModifiableValue> allValues;
+        [SerializeField] private List<ModifiableValue> allValues = new List<ModifiableValue>();
 
         #endregion
 
@@ -32,7 +34,9 @@ namespace ModifiableValues
 
         public void Initialze()
         {
-            foreach (var propertyInfo in typeof(ModifiableValue).GetProperties())
+            allValues.Clear();
+            PropertyInfo[] listOfProperties = GetType().GetProperties();
+            foreach (PropertyInfo propertyInfo in listOfProperties)
             {
                 object propertyObject = propertyInfo.GetValue(this);
                 if (propertyObject is ModifiableValue modifiableValue)
@@ -41,6 +45,24 @@ namespace ModifiableValues
                     HandleValuePropertyInfo(modifiableValue, propertyInfo);
                 }
             }
+        }
+
+        public void SetStartingValues(List<StartingValue> startingValues)
+        {
+            foreach (var startingValue in startingValues)
+                SetStartingValue(startingValue);
+        }
+
+        public void SetStartingValue(StartingValue startingValue)
+        {
+            ModifiableValue value = GetValue(startingValue.ValueId);
+            if (value == null)
+            {
+                Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawnie ustawiony starting value dla {0}, nie odnaleziono wartoœci {1}", GetType().Name, startingValue.ValueId));
+                return;
+            }
+
+            value.SetBaseValue(startingValue.Value);
         }
 
         public ModifiableValue GetValue(string valueId)

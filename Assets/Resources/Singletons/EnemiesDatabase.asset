@@ -19,13 +19,16 @@ MonoBehaviour:
       enemyData:
       - id: Warrior_test
         startingValues:
-        - valueName: HP
+        - valueId: HP
           value: 10
+        modelPool: SphereTest
       - id: Warrior test 2
         startingValues: []
+        modelPool: 
   - biomType: 1
     enemyTypes:
     - enemyType: 1
       enemyData:
       - id: fire archer
         startingValues: []
+        modelPool: 

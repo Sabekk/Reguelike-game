@@ -18,73 +18,6 @@ namespace Gameplay.Arena
 
         #region METHODS
 
-        public T SpawnAndGetObject<T>() where T : Component
-        {
-            return SpawnAndGetObject<T>(ArenaManager.Instance.CurrentBiom);
-        }
-
-        public T SpawnAndGetObject<T>(BiomType biomType) where T : Component
-        {
-            ClearChildren();
-
-            PrefabSpawnVariant variant = GetVariantForBiom(biomType);
-            if (variant == null)
-            {
-                Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawnie ustawiony biom dla spawn point! {0}", biomType, this));
-                variant = GetVariantForBiom(BiomType.DEFAULT);
-            }
-            if (variant == null)
-                return null;
-
-            PoolObject polledObject = ObjectPool.Instance.GetFromPool(variant.GetRandomInstanceName(variant.InstanceName), variant.CategoryName);
-            polledObject.Prefab.transform.SetParent(transform);
-            T spawnedObject = polledObject.GetComponent<T>();
-            return spawnedObject;
-        }
-
-        public void SpawnObject()
-        {
-            SpawnObject(ArenaManager.Instance.CurrentBiom, true);
-        }
-
-        public void SpawnObject(BiomType biomType, bool useObjectPool)
-        {
-            ClearChildren();
-
-            PrefabSpawnVariant variant = GetVariantForBiom(biomType);
-            if (variant == null)
-            {
-                Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawnie ustawiony biom dla spawn point! {0}", biomType, this));
-                variant = GetVariantForBiom(BiomType.DEFAULT);
-            }
-            if (variant == null)
-                return;
-
-            string instanceName = variant.GetRandomInstanceName(variant.InstanceName);
-            GameObject spawnedObject = null;
-
-            if (useObjectPool)
-                spawnedObject = ObjectPool.Instance.GetFromPool(instanceName, variant.CategoryName).Prefab;
-            else
-            {
-                PoolCategoryData poolCategoryData = ObjectPoolDatabase.Instance.FindCategoryData(variant?.CategoryName);
-                if (poolCategoryData == null)
-                    return;
-
-                PoolInstanceData poolInstanceData = poolCategoryData.FindInstanceData(instanceName);
-                if (poolInstanceData == null)
-                    return;
-
-                spawnedObject = Instantiate(poolInstanceData.PoolObject);
-            }
-
-            if (spawnedObject != null)
-            {
-                spawnedObject.transform.SetParent(transform);
-                spawnedObject.transform.localPosition = Vector3.zero;
-            }
-        }
-
         public bool VariantsContainCategory(string categoryName)
         {
             foreach (var variant in SpawnVariants)
@@ -142,6 +75,16 @@ namespace Gameplay.Arena
         #endregion
 
         #region METHODS
+
+        public override string GetCategory()
+        {
+            return CategoryName;
+        }
+
+        public override string[] GetVariants()
+        {
+            return InstanceName;
+        }
 
         #endregion
     }

@@ -1,4 +1,5 @@
 using Gameplay.Character;
+using ObjectPooling;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -28,10 +29,29 @@ namespace Gameplay.Arena
 
         private void SpawnAllOfEnemies()
         {
-            //foreach (var spawnPoint in spawnPoints)
-            //{
-            //    enemies.Add(spawnPoint.SpawnAndGetObject<Enemy>());
-            //}
+            foreach (var spawnPoint in spawnPoints)
+            {
+                EnemyData enemyData = spawnPoint.GetVariantData();
+                if (enemyData == null)
+                    continue;
+                CreateEnemy(enemyData);
+            }
+        }
+
+        private void CreateEnemy(EnemyData enemyData)
+        {
+            Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPool).GetComponent<Enemy>();
+            if (enemy == null)
+            {
+                Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawny przypisany model enemy dla {0}", enemyData.Id));
+                return;
+            }
+
+            enemy.Initialize();
+            enemy.SetData(enemyData);
+            enemy.SetStartingValues();
+
+            enemies.Add(enemy);
         }
 
         #endregion

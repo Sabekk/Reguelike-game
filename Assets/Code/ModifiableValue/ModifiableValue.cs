@@ -15,7 +15,8 @@ public class ModifiableValue : IUpdatableValue
     [SerializeField] private float baseValue;
     [SerializeField, HideInInspector] private float currentValue;
     [SerializeField, HideInInspector] private List<Modifier> modifiers;
-    [SerializeField, HideInInspector] private ModifiableValueData data;
+
+    private ModifiableValueData data;
 
     #endregion
 

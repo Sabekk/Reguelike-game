@@ -1,3 +1,5 @@
+using Gameplay.Character;
+using ObjectPooling;
 using Sirenix.OdinInspector;
 using System;
 using UnityEngine;
@@ -15,6 +17,28 @@ namespace Gameplay.Arena
         #endregion
 
         #region METHODS
+
+        public EnemyData GetVariantData()
+        {
+            return GetVariantData(ArenaManager.Instance.CurrentBiom);
+        }
+
+        public EnemyData GetVariantData(BiomType biomType)
+        {
+            ClearChildren();
+
+            EnemySpawnVariant variant = GetVariantForBiom(biomType);
+            if (variant == null)
+            {
+                Debug.LogWarning(StringBuilderScaler.GetScaledText("Niepoprawnie ustawiony biom dla enemy spawn point! {0}", biomType), this);
+                variant = GetVariantForBiom(BiomType.DEFAULT);
+            }
+
+            if (variant == null)
+                return null;
+
+            return EnemiesDatabase.Instance.GetEnemyData(biomType, variant.EnemyType, variant.GetRandomVariantName());
+        }
 
         #endregion
     }
@@ -41,6 +65,16 @@ namespace Gameplay.Arena
         #endregion
 
         #region METHODS
+
+        public override string GetCategory()
+        {
+            return EnemyType.ToString();
+        }
+
+        public override string[] GetVariants()
+        {
+            return EnemyIds;
+        }
 
         #endregion
     }

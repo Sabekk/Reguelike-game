@@ -66,6 +66,24 @@ public class EnemiesDatabase : ScriptableSingleton<EnemiesDatabase>
         return enemyData;
     }
 
+    public EnemyData GetEnemyData(BiomType biomType, EnemyType enemyType, string enemyId)
+    {
+        List<EnemyTypeCategoryData> categoryDatas = GetCategoriesData(biomType);
+
+        foreach (var categoryData in categoryDatas)
+        {
+            if (categoryData.EnemyType == enemyType)
+            {
+                EnemyData data = categoryData.EnemyDatas.Find(x => x.Id == enemyId);
+                if (data == null)
+                    Debug.LogError(StringBuilderScaler.GetScaledText("Nie znaleziono EnemyData dla BiomType:{0} - EnemyType:{1} - Id{2}", biomType, enemyType, enemyId));
+                return data;
+            }
+        }
+        return null;
+    }
+
+
     #endregion
 
     #region EDITOR_METHODS

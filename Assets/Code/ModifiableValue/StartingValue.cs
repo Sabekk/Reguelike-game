@@ -10,12 +10,15 @@ public abstract class StartingValue
     #region VARIABLES
 
     [ValueDropdown(nameof(GetStartingValue))]
-    [SerializeField] string valueName;
+    [SerializeField] string valueId;
     [SerializeField] float value;
 
     #endregion
 
     #region PROPERTIES
+
+    public string ValueId => valueId;
+    public float Value => value;
 
     #endregion
 
