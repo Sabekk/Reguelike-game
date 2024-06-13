@@ -3,6 +3,7 @@ using ObjectPooling;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using UnityEngine;
 
 namespace Gameplay.Arena
@@ -27,24 +28,27 @@ namespace Gameplay.Arena
             SpawnAllOfEnemies();
         }
 
-        private void SpawnAllOfEnemies()
+        private async void SpawnAllOfEnemies()
         {
-            foreach (var spawnPoint in spawnPoints)
+            for (int i = 0; i < spawnPoints.Count; i++)
             {
-                EnemyData enemyData = spawnPoint.GetVariantData();
+                EnemyData enemyData = spawnPoints[i].GetVariantData();
                 if (enemyData == null)
                     continue;
-                CreateEnemy(enemyData);
+
+                Enemy enemy = await CreateEnemy(enemyData);
+                if (enemy)
+                    enemy.transform.position = spawnPoints[i].transform.position;
             }
         }
 
-        private void CreateEnemy(EnemyData enemyData)
+        private async Task<Enemy> CreateEnemy(EnemyData enemyData)
         {
             Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPool).GetComponent<Enemy>();
             if (enemy == null)
             {
                 Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawny przypisany model enemy dla {0}", enemyData.Id));
-                return;
+                return null;
             }
 
             enemy.Initialize();
@@ -52,6 +56,10 @@ namespace Gameplay.Arena
             enemy.SetStartingValues();
 
             enemies.Add(enemy);
+
+            await Task.Yield();
+
+            return enemy;
         }
 
         #endregion
