@@ -25,10 +25,10 @@ namespace Gameplay.Arena
 
         public void Initialize()
         {
-            SpawnAllOfEnemies();
+            SpawnAllOfEnemiesAsync();
         }
 
-        private async void SpawnAllOfEnemies()
+        private async void SpawnAllOfEnemiesAsync()
         {
             for (int i = 0; i < spawnPoints.Count; i++)
             {
@@ -36,13 +36,13 @@ namespace Gameplay.Arena
                 if (enemyData == null)
                     continue;
 
-                Enemy enemy = await CreateEnemy(enemyData);
+                Enemy enemy = await CreateEnemyAsync(enemyData);
                 if (enemy)
                     enemy.transform.position = spawnPoints[i].transform.position;
             }
         }
 
-        private async Task<Enemy> CreateEnemy(EnemyData enemyData)
+        private async Task<Enemy> CreateEnemyAsync(EnemyData enemyData)
         {
             Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPool).GetComponent<Enemy>();
             if (enemy == null)
@@ -69,7 +69,7 @@ namespace Gameplay.Arena
         [Button]
         private void SpawnEnemies()
         {
-            SpawnAllOfEnemies();
+            SpawnAllOfEnemiesAsync();
         }
 
         [Button]
