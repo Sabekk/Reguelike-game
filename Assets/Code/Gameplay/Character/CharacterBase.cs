@@ -10,12 +10,14 @@ namespace Gameplay.Character
 
         [SerializeField] private CharacterValues values;
         [SerializeField] private CharacterData data;
+        [SerializeField, HideInInspector] private bool isInitialzied;
 
         #endregion
 
         #region PROPERTIES
 
         public CharacterValues Values => values;
+        protected bool IsInitialzied => isInitialzied;
 
         #endregion
 
@@ -35,6 +37,8 @@ namespace Gameplay.Character
             data = new();
 
             values.Initialze();
+
+            isInitialzied = true;
         }
 
         public void SetData(CharacterData data)

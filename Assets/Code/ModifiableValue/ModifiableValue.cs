@@ -50,11 +50,14 @@ public class ModifiableValue : IUpdatableValue
     {
         id = data.Id;
         this.data = data;
+
+        modifiers = new List<Modifier>();
     }
 
     public void SetBaseValue(float value)
     {
         baseValue = value;
+        RecalculateCurrentValue();
     }
 
     public void AddModifier(Modifier modifier)
@@ -98,6 +101,7 @@ public class ModifiableValue : IUpdatableValue
     private void RecalculateCurrentValue()
     {
         float oldValue = currentValue;
+        currentValue = baseValue;
 
         foreach (var modifier in modifiers)
         {
@@ -118,7 +122,7 @@ public class ModifiableValue : IUpdatableValue
         }
 
         if (currentValue != oldValue)
-            OnValueChanged.Invoke();
+            OnValueChanged?.Invoke();
     }
 
     #endregion

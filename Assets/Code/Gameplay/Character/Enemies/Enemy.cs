@@ -16,6 +16,12 @@ namespace Gameplay.Character
 
         #region METHODS
 
+        private void Update()
+        {
+            if (IsInitialzied)
+                Debug.Log(Values.HP.CurrentValue);
+        }
+
         #endregion
     }
 }
