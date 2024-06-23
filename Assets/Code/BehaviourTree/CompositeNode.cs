@@ -2,15 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.AIBehaviours
+namespace BehaviourTreeSystem
 {
-    public class AIBehaviourManager : MonoSingleton<AIBehaviourManager>
+    public abstract class CompositeNode : Node
     {
         #region VARIABLES
+
+        [SerializeField] private List<Node> nodes;
 
         #endregion
 
         #region PROPERTIES
+
+        protected List<Node> Childs => nodes;
 
         #endregion
 
