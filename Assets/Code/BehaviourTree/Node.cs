@@ -10,11 +10,15 @@ namespace BehaviourTreeSystem
 
         [SerializeField] private NodeState state;
         [SerializeField] private bool started = false;
+        [SerializeField] private string guid;
+        [SerializeField] private Vector2 position;
 
         #endregion
 
         #region PROPERTIES
 
+        public Vector2 Position { get { return position; } set { position = value; } }
+        public string Guid { get { return guid; } set { guid = value; } }
         public NodeState State => state;
 
         #endregion
@@ -23,7 +27,7 @@ namespace BehaviourTreeSystem
 
         public NodeState Update()
         {
-            if(started == false)
+            if (started == false)
             {
                 started = true;
                 OnStart();
@@ -31,7 +35,7 @@ namespace BehaviourTreeSystem
 
             state = OnUpdate();
 
-            if(state!= NodeState.RUNNING)
+            if (state != NodeState.RUNNING)
             {
                 started = false;
                 OnStop();

@@ -1,0 +1,16 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" xsi="http://www.w3.org/2001/XMLSchema-instance" engine="UnityEngine.UIElements" editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/Code/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uss?fileID=7433441132597879392&amp;guid=e73ba3ebb6f49b44a8b47bd036b72a4f&amp;type=3#BehaviourTreeEditor" />
+    <uie:Toolbar>
+        <uie:ToolbarMenu tabindex="-1" parse-escape-sequences="true" display-tooltip-when-elided="true" text="Assets" />
+    </uie:Toolbar>
+    <BehaviourTreeSplitView>
+        <ui:VisualElement name="left-panel" style="flex-grow: 1; flex-basis: auto; width: 300px; max-width: 500px; min-width: 300px; opacity: 1; flex-shrink: 0;">
+            <ui:Label tabindex="-1" text="Inspector" parse-escape-sequences="true" display-tooltip-when-elided="true" name="Inspector-Label" style="background-color: rgb(40, 40, 40); color: rgb(255, 255, 255);" />
+            <BehaviourTreeInspectorView />
+        </ui:VisualElement>
+        <ui:VisualElement name="right-panel" style="flex-grow: 1;">
+            <ui:Label tabindex="-1" text="Tree view" parse-escape-sequences="true" display-tooltip-when-elided="true" name="tree-view-Label" style="color: rgb(255, 255, 255); background-color: rgb(40, 40, 40);" />
+            <BehaviourTreeView style="flex-grow: 1;" />
+        </ui:VisualElement>
+    </BehaviourTreeSplitView>
+</ui:UXML>

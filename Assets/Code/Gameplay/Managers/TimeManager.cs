@@ -4,8 +4,11 @@ using UnityEngine;
 public class TimeManager : MonoSingleton<TimeManager>
 {
     #region VARIABLES
-    [SerializeField, HideInInspector] private float rareTickTime = 1;
+
+
+    [SerializeField] private float rareTickTime = 1;
     [SerializeField, HideInInspector] private float currentTime = 0;
+
     #endregion
 
     #region PROPERTIES
