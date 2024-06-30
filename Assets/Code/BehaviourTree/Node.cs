@@ -44,6 +44,11 @@ namespace BehaviourTreeSystem
             return state;
         }
 
+        public void SetPosition(Vector2 position)
+        {
+            this.position = position;
+        }
+
         protected abstract void OnStart();
         protected abstract void OnStop();
         protected abstract NodeState OnUpdate();

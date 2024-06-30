@@ -4,6 +4,7 @@ using UnityEngine;
 using BehaviourTreeSystem;
 using System;
 using UnityEditor.Experimental.GraphView;
+using UnityEngine.UIElements;
 
 public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
@@ -18,6 +19,8 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
     #region PROPERTIES
 
     public BehaviourTreeSystem.Node Node => node;
+    public Port Input => input;
+    public Port Output => output;
 
     #endregion
 
@@ -39,12 +42,46 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
     private void CreateOutputPorst()
     {
+        switch (Node)
+        {
+            case ActionNode:
+            case CompositeNode:
+            case DecoratorNode:
+                input = InstantiatePort(Orientation.Vertical, Direction.Input, Port.Capacity.Single, typeof(bool));
+                break;
+        }
 
+        if (input != null)
+        {
+            input.portName = "";
+            inputContainer.Add(input);
+        }
+
+        inputContainer.style.alignItems = Align.Center;
     }
 
     private void CreateInputPorst()
     {
+        switch (Node)
+        {
+            case ActionNode:
+                break;
+            case CompositeNode:
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
+                break;
+            case DecoratorNode:
+                //case RootNode:
+                output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
+                break;
+        }
 
+        if (output != null)
+        {
+            output.portName = "";
+            outputContainer.Add(output);
+        }
+
+        outputContainer.style.alignSelf = Align.Center;
     }
 
     #endregion

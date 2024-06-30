@@ -14,11 +14,16 @@ namespace BehaviourTreeSystem
 
         #region PROPERTIES
 
-        protected Node Child => node;
+        public Node Child => node;
 
         #endregion
 
         #region METHODS
+
+        public void SetChild(Node child)
+        {
+            this.node = child;
+        }
 
         #endregion
     }

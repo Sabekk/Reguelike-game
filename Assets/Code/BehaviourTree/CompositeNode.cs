@@ -14,11 +14,21 @@ namespace BehaviourTreeSystem
 
         #region PROPERTIES
 
-        protected List<Node> Childs => nodes;
+        public List<Node> Childs => nodes;
 
         #endregion
 
         #region METHODS
+
+        public void AddChild(Node child)
+        {
+            nodes.Add(child);
+        }
+
+        public void RemoveChild(Node child)
+        {
+            nodes.Remove(child);
+        }
 
         #endregion
     }

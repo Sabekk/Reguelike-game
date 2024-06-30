@@ -53,6 +53,41 @@ namespace BehaviourTreeSystem
             AssetDatabase.SaveAssets();
         }
 
+        public void AddChild(Node parent, Node child)
+        {
+            if (parent is DecoratorNode decorator)
+                decorator.SetChild(child);
+
+            if (parent is CompositeNode composite)
+                composite.AddChild(child);
+        }
+
+        public void RemoveChild(Node parent, Node child)
+        {
+            if (parent is DecoratorNode decorator)
+                decorator.SetChild(null);
+
+            if (parent is CompositeNode composite)
+                composite.RemoveChild(child);
+        }
+
+        public List<Node> GetChildren(Node parent)
+        {
+            List<Node> list = new();
+            if (parent is DecoratorNode decorator)
+            {
+                if (decorator.Child != null)
+                    list.Add(decorator.Child);
+            }
+
+            if (parent is CompositeNode composite)
+            {
+                return composite.Childs;
+            }
+
+            return list;
+        }
+
         #endregion
     }
 }
