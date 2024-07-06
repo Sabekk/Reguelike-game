@@ -98,10 +98,17 @@ namespace BehaviourTreeSystem
 
             if (parent is CompositeNode composite)
             {
-                return composite.Childs;
+                return composite.Children;
             }
 
             return list;
+        }
+
+        public BehaviourTree Clone()
+        {
+            BehaviourTree tree = Instantiate(this);
+            tree.rootNode = tree.RootNode.Clone();
+            return tree;
         }
 
         #endregion

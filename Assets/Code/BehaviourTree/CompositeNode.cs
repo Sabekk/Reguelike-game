@@ -8,26 +8,33 @@ namespace BehaviourTreeSystem
     {
         #region VARIABLES
 
-        [SerializeField] private List<Node> nodes;
+        [SerializeField] private List<Node> children;
 
         #endregion
 
         #region PROPERTIES
 
-        public List<Node> Childs => nodes;
+        public List<Node> Children => children;
 
         #endregion
 
         #region METHODS
 
+        public override Node Clone()
+        {
+            CompositeNode node = Instantiate(this);
+            node.children = Children.ConvertAll(c => c.Clone());
+            return node;
+        }
+
         public void AddChild(Node child)
         {
-            nodes.Add(child);
+            children.Add(child);
         }
 
         public void RemoveChild(Node child)
         {
-            nodes.Remove(child);
+            children.Remove(child);
         }
 
         #endregion

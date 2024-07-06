@@ -30,7 +30,7 @@ namespace BehaviourTreeSystem
 
         protected override NodeState OnUpdate()
         {
-            var child = Childs[current];
+            var child = Children[current];
             switch (child.Update())
             {
                 case NodeState.RUNNING:
@@ -44,7 +44,7 @@ namespace BehaviourTreeSystem
                     break;
             }
 
-            return current == Childs.Count ? NodeState.SUCCESS : NodeState.RUNNING;
+            return current == Children.Count ? NodeState.SUCCESS : NodeState.RUNNING;
         }
 
         #endregion
