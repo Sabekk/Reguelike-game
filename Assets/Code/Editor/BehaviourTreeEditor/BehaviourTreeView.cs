@@ -76,6 +76,9 @@ public class BehaviourTreeView : GraphView
 
         graphViewChanged += OnGraphViewChanged;
 
+        if (tree.RootNode == null)
+            tree.CreateRootNode();
+
         // Create node view
         foreach (var node in tree.Nodes)
             CreateNodeView(node);

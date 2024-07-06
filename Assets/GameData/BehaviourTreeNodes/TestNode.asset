@@ -37,6 +37,8 @@ MonoBehaviour:
   - {fileID: 1586022342636725367}
   - {fileID: 2064866897348740697}
   - {fileID: 2600635277218035681}
+  - {fileID: 5195389650302851280}
+  rootNode: {fileID: 5195389650302851280}
 --- !u!114 &1586022342636725367
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -90,3 +92,20 @@ MonoBehaviour:
   guid: 398fb54409d17cd4c8493ef1be4c4d6f
   position: {x: 0, y: 0}
   message: 
+--- !u!114 &5195389650302851280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 949a1ef1ec6eaeb4a9fc2b9075eb1712, type: 3}
+  m_Name: RootNode
+  m_EditorClassIdentifier: 
+  state: 0
+  started: 0
+  guid: 5d132d710d2854748ba1d91ffbc2b762
+  position: {x: 0, y: 0}
+  child: {fileID: 0}

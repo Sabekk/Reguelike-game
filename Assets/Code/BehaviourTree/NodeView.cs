@@ -36,12 +36,12 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         style.left = node.Position.x;
         style.top = node.Position.y;
 
-        CreateInputPorst();
         CreateOutputPorst();
+        CreateInputPorst();
 
     }
 
-    private void CreateOutputPorst()
+    private void CreateInputPorst()
     {
         switch (Node)
         {
@@ -61,7 +61,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         inputContainer.style.alignItems = Align.Center;
     }
 
-    private void CreateInputPorst()
+    private void CreateOutputPorst()
     {
         switch (Node)
         {
@@ -71,7 +71,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
                 output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Multi, typeof(bool));
                 break;
             case DecoratorNode:
-                //case RootNode:
+            case RootNode:
                 output = InstantiatePort(Orientation.Vertical, Direction.Output, Port.Capacity.Single, typeof(bool));
                 break;
         }

@@ -12,6 +12,7 @@ namespace BehaviourTreeSystem
 
         [SerializeField, HideInInspector] private Node node;
         [SerializeField, HideInInspector] private NodeState nodeState;
+        [SerializeField] private Node rootNode;
         [SerializeField] private List<Node> nodes;
 
         #endregion
@@ -19,6 +20,7 @@ namespace BehaviourTreeSystem
         #region PROPERTIES
 
         public List<Node> Nodes => nodes;
+        public Node RootNode => rootNode;
 
         #endregion
 
@@ -30,6 +32,14 @@ namespace BehaviourTreeSystem
                 nodeState = node.Update();
 
             return nodeState;
+        }
+
+        public Node CreateRootNode()
+        {
+            rootNode = CreateNode(typeof(RootNode)) as RootNode;
+            EditorUtility.SetDirty(this);
+            AssetDatabase.SaveAssets();
+            return rootNode;
         }
 
         public Node CreateNode(System.Type type)
@@ -55,6 +65,9 @@ namespace BehaviourTreeSystem
 
         public void AddChild(Node parent, Node child)
         {
+            if (parent is RootNode root)
+                root.SetChild(null);
+
             if (parent is DecoratorNode decorator)
                 decorator.SetChild(child);
 
@@ -74,11 +87,14 @@ namespace BehaviourTreeSystem
         public List<Node> GetChildren(Node parent)
         {
             List<Node> list = new();
+
+            if (parent is RootNode root)
+                if (root.Child != null)
+                    list.Add(root.Child);
+
             if (parent is DecoratorNode decorator)
-            {
                 if (decorator.Child != null)
                     list.Add(decorator.Child);
-            }
 
             if (parent is CompositeNode composite)
             {
