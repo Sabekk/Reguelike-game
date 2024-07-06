@@ -10,6 +10,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 {
     #region VARIABLES
 
+    public Action<NodeView> OnNodeSelected;
     private BehaviourTreeSystem.Node node;
     private Port input;
     private Port output;
@@ -93,6 +94,12 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         base.SetPosition(newPos);
         Vector2 pos = new Vector2(newPos.xMin, newPos.yMin);
         node.Position = pos;
+    }
+
+    public override void OnSelected()
+    {
+        base.OnSelected();
+        OnNodeSelected?.Invoke(this);
     }
 
     #endregion

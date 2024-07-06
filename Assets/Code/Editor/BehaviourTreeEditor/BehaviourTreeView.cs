@@ -1,4 +1,5 @@
 using BehaviourTreeSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,7 @@ public class BehaviourTreeView : GraphView
 {
     #region VARIABLES
 
+    public Action<NodeView> OnNodeSelected;
     private BehaviourTree tree;
 
     #endregion
@@ -116,6 +118,7 @@ public class BehaviourTreeView : GraphView
     private void CreateNodeView(BehaviourTreeSystem.Node node)
     {
         NodeView nodeView = new NodeView(node);
+        nodeView.OnNodeSelected = OnNodeSelected;
         AddElement(nodeView);
     }
 
