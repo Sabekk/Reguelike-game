@@ -2,6 +2,7 @@ using BehaviourTreeSystem;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using UnityEditor.Callbacks;
 
 public class BehaviourTreeEditor : EditorWindow
 {
@@ -52,6 +53,21 @@ public class BehaviourTreeEditor : EditorWindow
         {
             treeView.PopulateView(tree);
         }
+    }
+
+    #endregion
+
+    #region METHODS
+
+    [OnOpenAsset]
+    public static bool OnOpenAsset(int instanceId, int line)
+    {
+        if(Selection.activeObject is BehaviourTree)
+        {
+            ShowExample();
+            return true;
+        }
+        return false;
     }
 
     private void OnNodeSelectionChanged(NodeView node)
