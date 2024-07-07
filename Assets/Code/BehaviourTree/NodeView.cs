@@ -27,7 +27,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
     #region CONSTRUCTORS
 
-    public NodeView(BehaviourTreeSystem.Node node)
+    public NodeView(BehaviourTreeSystem.Node node) : base("Assets/Code/Editor/BehaviourTreeEditor/NodeView.uxml")
     {
         this.node = node;
         this.title = node.name;
@@ -38,6 +38,27 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
 
         CreateOutputPorst();
         CreateInputPorst();
+        SetupClasses();
+
+    }
+
+    private void SetupClasses()
+    {
+        switch (Node)
+        {
+            case ActionNode:
+                AddToClassList("action");
+                break;
+            case CompositeNode:
+                AddToClassList("composite");
+                break;
+            case DecoratorNode:
+                AddToClassList("decorator");
+                break;
+            case RootNode:
+                AddToClassList("root");
+                break;
+        }
 
     }
 
@@ -55,6 +76,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         if (input != null)
         {
             input.portName = "";
+            //input.style.flexDirection = FlexDirection.Column;
             inputContainer.Add(input);
         }
 
@@ -79,6 +101,7 @@ public class NodeView : UnityEditor.Experimental.GraphView.Node
         if (output != null)
         {
             output.portName = "";
+            //output.style.flexDirection = FlexDirection.ColumnReverse;
             outputContainer.Add(output);
         }
 

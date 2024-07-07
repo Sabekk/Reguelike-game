@@ -66,7 +66,7 @@ namespace BehaviourTreeSystem
         public void AddChild(Node parent, Node child)
         {
             if (parent is RootNode root)
-                root.SetChild(null);
+                root.SetChild(child);
 
             if (parent is DecoratorNode decorator)
                 decorator.SetChild(child);
@@ -77,6 +77,9 @@ namespace BehaviourTreeSystem
 
         public void RemoveChild(Node parent, Node child)
         {
+            if (parent is RootNode root)
+                root.SetChild(null);
+
             if (parent is DecoratorNode decorator)
                 decorator.SetChild(null);
 
