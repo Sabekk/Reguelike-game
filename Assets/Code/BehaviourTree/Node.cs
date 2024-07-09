@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,10 +9,10 @@ namespace BehaviourTreeSystem
     {
         #region VARIABLES
 
-        [SerializeField] private NodeState state;
-        [SerializeField] private bool started = false;
-        [SerializeField] private string guid;
-        [SerializeField] private Vector2 position;
+        [SerializeField, ReadOnly] private string guid;
+        [SerializeField, HideInInspector] private NodeState state;
+        [SerializeField, HideInInspector] private bool started = false;
+        [SerializeField, HideInInspector] private Vector2 position;
 
         #endregion
 

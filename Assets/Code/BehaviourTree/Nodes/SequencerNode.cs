@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTreeSystem
@@ -8,7 +6,7 @@ namespace BehaviourTreeSystem
     {
         #region VARIABLES
 
-        [SerializeField] private int current;
+        [SerializeField, HideInInspector] private int current;
 
         #endregion
 

@@ -1,6 +1,4 @@
 using Sirenix.OdinInspector;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace BehaviourTreeSystem
@@ -9,7 +7,7 @@ namespace BehaviourTreeSystem
     {
         #region VARIABLES
 
-        [SerializeField] private Node child;
+        [SerializeField, ReadOnly] private Node child;
 
         #endregion
 
