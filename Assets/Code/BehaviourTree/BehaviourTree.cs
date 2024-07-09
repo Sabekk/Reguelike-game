@@ -10,9 +10,8 @@ namespace BehaviourTreeSystem
     {
         #region VARIABLES
 
-        [SerializeField, HideInInspector] private Node node;
         [SerializeField, HideInInspector] private NodeState nodeState;
-        [SerializeField] private Node rootNode;
+        [SerializeField, HideInInspector] private Node rootNode;
         [SerializeField] private List<Node> nodes;
 
         #endregion
@@ -28,8 +27,8 @@ namespace BehaviourTreeSystem
 
         public NodeState Update()
         {
-            if (node.State == NodeState.RUNNING)
-                nodeState = node.Update();
+            if (rootNode.State == NodeState.RUNNING)
+                nodeState = rootNode.Update();
 
             return nodeState;
         }
