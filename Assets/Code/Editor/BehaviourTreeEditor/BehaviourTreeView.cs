@@ -1,4 +1,5 @@
 using BehaviourTreeSystem;
+using Sirenix.OdinInspector.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -13,6 +14,7 @@ public class BehaviourTreeView : GraphView
     #region VARIABLES
 
     public Action<NodeView> OnNodeSelected;
+    public Action<NodeView> OnNodeDeleted;
     private BehaviourTree tree;
 
     #endregion
@@ -34,6 +36,19 @@ public class BehaviourTreeView : GraphView
 
         var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>("Assets/Code/Editor/BehaviourTreeEditor/BehaviourTreeEditor.uss");
         styleSheets.Add(styleSheet);
+
+        Undo.undoRedoPerformed += OnUndoRedo;
+    }
+
+    ~BehaviourTreeView()
+    {
+        Undo.undoRedoPerformed -= OnUndoRedo;
+    }
+
+    private void OnUndoRedo()
+    {
+        PopulateView(tree);
+        AssetDatabase.SaveAssets();
     }
 
     #endregion
@@ -91,15 +106,15 @@ public class BehaviourTreeView : GraphView
 
             foreach (var child in children)
             {
-                NodeView parentView =  FindNodeView(node);
-                NodeView childView =  FindNodeView(child);
+                NodeView parentView = FindNodeView(node);
+                NodeView childView = FindNodeView(child);
 
                 Edge edge = parentView.Output.ConnectTo(childView.Input);
                 AddElement(edge);
             }
         }
     }
-    
+
     public override List<Port> GetCompatiblePorts(Port startPort, NodeAdapter nodeAdapter)
     {
         return ports.ToList().Where(endPort => endPort.direction != startPort.direction && endPort.node != startPort.node).ToList();
@@ -122,6 +137,7 @@ public class BehaviourTreeView : GraphView
     {
         NodeView nodeView = new NodeView(node);
         nodeView.OnNodeSelected = OnNodeSelected;
+        nodeView.OnNodeDeleted = OnNodeDeleted;
         AddElement(nodeView);
     }
 

@@ -41,6 +41,7 @@ public class BehaviourTreeEditor : EditorWindow
         inspectorView = root.Q<BehaviourTreeInspectorView>();
         treeView = root.Q<BehaviourTreeView>();
         treeView.OnNodeSelected = OnNodeSelectionChanged;
+        treeView.OnNodeDeleted = OnNodeDeleted;
 
         OnSelectionChange();
     }
@@ -73,6 +74,11 @@ public class BehaviourTreeEditor : EditorWindow
     private void OnNodeSelectionChanged(NodeView node)
     {
         inspectorView.UpdateSelection(node);
+    }
+
+    private void OnNodeDeleted(NodeView node)
+    {
+        inspectorView.ClearSelection();
     }
 
     #endregion

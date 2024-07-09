@@ -1,11 +1,11 @@
 using UnityEngine.UIElements;
-using UnityEditor;
+using Sirenix.OdinInspector.Editor;
 
 public class BehaviourTreeInspectorView : VisualElement
 {
     #region VARIABLES
 
-    private UnityEditor.Editor editor;
+    private OdinEditor editor;
 
     #endregion
 
@@ -26,20 +26,25 @@ public class BehaviourTreeInspectorView : VisualElement
 
     public new class UxmlFactory : UxmlFactory<BehaviourTreeInspectorView, UxmlTraits> { }
 
+    #endregion
+
+    #region METHODS
+
     internal void UpdateSelection(NodeView nodeView)
     {
-        Clear();
+        ClearSelection();
 
-        UnityEngine.Object.DestroyImmediate(editor);
-
-        editor = UnityEditor.Editor.CreateEditor(nodeView.Node);
+        editor = (OdinEditor)OdinEditor.CreateEditor(nodeView.Node);
         IMGUIContainer container = new IMGUIContainer(() => { editor.OnInspectorGUI(); });
         Add(container);
     }
 
-    #endregion
+    internal void ClearSelection()
+    {
+        Clear();
 
-    #region METHODS
+        UnityEngine.Object.DestroyImmediate(editor);
+    }
 
     #endregion
 }
