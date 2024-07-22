@@ -32,7 +32,7 @@ namespace Gameplay.Character
 
         #region PROPERTIES
 
-        private bool IsGrounded => Physics.Raycast(transform.position, Vector3.down, capsuleCollider.height * 0.5f + 0.2f);
+        private bool IsGrounded => Physics.Raycast(transform.position + capsuleCollider.center, Vector3.down, (capsuleCollider.height * 0.5f + 0.2f));
 
         #endregion
 
@@ -63,13 +63,16 @@ namespace Gameplay.Character
             if (direction != Vector2.zero)
             {
                 moveDirection = transform.right * direction.x + transform.forward * direction.y;
-                rb.AddForce(moveDirection * (isSprinting ? runSpeed : walkSpeed), ForceMode.Force);
+                rb.AddForce(moveDirection.normalized * (isSprinting ? runSpeed : walkSpeed), ForceMode.Force);
             }
 
-            rb.drag = IsGrounded ? baseDrag : 0;
-            Debug.Log(IsGrounded);
-            //    velocity.y -= gravity * Time.deltaTime;
-            //characterController.Move(velocity * Time.deltaTime);
+            if (!IsGrounded)
+            {
+                rb.AddForce(Vector3.down * gravity, ForceMode.Force);
+                rb.drag = baseDrag/2;
+            }
+            else
+                rb.drag = baseDrag;
         }
 
         private void AttachEvents()
@@ -88,8 +91,8 @@ namespace Gameplay.Character
 
         private void Jump()
         {
-            //if (!IsGrounded)
-            //    return;
+            if (!IsGrounded)
+                return;
 
             rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
 
