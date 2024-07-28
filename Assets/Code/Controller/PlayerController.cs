@@ -108,6 +108,13 @@ namespace Gameplay.Character
             this.isSprinting = isSprinting;
         }
 
+        [Button]
+        private void ToggleRun()
+        {
+            bool currentState = animator.GetBool("Run");
+            animator.SetBool("Run", !currentState);
+        }
+
         #endregion
     }
 }
