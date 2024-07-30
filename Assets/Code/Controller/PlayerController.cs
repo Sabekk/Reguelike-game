@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
+using Gameplay.Character.Animations;
 
 namespace Gameplay.Character
 {
@@ -20,6 +21,7 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Components")] private Animator animator;
         [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
+        [SerializeField, FoldoutGroup("Components")] private AnimatorStateController stateController;
 
         private bool isSprinting;
         private float baseDrag;
@@ -40,6 +42,9 @@ namespace Gameplay.Character
 
         private void Start()
         {
+            stateController = new AnimatorStateController();
+            stateController.Initialzie(animator);
+
             AttachEvents();
             baseDrag = rb.drag;
         }
@@ -101,6 +106,7 @@ namespace Gameplay.Character
         private void MoveInDirection(Vector2 direction)
         {
             this.direction = direction;
+            stateController.SetMovementAnimation(direction.x, direction.y);
         }
 
         private void Sprint(bool isSprinting)
