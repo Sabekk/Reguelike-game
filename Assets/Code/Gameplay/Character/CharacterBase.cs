@@ -1,3 +1,6 @@
+using Gameplay.Character.Animations;
+using Gameplay.Character.Controller;
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,11 +15,19 @@ namespace Gameplay.Character
         [SerializeField] private CharacterData data;
         [SerializeField, HideInInspector] private bool isInitialzied;
 
+        [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
+        [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
+
         #endregion
 
         #region PROPERTIES
 
         public CharacterValues Values => values;
+        public CapsuleCollider CapsuleCollider => capsuleCollider;
+        public Rigidbody Rb => rb;
+        public CharacterMovementController MovementController => new();
+        public AnimatorStateController AnimatorStateController => new();
+
         protected bool IsInitialzied => isInitialzied;
 
         #endregion
@@ -30,6 +41,16 @@ namespace Gameplay.Character
 
         #endregion
 
+        #region UNITY_METHODS
+
+        private void Update()
+        {
+            MovementController.OnUpdate();
+            AnimatorStateController.OnUpdate();
+        }
+
+        #endregion
+
         #region METHODS
         public void Initialize()
         {
@@ -37,6 +58,7 @@ namespace Gameplay.Character
             data = new();
 
             values.Initialze();
+            InitializeControllers();
 
             isInitialzied = true;
         }
@@ -49,6 +71,12 @@ namespace Gameplay.Character
         public void SetStartingValues()
         {
             Values.SetStartingValues(new List<StartingValue>(data.StartingValues));
+        }
+
+        private void InitializeControllers()
+        {
+            MovementController.Initialize(this);
+            AnimatorStateController.Initialize(this);
         }
 
         #endregion

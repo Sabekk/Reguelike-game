@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Gameplay.Character.Animations;
+using Gameplay.Character.Controller;
 
 namespace Gameplay.Character
 {
@@ -18,10 +19,11 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Values")] float jumpPower;
         [SerializeField, FoldoutGroup("Values")] float gravity;
 
-        [SerializeField, FoldoutGroup("Components")] private Animator animator;
+        
         [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
-        [SerializeField, FoldoutGroup("Components")] private AnimatorStateController stateController;
+        [SerializeField, FoldoutGroup("Components")] private CharacterMovementController movementController;
+        
 
         private bool isSprinting;
         private float baseDrag;
@@ -42,9 +44,6 @@ namespace Gameplay.Character
 
         private void Start()
         {
-            stateController = new AnimatorStateController();
-            stateController.Initialzie(animator);
-
             AttachEvents();
             baseDrag = rb.drag;
         }
@@ -106,19 +105,12 @@ namespace Gameplay.Character
         private void MoveInDirection(Vector2 direction)
         {
             this.direction = direction;
-            stateController.SetMovementAnimation(direction.x, direction.y);
+            //stateController.SetMovementAnimation(direction.x, direction.y);
         }
 
         private void Sprint(bool isSprinting)
         {
             this.isSprinting = isSprinting;
-        }
-
-        [Button]
-        private void ToggleRun()
-        {
-            bool currentState = animator.GetBool("Run");
-            animator.SetBool("Run", !currentState);
         }
 
         #endregion
