@@ -2,17 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ValuesDatabase : MonoBehaviour
+[CreateAssetMenu(menuName = "Database/ValuesDatabase", fileName = "ValuesDatabase")]
+public class ValuesDatabase : ScriptableObject
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    #region VARIABLES
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    #endregion
+
+    #region PROPERTIES
+
+    #endregion
+
+    #region METHODS
+
+    #endregion
 }

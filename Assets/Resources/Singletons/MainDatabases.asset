@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c9994787723bc264c942907fc5625c85, type: 3}
+  m_Name: MainDatabases
+  m_EditorClassIdentifier: 
+  modifiableValuesDatabase: {fileID: 11400000, guid: 61fe89b975a57ac41ba9c9f6da3414c4, type: 2}
+  objectPoolDatabase: {fileID: 11400000, guid: 362b9ceb3c5a7bf4f92b22b98e8e4061, type: 2}
+  enemiesDatabase: {fileID: 11400000, guid: 8ad791d6ac349154a93fc835c8b0b6eb, type: 2}
+  valuesDatabase: {fileID: 11400000, guid: ea1656ab89e7f204685cae7665024b83, type: 2}
+  characterDatabase: {fileID: 11400000, guid: 2b1282fb491015346b0f889dbe580c85, type: 2}

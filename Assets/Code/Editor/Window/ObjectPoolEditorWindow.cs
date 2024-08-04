@@ -26,7 +26,7 @@ namespace Editor
             OdinMenuTreeDrawingConfig style = new OdinMenuTreeDrawingConfig();
             OdinMenuTree tree = new OdinMenuTree(false, style);
 
-            List<PoolCategoryData> allObjectPoolCategories = new List<PoolCategoryData>(ObjectPoolDatabase.Instance.PoolCategories);
+            List<PoolCategoryData> allObjectPoolCategories = new List<PoolCategoryData>(MainDatabases.Instance.ObjectPoolDatabase.PoolCategories);
             allObjectPoolCategories.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
 
             for (int i = 0; i < allObjectPoolCategories.Count; i++)
@@ -84,14 +84,14 @@ namespace Editor
                 return;
             }
 
-            EditorUtility.SetDirty(ObjectPoolDatabase.Instance);
+            EditorUtility.SetDirty(MainDatabases.Instance.ObjectPoolDatabase);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
 
         private void AddNewCategory()
         {
-            ObjectPoolDatabase.Instance.AddCategory("NewCategory");
+            MainDatabases.Instance.ObjectPoolDatabase.AddCategory("NewCategory");
 
             ForceMenuTreeRebuild();
         }
@@ -105,7 +105,7 @@ namespace Editor
                 if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this category?", categoryToDelete.CategoryName), "Yes", "Cancel") == false)
                     return;
 
-                ObjectPoolDatabase.Instance.RemoveCategory(categoryToDelete);
+                MainDatabases.Instance.ObjectPoolDatabase.RemoveCategory(categoryToDelete);
                 ForceMenuTreeRebuild();
             }
         }

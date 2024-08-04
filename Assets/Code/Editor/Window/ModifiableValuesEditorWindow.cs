@@ -25,7 +25,7 @@ namespace Editor
             OdinMenuTreeDrawingConfig style = new OdinMenuTreeDrawingConfig();
             OdinMenuTree tree = new OdinMenuTree(false, style);
 
-            List<ModifiableValuesCategory> allCategories = new List<ModifiableValuesCategory>(ModifiableValuesDatabase.Instance.ModifiableValueCategories);
+            List<ModifiableValuesCategory> allCategories = new List<ModifiableValuesCategory>(MainDatabases.Instance.ModifiableValuesDatabase.ModifiableValueCategories);
             allCategories.Sort((x, y) => x.CategoryName.CompareTo(y.CategoryName));
 
             for (int i = 0; i < allCategories.Count; i++)
@@ -71,7 +71,7 @@ namespace Editor
 
             if (GUILayout.Button("Generate scripts", SirenixGUIStyles.Button))
             {
-                ModifiableValuesDatabase.Instance.GenerateScripts();
+                MainDatabases.Instance.ModifiableValuesDatabase.GenerateScripts();
             }
 
             SirenixEditorGUI.EndHorizontalToolbar();
@@ -92,14 +92,14 @@ namespace Editor
                 return;
             }
 
-            EditorUtility.SetDirty(ModifiableValuesDatabase.Instance);
+            EditorUtility.SetDirty(MainDatabases.Instance.ModifiableValuesDatabase);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
 
         private void AddNewCategory()
         {
-            ModifiableValuesDatabase.Instance.AddCategory(new ModifiableValuesCategory());
+            MainDatabases.Instance.ModifiableValuesDatabase.AddCategory(new ModifiableValuesCategory());
             ForceMenuTreeRebuild();
         }
 
@@ -112,7 +112,7 @@ namespace Editor
                 if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this category?", categoryToDelete.CategoryName), "Yes", "Cancel") == false)
                     return;
 
-                ModifiableValuesDatabase.Instance.RemoveCategory(categoryToDelete);
+                MainDatabases.Instance.ModifiableValuesDatabase.RemoveCategory(categoryToDelete);
                 ForceMenuTreeRebuild();
             }
         }

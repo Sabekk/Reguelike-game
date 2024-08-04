@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ModifiableValues
 {
     [CreateAssetMenu(menuName = "Database/ModifiableValuesDatabase", fileName = "ModifiableValuesDatabase")]
-    public class ModifiableValuesDatabase : ScriptableSingleton<ModifiableValuesDatabase>
+    public class ModifiableValuesDatabase : ScriptableObject
     {
         #region VARIABLES
 
@@ -20,7 +20,6 @@ namespace ModifiableValues
 
         #region PROPERTIES
 
-        public new static ModifiableValuesDatabase Instance => GetInstance("Singletons/ModifiableValuesDatabase");
         public List<ModifiableValuesCategory> ModifiableValueCategories => modifiableValueCategories;
         private ModifiableValuesScriptsGenerator ScriptsGenerator
         {

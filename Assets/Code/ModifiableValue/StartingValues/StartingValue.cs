@@ -26,7 +26,7 @@ public abstract class StartingValue
 
     protected List<string> GetStartingValue()
     {
-        return ModifiableValuesDatabase.Instance.GetAllModifiableNamesFromCategory(GetCategory());
+        return MainDatabases.Instance.ModifiableValuesDatabase.GetAllModifiableNamesFromCategory(GetCategory());
     }
 
     protected abstract string GetCategory();

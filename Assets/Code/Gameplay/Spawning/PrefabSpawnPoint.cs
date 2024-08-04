@@ -35,7 +35,7 @@ namespace Gameplay.Arena
         public static IEnumerable GetChoosenCategoryInstances(string categoryName)
         {
             ValueDropdownList<string> values = new();
-            foreach (PoolCategoryData poolCategory in ObjectPoolDatabase.Instance.PoolCategories)
+            foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
             {
                 if (categoryName != poolCategory.CategoryName)
                     continue;

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ObjectPooling
 {
     [CreateAssetMenu(menuName = "Database/ObjectPool", fileName = "ObjectPoolDatabase")]
-    public class ObjectPoolDatabase : ScriptableSingleton<ObjectPoolDatabase>
+    public class ObjectPoolDatabase : ScriptableObject
     {
         #region VARIABLES
 
@@ -17,7 +17,7 @@ namespace ObjectPooling
         #endregion
 
         #region PROPERTIES
-        public new static ObjectPoolDatabase Instance => GetInstance("Singletons/ObjectPoolDatabase");
+
         public List<PoolCategoryData> PoolCategories => poolCategories;
 
         #endregion
@@ -27,7 +27,7 @@ namespace ObjectPooling
         public static IEnumerable GetCategoriesNames()
         {
             ValueDropdownList<string> values = new();
-            foreach (PoolCategoryData poolCategory in Instance.PoolCategories)
+            foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
             {
                 values.Add(poolCategory.CategoryName);
             }
@@ -38,7 +38,7 @@ namespace ObjectPooling
         public IEnumerable GetCategoryInstancesNames(string category)
         {
             ValueDropdownList<string> values = new();
-            foreach (PoolCategoryData poolCategory in Instance.PoolCategories)
+            foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
             {
                 if (category != poolCategory.CategoryName)
                     continue;

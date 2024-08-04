@@ -11,7 +11,9 @@ namespace Gameplay.Character
     {
         #region VARIABLES
 
-        [SerializeField] private CharacterValues values;
+        [SerializeField, FoldoutGroup("Values")] private CharacterValues values;
+        [SerializeField, FoldoutGroup("Values")] private MovementValues movementValues;
+
         [SerializeField] private CharacterData data;
         [SerializeField, HideInInspector] private bool isInitialzied;
 
@@ -23,6 +25,7 @@ namespace Gameplay.Character
         #region PROPERTIES
 
         public CharacterValues Values => values;
+        public MovementValues MovementValues => movementValues;
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
         public CharacterMovementController MovementController => new();

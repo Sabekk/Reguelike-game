@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Database/EnemiesDatabase", fileName = "EnemiesDatabase")]
-public class EnemiesDatabase : ScriptableSingleton<EnemiesDatabase>
+public class EnemiesDatabase : ScriptableObject
 {
     #region VARIABLES
 
@@ -13,7 +13,6 @@ public class EnemiesDatabase : ScriptableSingleton<EnemiesDatabase>
     #endregion
 
     #region PROPERTIES
-    public new static EnemiesDatabase Instance => GetInstance("Singletons/EnemiesDatabase");
 
     public List<EnemyBiomCategoryData> EnemyBiomData => enemyBiomData;
 
@@ -33,7 +32,7 @@ public class EnemiesDatabase : ScriptableSingleton<EnemiesDatabase>
 
     public EnemyBiomCategoryData GetBiomCategoryData(BiomType biomType)
     {
-        foreach (EnemyBiomCategoryData enemyBiomData in Instance.EnemyBiomData)
+        foreach (EnemyBiomCategoryData enemyBiomData in MainDatabases.Instance.EnemiesDatabase.EnemyBiomData)
         {
             if (enemyBiomData.BiomType == biomType)
                 return enemyBiomData;
@@ -91,7 +90,7 @@ public class EnemiesDatabase : ScriptableSingleton<EnemiesDatabase>
     public IEnumerable GetCategoriesNamesOfBiom(BiomType biomType)
     {
         ValueDropdownList<EnemyType> values = new();
-        foreach (EnemyBiomCategoryData enemyBiomData in Instance.EnemyBiomData)
+        foreach (EnemyBiomCategoryData enemyBiomData in MainDatabases.Instance.EnemiesDatabase.EnemyBiomData)
         {
             if (enemyBiomData.BiomType == biomType)
                 foreach (var enemyType in enemyBiomData.EnemyTypes)

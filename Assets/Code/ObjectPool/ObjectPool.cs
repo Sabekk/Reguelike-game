@@ -95,7 +95,7 @@ namespace ObjectPooling
 
         private void InitializePools()
         {
-            foreach (var poolCategoryData in ObjectPoolDatabase.Instance.PoolCategories)
+            foreach (var poolCategoryData in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
                 poolCategories.Add(new PoolCategory(poolCategoryData));
 
             foreach (var poolCategory in poolCategories)

@@ -37,7 +37,7 @@ namespace Gameplay.Arena
             if (variant == null)
                 return null;
 
-            return EnemiesDatabase.Instance.GetEnemyData(biomType, variant.EnemyType, variant.GetRandomVariantName());
+            return MainDatabases.Instance.EnemiesDatabase.GetEnemyData(biomType, variant.EnemyType, variant.GetRandomVariantName());
         }
 
         #endregion

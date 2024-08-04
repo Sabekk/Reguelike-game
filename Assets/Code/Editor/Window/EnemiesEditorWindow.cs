@@ -36,9 +36,9 @@ namespace Editor
             OdinMenuTreeDrawingConfig style = new OdinMenuTreeDrawingConfig();
             OdinMenuTree tree = new OdinMenuTree(false, style);
 
-            if (EnemiesDatabase.Instance.EnemyBiomData != null)
+            if (MainDatabases.Instance.EnemiesDatabase.EnemyBiomData != null)
             {
-                List<EnemyBiomCategoryData> allEnemyBiomCategories = new List<EnemyBiomCategoryData>(EnemiesDatabase.Instance.EnemyBiomData);
+                List<EnemyBiomCategoryData> allEnemyBiomCategories = new List<EnemyBiomCategoryData>(MainDatabases.Instance.EnemiesDatabase.EnemyBiomData);
 
                 for (int i = 0; i < allEnemyBiomCategories.Count; i++)
                 {
@@ -95,14 +95,14 @@ namespace Editor
                 return;
             }
 
-            EditorUtility.SetDirty(EnemiesDatabase.Instance);
+            EditorUtility.SetDirty(MainDatabases.Instance.EnemiesDatabase);
             AssetDatabase.SaveAssets();
             AssetDatabase.Refresh();
         }
 
         private void AddNewBiomEnemies()
         {
-            EnemiesDatabase.Instance.AddBiomCategory(new EnemyBiomCategoryData());
+            MainDatabases.Instance.EnemiesDatabase.AddBiomCategory(new EnemyBiomCategoryData());
 
             ForceMenuTreeRebuild();
         }
@@ -116,7 +116,7 @@ namespace Editor
                 if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this enemies biom?", categoryToDelete.BiomType.ToString()), "Yes", "Cancel") == false)
                     return;
 
-                EnemiesDatabase.Instance.DeleteBiomCategory(categoryToDelete);
+                MainDatabases.Instance.EnemiesDatabase.DeleteBiomCategory(categoryToDelete);
                 ForceMenuTreeRebuild();
             }
         }

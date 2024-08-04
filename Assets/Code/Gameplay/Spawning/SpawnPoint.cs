@@ -80,7 +80,7 @@ namespace Gameplay.Arena
                 spawnedObject = ObjectPool.Instance.GetFromPool(instanceName, variant.GetCategory()).Prefab;
             else
             {
-                PoolCategoryData poolCategoryData = ObjectPoolDatabase.Instance.FindCategoryData(variant?.GetCategory());
+                PoolCategoryData poolCategoryData = MainDatabases.Instance.ObjectPoolDatabase.FindCategoryData(variant?.GetCategory());
                 if (poolCategoryData == null)
                     return;
 

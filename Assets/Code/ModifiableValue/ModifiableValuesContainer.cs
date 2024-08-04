@@ -72,7 +72,7 @@ namespace ModifiableValues
 
         protected void HandleValuePropertyInfo(ModifiableValue value, PropertyInfo propertyInfo)
         {
-            ModifiableValueData modifiableData = ModifiableValuesDatabase.Instance.FindData(propertyInfo.Name, GetType().Name);
+            ModifiableValueData modifiableData = MainDatabases.Instance.ModifiableValuesDatabase.FindData(propertyInfo.Name, GetType().Name);
             value.InitializeData(modifiableData);
         }
 

@@ -8,6 +8,7 @@ public class CharacterData
 
     [SerializeField] private string id;
     [SerializeField] private List<CharacterStartingValue> startingValues;
+    [SerializeField] private List<MovementStartingValue> movementStartingValues;
 
     #endregion
 
@@ -15,6 +16,7 @@ public class CharacterData
 
     public string Id => id;
     public List<CharacterStartingValue> StartingValues => startingValues;
+    public List<MovementStartingValue> MovementStartingValues => movementStartingValues;
 
     #endregion
 }

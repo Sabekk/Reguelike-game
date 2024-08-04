@@ -21,9 +21,11 @@ MonoBehaviour:
         startingValues:
         - valueId: HP
           value: 10
+        movementStartingValues: []
         modelPool: SphereTest
       - id: Warrior test 2
         startingValues: []
+        movementStartingValues: []
         modelPool: 
   - biomType: 1
     enemyTypes:
@@ -31,4 +33,5 @@ MonoBehaviour:
       enemyData:
       - id: fire archer
         startingValues: []
+        movementStartingValues: []
         modelPool: 
