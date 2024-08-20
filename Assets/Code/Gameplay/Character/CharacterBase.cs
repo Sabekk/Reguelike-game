@@ -1,7 +1,5 @@
-using Gameplay.Character.Animations;
-using Gameplay.Character.Controller;
+using Gameplay.Character.Module;
 using Sirenix.OdinInspector;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -20,6 +18,8 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
 
+        [SerializeField, HideInInspector] protected List<CharacterModule> modules;
+
         #endregion
 
         #region PROPERTIES
@@ -28,8 +28,6 @@ namespace Gameplay.Character
         public MovementValues MovementValues => movementValues;
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
-        public CharacterMovementController MovementController => new();
-        public AnimatorStateController AnimatorStateController => new();
 
         protected bool IsInitialzied => isInitialzied;
 
@@ -48,8 +46,7 @@ namespace Gameplay.Character
 
         private void Update()
         {
-            MovementController.OnUpdate();
-            AnimatorStateController.OnUpdate();
+            UpdateModules();
         }
 
         #endregion
@@ -61,7 +58,8 @@ namespace Gameplay.Character
             data = new();
 
             values.Initialze();
-            InitializeControllers();
+            SetModules();
+            InitializeModules();
 
             isInitialzied = true;
         }
@@ -76,10 +74,24 @@ namespace Gameplay.Character
             Values.SetStartingValues(new List<StartingValue>(data.StartingValues));
         }
 
-        private void InitializeControllers()
+        protected virtual void SetModules()
         {
-            MovementController.Initialize(this);
-            AnimatorStateController.Initialize(this);
+            modules = new();
+        }
+
+        protected void InitializeModules()
+        {
+            modules.ForEach(m => m.Initialize(this));
+        }
+
+        protected void UpdateModules()
+        {
+            modules.ForEach(m => m.OnUpdate());
+        }
+
+        protected void CleanUpModules()
+        {
+            modules.ForEach(m => m.CleanUp());
         }
 
         #endregion

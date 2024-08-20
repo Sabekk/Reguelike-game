@@ -50,55 +50,40 @@ namespace Gameplay.Character.Controller
         public override void OnUpdate()
         {
             base.OnUpdate();
-            MovePlayer();
+            MoveCharacter();
         }
 
-        protected override void AttachEvents()
-        {
-            base.AttachEvents();
-            Events.Gameplay.Move.OnJump += Jump;
-            Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
-            Events.Gameplay.Move.OnSprint += Sprint;
-        }
-
-        protected override void DetachEvents()
-        {
-            Events.Gameplay.Move.OnJump -= Jump;
-            Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
-            Events.Gameplay.Move.OnSprint -= Sprint;
-        }
-
-        private void MovePlayer()
+        protected virtual void MoveCharacter()
         {
             if (direction != Vector2.zero)
             {
                 moveDirection = transform.right * direction.x + transform.forward * direction.y;
-                //rb.AddForce(moveDirection.normalized * (isSprinting ? runSpeed : walkSpeed), ForceMode.Force);
+                rb.AddForce(moveDirection.normalized * (isSprinting ? runSpeed : walkSpeed), ForceMode.Force);
             }
 
             if (!IsGrounded)
             {
-                //rb.AddForce(Vector3.down * gravity, ForceMode.Force);
+                rb.AddForce(Vector3.down * gravity, ForceMode.Force);
                 rb.drag = baseDrag / 2;
             }
             else
                 rb.drag = baseDrag;
         }
 
-        private void Jump()
+        protected virtual void Jump()
         {
             if (!IsGrounded)
                 return;
 
-            //rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+            rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
         }
 
-        private void MoveInDirection(Vector2 direction)
+        protected virtual void MoveInDirection(Vector2 direction)
         {
             this.direction = direction;
         }
 
-        private void Sprint(bool isSprinting)
+        protected virtual void Sprint(bool isSprinting)
         {
             this.isSprinting = isSprinting;
         }

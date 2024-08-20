@@ -34,25 +34,13 @@ namespace Gameplay.Character.Animations
             animator = Character.GetComponent<Animator>();
         }
 
-        protected override void AttachEvents()
-        {
-            base.AttachEvents();
-            Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
-        }
-
-        protected override void DetachEvents()
-        {
-            base.DetachEvents();
-            Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
-        }
-
-        private void MoveInDirection(Vector2 direction)
+        protected virtual void MoveInDirection(Vector2 direction)
         {
             SetMovementAnimation(direction.x, direction.y);
         }
 
-        //TODO przyspieszenie?
-        private void SetMovementAnimation(float xDir, float yDir)
+        //TODO przyspieszenie - update do podanych wartosci w OnUpdate
+        protected virtual void SetMovementAnimation(float xDir, float yDir)
         {
             animator.SetFloat(MoveDirectionX, xDir);
             animator.SetFloat(MoveDirectionY, yDir);
