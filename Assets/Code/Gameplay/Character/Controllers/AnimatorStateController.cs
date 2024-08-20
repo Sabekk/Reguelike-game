@@ -1,17 +1,24 @@
 using Gameplay.Character.Controller;
-using GlobalEventSystem;
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 namespace Gameplay.Character.Animations
 {
     [RequireComponent(typeof(Animator))]
+
+    [Serializable]
     public class AnimatorStateController : ControllerBase
     {
         #region VARIABLES
 
         [SerializeField] private Animator animator;
+        [SerializeField] private float animationBlendingSpeed = 5;
+
+        private float dirX;
+        private float dirY;
+
+        private float currentDirX;
+        private float currentDirY;
 
         #endregion
 
@@ -28,15 +35,27 @@ namespace Gameplay.Character.Animations
 
         #region METHODS
 
+        public override void OnUpdate()
+        {
+            base.OnUpdate();
+
+            currentDirX = Mathf.MoveTowards(currentDirX, dirX, animationBlendingSpeed * Time.deltaTime);
+            currentDirY = Mathf.MoveTowards(currentDirY, dirY, animationBlendingSpeed * Time.deltaTime);
+
+            SetMovementAnimation(currentDirX, currentDirY);
+        }
+
         public override void Initialize(CharacterBase character)
         {
             base.Initialize(character);
-            animator = Character.GetComponent<Animator>();
+            if (animator == null)
+                animator = Character.GetComponent<Animator>();
         }
 
         protected virtual void MoveInDirection(Vector2 direction)
         {
-            SetMovementAnimation(direction.x, direction.y);
+            dirX = direction.x;
+            dirY = direction.y;
         }
 
         //TODO przyspieszenie - update do podanych wartosci w OnUpdate

@@ -1,11 +1,9 @@
-using Gameplay.Character.Controller;
 using GlobalEventSystem;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 namespace Gameplay.Character.Controller
 {
+    [Serializable]
     public class CharacterMovementController_Player : CharacterMovementController
     {
         #region VARIABLES

@@ -1,10 +1,9 @@
 using GlobalEventSystem;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+using System;
 
 namespace Gameplay.Character.Animations
 {
+    [Serializable]
     public class AnimatorStateController_Player : AnimatorStateController
     {
         #region VARIABLES

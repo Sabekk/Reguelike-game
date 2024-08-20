@@ -1,14 +1,19 @@
+using Sirenix.OdinInspector;
+using UnityEngine;
+
 namespace Gameplay.Character
 {
     public class Player : CharacterBase
     {
         #region VARIABLES
 
+        [SerializeField, FoldoutGroup("Modules")] private PlayerControllersModule controllersModule;
+
         #endregion
 
         #region PROPERTIES
 
-        public PlayerControllersModule ControllersModule => new();
+        public PlayerControllersModule ControllersModule => controllersModule;
 
         #endregion
 
@@ -27,7 +32,7 @@ namespace Gameplay.Character
         protected override void SetModules()
         {
             base.SetModules();
-            modules.Add(ControllersModule);
+            modules.Add(controllersModule = new());
         }
 
         #endregion

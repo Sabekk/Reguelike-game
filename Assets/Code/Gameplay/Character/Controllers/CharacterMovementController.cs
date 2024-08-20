@@ -17,10 +17,6 @@ namespace Gameplay.Character.Controller
         [SerializeField, FoldoutGroup("Values")] float jumpPower = 10;
         [SerializeField, FoldoutGroup("Values")] float gravity = 5;
 
-
-        [SerializeField, FoldoutGroup("Components")] private AnimatorStateController stateController;
-        [SerializeField, FoldoutGroup("Components")] private Animator animator;
-
         private bool isSprinting;
         private float baseDrag;
 

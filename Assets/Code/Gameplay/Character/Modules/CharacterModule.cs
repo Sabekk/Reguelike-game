@@ -4,7 +4,7 @@ namespace Gameplay.Character.Module
 {
     public abstract class CharacterModule
     {
-        [SerializeField] protected CharacterBase character;
+        [SerializeField, HideInInspector] protected CharacterBase character;
 
         public virtual void Initialize(CharacterBase character)
         {

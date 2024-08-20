@@ -1,14 +1,16 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Character.Controller
 {
+    [Serializable]
     public abstract class ControllerBase
     {
         #region VARIABLES
 
-        [SerializeField] private CharacterBase character;
+        [SerializeField, HideInInspector] private CharacterBase character;
 
         #endregion
 
