@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public abstract class MonoSingleton<T> : MonoBehaviour where T : MonoSingleton<T> {
+public abstract class MonoSingleton<T> : MonoBehaviour where T : Component {
 
     #region VARIABLES
 

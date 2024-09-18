@@ -26,6 +26,7 @@ namespace Gameplay.Character.Controller
 
         protected override void DetachEvents()
         {
+            base.DetachEvents();
             Events.Gameplay.Move.OnJump -= Jump;
             Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
             Events.Gameplay.Move.OnSprint -= Sprint;

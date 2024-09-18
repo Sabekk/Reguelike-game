@@ -6,7 +6,7 @@ using Sirenix.OdinInspector;
 
 namespace Gameplay.Arena
 {
-    public class ArenaManager : MonoSingleton<ArenaManager>
+    public class ArenaManager : GameplayManager<ArenaManager>
     {
         #region EVENTS
 

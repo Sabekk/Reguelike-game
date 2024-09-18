@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Gameplay.Arena
 {
-    public class ArenaChooserManager : MonoSingleton<ArenaChooserManager>
+    public class ArenaChooserManager : GameplayManager<ArenaChooserManager>
     {
         #region VARIABLES
 

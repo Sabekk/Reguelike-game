@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Gameplay.Arena
 {
-    public class EnemiesManager : MonoSingleton<EnemiesManager>
+    public class EnemiesManager : GameplayManager<EnemiesManager>
     {
         #region VARIABLES
 

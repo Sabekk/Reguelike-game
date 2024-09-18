@@ -32,3 +32,8 @@ MonoBehaviour:
     - name: Cylinder
       poolObject: {fileID: 2842577236933452976, guid: 96b6e7158bddd6145b124466528ae4dc, type: 3}
       size: 5
+  - categoryName: CAMERA
+    instances:
+    - name: CharacterCamera
+      poolObject: {fileID: 0}
+      size: 1

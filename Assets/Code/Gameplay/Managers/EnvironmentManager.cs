@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.Arena
 {
-    public class EnvironmentManager : MonoSingleton<EnvironmentManager>
+    public class EnvironmentManager : GameplayManager<EnvironmentManager>
     {
         #region VARIABLES
 
