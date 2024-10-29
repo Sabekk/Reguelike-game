@@ -29,6 +29,7 @@ namespace Gameplay.Character
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
 
+        public abstract bool IsMoving { get; }
         protected bool IsInitialzied => isInitialzied;
 
         #endregion
@@ -44,7 +45,7 @@ namespace Gameplay.Character
 
         #region UNITY_METHODS
 
-        private void Update()
+        protected virtual void Update()
         {
             UpdateModules();
         }

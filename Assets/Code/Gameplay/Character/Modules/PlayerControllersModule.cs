@@ -12,6 +12,7 @@ namespace Gameplay.Character
 
         [SerializeField] private CharacterMovementController_Player movementController;
         [SerializeField] private AnimatorStateController_Player animatorStateController;
+        [SerializeField] private CharacterCameraController cameraController;
 
         #endregion
 
@@ -19,6 +20,7 @@ namespace Gameplay.Character
 
         public CharacterMovementController_Player MovementController => movementController;
         public AnimatorStateController_Player AnimatorStateController => animatorStateController;
+        public CharacterCameraController CameraController => cameraController;
 
         #endregion
 
@@ -30,6 +32,7 @@ namespace Gameplay.Character
             base.SetControllers();
             controllers.Add(movementController = new());
             controllers.Add(animatorStateController = new());
+            controllers.Add(cameraController = new());
         }
 
         #endregion

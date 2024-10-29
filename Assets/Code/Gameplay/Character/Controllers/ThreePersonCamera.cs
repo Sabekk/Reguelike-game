@@ -1,7 +1,9 @@
+using Cinemachine;
 using GlobalEventSystem;
 using ObjectPooling;
 using System;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
 namespace Gameplay.Character.Camera
 {
@@ -9,6 +11,10 @@ namespace Gameplay.Character.Camera
     public class ThreePersonCamera : MonoBehaviour, IPoolable
     {
         #region VARIABLES
+
+        [SerializeField] private CinemachineVirtualCamera cvCamera;
+
+        [SerializeField, FoldoutGroup("Settings")] private float timeToResetRotation;
 
         #endregion
 
@@ -18,6 +24,11 @@ namespace Gameplay.Character.Camera
         #endregion
 
         #region UNITY_METHODS
+
+        private void FixedUpdate()
+        {
+            
+        }
 
         #endregion
 
@@ -44,7 +55,7 @@ namespace Gameplay.Character.Camera
 
         private void DetachEvents()
         {
-            Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
+            Events.Gameplay.Move.OnLookInDirection -= MoveInDirection;
         }
 
         private void MoveInDirection(Vector2 direction)

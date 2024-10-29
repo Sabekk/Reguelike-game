@@ -1,16 +1,20 @@
+using Gameplay.Character.Camera;
 using GlobalEventSystem;
-using System;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace Gameplay.Character.Controller
 {
-    [Serializable]
-    public class CharacterMovementController_Player : CharacterMovementController
+    public class CharacterCameraController : ControllerBase
     {
         #region VARIABLES
 
         #endregion
 
         #region PROPERTIES
+
+        private ThreePersonCamera CharacterCamera => ThreePersonCameraManager.Instance != null ? ThreePersonCameraManager.Instance.PersonCameraInGame : null;
 
         #endregion
 
@@ -19,19 +23,19 @@ namespace Gameplay.Character.Controller
         protected override void AttachEvents()
         {
             base.AttachEvents();
-            Events.Gameplay.Move.OnJump += Jump;
-            Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
             Events.Gameplay.Move.OnLookInDirection += LookInDirection;
-            Events.Gameplay.Move.OnSprint += Sprint;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
-            Events.Gameplay.Move.OnJump -= Jump;
-            Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
             Events.Gameplay.Move.OnLookInDirection -= LookInDirection;
-            Events.Gameplay.Move.OnSprint -= Sprint;
+        }
+
+        private void LookInDirection(Vector2 direction)
+        {
+            if (direction == Vector2.zero)
+                return;
         }
 
         #endregion

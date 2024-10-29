@@ -16,21 +16,22 @@ namespace Gameplay.Character.Controller
         [SerializeField, FoldoutGroup("Values")] float runSpeed = 7;
         [SerializeField, FoldoutGroup("Values")] float jumpPower = 10;
         [SerializeField, FoldoutGroup("Values")] float gravity = 5;
+        [SerializeField, FoldoutGroup("Values")] float rotationSpeed = 25;
 
         private bool isSprinting;
         private float baseDrag;
 
         private Vector2 direction = Vector3.zero;
+        private Vector2 lookDirection = Vector3.zero;
         private Vector3 moveDirection = Vector3.zero;
-        private Vector3 velocity = Vector3.zero;
 
         #endregion
 
         #region PROPERTIES
 
-        private Rigidbody rb => Character.Rb;
+        private Rigidbody Rb => Character.Rb;
         private CapsuleCollider CapsuleCollider => Character.CapsuleCollider;
-        private Transform transform => Character.transform;
+        private Transform CharacterTransform => Character.transform;
         private bool IsGrounded => Physics.Raycast(Character.transform.position + CapsuleCollider.center, Vector3.down, (CapsuleCollider.height * 0.5f + 0.2f));
 
         #endregion
@@ -40,30 +41,45 @@ namespace Gameplay.Character.Controller
         public override void Initialize(CharacterBase character)
         {
             base.Initialize(character);
-            baseDrag = rb.drag;
+            baseDrag = Rb.drag;
         }
 
         public override void OnUpdate()
         {
             base.OnUpdate();
             MoveCharacter();
+            RotateCharacter();
         }
 
         protected virtual void MoveCharacter()
         {
             if (direction != Vector2.zero)
             {
-                moveDirection = transform.right * direction.x + transform.forward * direction.y;
-                rb.AddForce(moveDirection.normalized * (isSprinting ? runSpeed : walkSpeed), ForceMode.Force);
+                moveDirection = CharacterTransform.right * direction.x + CharacterTransform.forward * direction.y;
+                Rb.AddForce(moveDirection.normalized * (isSprinting ? runSpeed : walkSpeed), ForceMode.Force);
             }
 
             if (!IsGrounded)
             {
-                rb.AddForce(Vector3.down * gravity, ForceMode.Force);
-                rb.drag = baseDrag / 2;
+                Rb.AddForce(Vector3.down * gravity, ForceMode.Force);
+                Rb.drag = baseDrag / 2;
             }
             else
-                rb.drag = baseDrag;
+                Rb.drag = baseDrag;
+        }
+
+        protected virtual void RotateCharacter()
+        {
+            //IsMoving is true in CharacterCameraController
+            if (Character.IsMoving == false)
+                return;
+
+            if (lookDirection != Vector2.zero)
+            {
+                Quaternion deltaRotation = Quaternion.Euler(0, lookDirection.x * rotationSpeed * Time.fixedDeltaTime, 0);
+                Rb.MoveRotation(Rb.rotation * deltaRotation);
+            }
+
         }
 
         protected virtual void Jump()
@@ -71,12 +87,17 @@ namespace Gameplay.Character.Controller
             if (!IsGrounded)
                 return;
 
-            rb.AddForce(transform.up * jumpPower, ForceMode.Impulse);
+            Rb.AddForce(CharacterTransform.up * jumpPower, ForceMode.Impulse);
         }
 
         protected virtual void MoveInDirection(Vector2 direction)
         {
             this.direction = direction;
+        }
+
+        protected virtual void LookInDirection(Vector2 direction)
+        {
+            this.lookDirection = direction;
         }
 
         protected virtual void Sprint(bool isSprinting)

@@ -12,6 +12,8 @@ namespace Gameplay.Character
 
         #region PROPERTIES
 
+        public override bool IsMoving => throw new System.NotImplementedException();
+
         #endregion
 
         #region METHODS

@@ -6,6 +6,7 @@ using UnityEngine;
 
 public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager>
 {
+    //Kamera jak narazie jest w controlerze playera. W przypadku potrzeby obs³ugi kamery (wy³aczanie/w³aczanie) obs³ugiwaæ ja bezpoœrednio w elemencie kamery
     #region VARIABLES
 
     [SerializeField] private ThreePersonCamera personCameraPrefab;
@@ -16,6 +17,16 @@ public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager
     #endregion
 
     #region PROPERTIES
+
+    public ThreePersonCamera PersonCameraInGame
+    {
+        get
+        {
+            if (personCameraInGame == null)
+                TryInitializeCamera();
+            return personCameraInGame;
+        }
+    }
 
     #endregion
 
@@ -29,10 +40,10 @@ public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager
     {
         base.Initialzie();
         if (personCameraInGame == null)
-        {
-            personCameraInGame = ObjectPool.Instance.GetFromPool(CAMERA_POOL_INSTANCE, CAMERA_POOL_CATEGORY).GetComponent<ThreePersonCamera>();
-        }
-        personCameraInGame.Initialzie();
+            TryInitializeCamera();
+
+        if (personCameraInGame)
+            personCameraInGame.Initialzie();
     }
 
     public override void CleanUp()
@@ -41,6 +52,11 @@ public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager
 
         if (personCameraInGame)
             personCameraInGame.CleanUp();
+    }
+
+    private void TryInitializeCamera()
+    {
+        personCameraInGame = ObjectPool.Instance.GetFromPool(CAMERA_POOL_INSTANCE, CAMERA_POOL_CATEGORY).GetComponent<ThreePersonCamera>();
     }
 
     #endregion

@@ -24,6 +24,8 @@ namespace Gameplay.Character.Animations
 
         #region PROPERTIES
 
+        public bool IsMoving => animator.GetFloat(MoveDirectionX) != 0 || animator.GetFloat(MoveDirectionY) != 0;
+        public Animator ChracterAnimator => animator;
         private int MoveDirectionX => Animator.StringToHash("MoveDirX");
         private int MoveDirectionY => Animator.StringToHash("MoveDirY");
 

@@ -73,6 +73,9 @@ namespace ObjectPooling
 
         private void AddToPool()
         {
+            if (prefab == null)
+                return;
+
             GameObject newPoolObject = GameObject.Instantiate(prefab);
             newPoolObject.name = newPoolObject.name + "_Pool";
             ReturnToPool(new PoolObject(name, category, newPoolObject));
