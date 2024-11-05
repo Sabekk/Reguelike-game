@@ -3,27 +3,28 @@ using ObjectPooling;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
 
-public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager>
+public class CamerasManager : GameplayManager<CamerasManager>
 {
     //Kamera jak narazie jest w controlerze playera. W przypadku potrzeby obs³ugi kamery (wy³aczanie/w³aczanie) obs³ugiwaæ ja bezpoœrednio w elemencie kamery
     #region VARIABLES
 
-    [SerializeField] private ThreePersonCamera personCameraPrefab;
-    [SerializeField] private ThreePersonCamera personCameraInGame;
+    [SerializeField, FoldoutGroup("Character")] private FollowingCamera personCameraInGame;
 
-    private const string CAMERA_POOL_CATEGORY = "Camera";
+    private const string CAMERA_POOL_CATEGORY = "CAMERA";
     private const string CAMERA_POOL_INSTANCE = "CharacterCamera";
+
     #endregion
 
     #region PROPERTIES
 
-    public ThreePersonCamera PersonCameraInGame
+    public FollowingCamera PersonCameraInGame
     {
         get
         {
             if (personCameraInGame == null)
-                TryInitializeCamera();
+                personCameraInGame = TryGetCamera(CAMERA_POOL_INSTANCE, CAMERA_POOL_CATEGORY);
             return personCameraInGame;
         }
     }
@@ -36,16 +37,6 @@ public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager
 
     #region METHODS
 
-    public override void Initialzie()
-    {
-        base.Initialzie();
-        if (personCameraInGame == null)
-            TryInitializeCamera();
-
-        if (personCameraInGame)
-            personCameraInGame.Initialzie();
-    }
-
     public override void CleanUp()
     {
         base.CleanUp();
@@ -54,9 +45,9 @@ public class ThreePersonCameraManager : GameplayManager<ThreePersonCameraManager
             personCameraInGame.CleanUp();
     }
 
-    private void TryInitializeCamera()
+    private FollowingCamera TryGetCamera(string cameraName, string category)
     {
-        personCameraInGame = ObjectPool.Instance.GetFromPool(CAMERA_POOL_INSTANCE, CAMERA_POOL_CATEGORY).GetComponent<ThreePersonCamera>();
+        return ObjectPool.Instance.GetFromPool(cameraName, category).GetComponent<FollowingCamera>();
     }
 
     #endregion

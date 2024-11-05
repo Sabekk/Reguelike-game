@@ -918,6 +918,37 @@ Transform:
   - {fileID: 5486554376000275754}
   m_Father: {fileID: 6810245522407643608}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4155327194954358704
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8034895263250846690}
+  m_Layer: 0
+  m_Name: FollowTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8034895263250846690
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4155327194954358704}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.415, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2771912247666215100}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4492491831793172962
 GameObject:
   m_ObjectHideFlags: 0
@@ -987,6 +1018,7 @@ Transform:
   - {fileID: 3463482337476302203}
   - {fileID: 8708332888609916837}
   - {fileID: 3623884970888795807}
+  - {fileID: 8034895263250846690}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!95 &157865207219326795
@@ -1075,6 +1107,7 @@ MonoBehaviour:
   isInitialzied: 0
   rb: {fileID: 6206051348556301890}
   capsuleCollider: {fileID: 896474244520342913}
+  cameraFollowTarget: {fileID: 8034895263250846690}
   controllersModule:
     character: {fileID: 0}
     movementController:
@@ -1083,6 +1116,7 @@ MonoBehaviour:
       runSpeed: 7
       jumpPower: 10
       gravity: 5
+      rotationSpeed: 25
     animatorStateController:
       character: {fileID: 0}
       animator: {fileID: 0}

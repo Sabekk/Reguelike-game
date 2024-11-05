@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7141801280578526122}
   - component: {fileID: 1341433035693113852}
   m_Layer: 0
-  m_Name: ThreePersonCameraManager
+  m_Name: CamerasManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa132b63af644f84cadcdd7c245396ec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  personCameraPrefab: {fileID: 0}
+  personCameraInGame: {fileID: 0}

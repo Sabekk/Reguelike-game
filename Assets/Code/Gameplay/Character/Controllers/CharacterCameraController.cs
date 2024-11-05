@@ -10,15 +10,24 @@ namespace Gameplay.Character.Controller
     {
         #region VARIABLES
 
+        private float currentXRotation;
+        private float currentYRotation;
+
         #endregion
 
         #region PROPERTIES
 
-        private ThreePersonCamera CharacterCamera => ThreePersonCameraManager.Instance != null ? ThreePersonCameraManager.Instance.PersonCameraInGame : null;
+        private FollowingCamera CharacterCamera => CamerasManager.Instance != null ? CamerasManager.Instance.PersonCameraInGame : null;
 
         #endregion
 
         #region METHODS
+
+        public override void Initialize(CharacterBase character)
+        {
+            base.Initialize(character);
+            CharacterCamera.Initialzie(character);
+        }
 
         protected override void AttachEvents()
         {
@@ -36,6 +45,22 @@ namespace Gameplay.Character.Controller
         {
             if (direction == Vector2.zero)
                 return;
+
+            currentXRotation = UpdateRotation(currentXRotation, direction.y, CharacterCamera.BottomClamp, CharacterCamera.TopClamp, true);
+
+            if (Character.IsMoving == false)
+            {
+                currentYRotation = UpdateRotation(currentYRotation, direction.x, float.MinValue, float.MaxValue, false);
+                CharacterCamera.UpdatePosition(currentXRotation, currentYRotation);
+            }
+            else
+                CharacterCamera.UpdatePosition(currentXRotation);
+        }
+
+        private float UpdateRotation(float currentRotation, float input, float min, float max, bool isXAxis)
+        {
+            currentRotation += isXAxis ? -input : input;
+            return Mathf.Clamp(currentRotation, min, max);
         }
 
         #endregion

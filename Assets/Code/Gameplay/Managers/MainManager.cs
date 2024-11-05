@@ -42,7 +42,7 @@ public class MainManager : MonoSingleton<MainManager>, IGlobalManager
         managers.Add(ArenaChooserManager.Instance);
         managers.Add(EnemiesManager.Instance);
         managers.Add(EnvironmentManager.Instance);
-        managers.Add(ThreePersonCameraManager.Instance);
+        managers.Add(CamerasManager.Instance);
 
 
         //Tymczasowe - przeniesc w przyszlosci do miejsca prze³aczania stanu gry (typu: menu, ³adowanie gry)

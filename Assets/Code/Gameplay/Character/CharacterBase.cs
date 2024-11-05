@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.Character
 {
-    public abstract class CharacterBase : MonoBehaviour
+    public abstract class CharacterBase : MonoBehaviour, ICameraFollowTarget
     {
         #region VARIABLES
 
@@ -17,6 +17,7 @@ namespace Gameplay.Character
 
         [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
+        [SerializeField, FoldoutGroup("Components")] private Transform cameraFollowTarget;
 
         [SerializeField, HideInInspector] protected List<CharacterModule> modules;
 
@@ -28,9 +29,12 @@ namespace Gameplay.Character
         public MovementValues MovementValues => movementValues;
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
+        public Transform CameraFollowTarget => cameraFollowTarget;
 
         public abstract bool IsMoving { get; }
+        public bool AllowToRotate => IsMoving;// + inne warunki typu celowanie aby obracaæ postaæ lecuj¹c¹
         protected bool IsInitialzied => isInitialzied;
+
 
         #endregion
 

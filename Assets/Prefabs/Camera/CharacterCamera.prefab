@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Damping: {x: 0.1, y: 0.5, z: 0.3}
-  ShoulderOffset: {x: 0.48, y: 1.2, z: 0.3}
+  ShoulderOffset: {x: 0.48, y: 0, z: 0.3}
   VerticalArmLength: 0.4
   CameraSide: 1
   CameraDistance: 2
@@ -182,3 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c9ab94db1a1f584d85e89cbeae0fe3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cvCamera: {fileID: 5613694665959595921}
+  timeToResetRotation: 0
+  rotationSpeed: 30
+  topClamp: 70
+  bottomClamp: -40

@@ -71,7 +71,7 @@ namespace Gameplay.Character.Controller
         protected virtual void RotateCharacter()
         {
             //IsMoving is true in CharacterCameraController
-            if (Character.IsMoving == false)
+            if (Character.AllowToRotate == false)
                 return;
 
             if (lookDirection != Vector2.zero)
