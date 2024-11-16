@@ -54,7 +54,10 @@ namespace Gameplay.Character.Controller
                 CharacterCamera.UpdatePosition(currentXRotation, currentYRotation);
             }
             else
+            {
+                currentYRotation = CharacterCamera.Target.eulerAngles.y;
                 CharacterCamera.UpdatePosition(currentXRotation);
+            }
         }
 
         private float UpdateRotation(float currentRotation, float input, float min, float max, bool isXAxis)

@@ -19,7 +19,7 @@ namespace Gameplay.Character.Camera
         [SerializeField, FoldoutGroup("Settings")] private float topClamp = 70;
         [SerializeField, FoldoutGroup("Settings")] private float bottomClamp = -40;
 
-        ICameraFollowTarget followingTarget;
+        private ICameraFollowTarget followingTarget;
 
         #endregion
 
@@ -28,6 +28,7 @@ namespace Gameplay.Character.Camera
         public float TopClamp => topClamp;
         public float BottomClamp => bottomClamp;
         public PoolObject Poolable { get; set; }
+        public Transform Target => followingTarget.CameraFollowTarget;
 
         #endregion
 
@@ -65,11 +66,13 @@ namespace Gameplay.Character.Camera
 
         public void UpdatePosition(float xRotation)
         {
+            Debug.Log("Single " + followingTarget.CameraFollowTarget.eulerAngles.y);
             followingTarget.CameraFollowTarget.rotation = Quaternion.Euler(xRotation, followingTarget.CameraFollowTarget.eulerAngles.y, followingTarget.CameraFollowTarget.eulerAngles.z);
         }
 
         public void UpdatePosition(float xRotation, float yRotation)
         {
+            Debug.Log("Douyble " + yRotation);
             followingTarget.CameraFollowTarget.rotation = Quaternion.Euler(xRotation, yRotation, followingTarget.CameraFollowTarget.eulerAngles.z);
         }
 
