@@ -66,14 +66,17 @@ namespace Gameplay.Character.Camera
 
         public void UpdatePosition(float xRotation)
         {
-            Debug.Log("Single " + followingTarget.CameraFollowTarget.eulerAngles.y);
             followingTarget.CameraFollowTarget.rotation = Quaternion.Euler(xRotation, followingTarget.CameraFollowTarget.eulerAngles.y, followingTarget.CameraFollowTarget.eulerAngles.z);
         }
 
         public void UpdatePosition(float xRotation, float yRotation)
         {
-            Debug.Log("Douyble " + yRotation);
             followingTarget.CameraFollowTarget.rotation = Quaternion.Euler(xRotation, yRotation, followingTarget.CameraFollowTarget.eulerAngles.z);
+        }
+
+        public void ResetLocal()
+        {
+            followingTarget.CameraFollowTarget.localRotation = Quaternion.Euler(0, 0, 0);
         }
 
         private void AttachEvents()

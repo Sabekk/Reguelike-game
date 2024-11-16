@@ -14,7 +14,7 @@ namespace Gameplay.Character
         #region PROPERTIES
 
         public PlayerControllersModule ControllersModule => controllersModule;
-        public override bool IsMoving => ControllersModule.AnimatorStateController.IsMoving;
+        public override bool IsMoving => ControllersModule.MovementController.IsMoving;
 
         #endregion
 
