@@ -12,6 +12,8 @@ namespace Gameplay.Character.Animations
 
         #region PROPERTIES
 
+        protected Player Player => Character as Player;
+
         #endregion
 
         #region METHODS
@@ -20,13 +22,25 @@ namespace Gameplay.Character.Animations
         {
             base.AttachEvents();
             Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
+            Player.ControllersModule.MovementController.OnTurnAfterLookingAround += HandleTurningAfterLookingAround;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
             Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
+            Player.ControllersModule.MovementController.OnTurnAfterLookingAround -= HandleTurningAfterLookingAround;
         }
+
+        #region HANDLERS
+
+        private void HandleTurningAfterLookingAround(float degrees)
+        {
+            //Animacja zawracania o odpowiedni stopieñ
+        }
+
+
+        #endregion
 
         #endregion
     }

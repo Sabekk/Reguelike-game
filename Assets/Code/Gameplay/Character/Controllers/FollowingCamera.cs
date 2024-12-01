@@ -36,7 +36,7 @@ namespace Gameplay.Character.Camera
 
         private void FixedUpdate()
         {
-
+            //Debug.Log("Rotation: " + Target.localRotation);
         }
 
         #endregion
@@ -64,19 +64,24 @@ namespace Gameplay.Character.Camera
             Poolable = poolable;
         }
 
-        public void UpdatePosition(float xRotation)
+        public void UpdateXPosition(float xRotation)
         {
-            followingTarget.CameraFollowTarget.rotation = Quaternion.Euler(xRotation, followingTarget.CameraFollowTarget.eulerAngles.y, followingTarget.CameraFollowTarget.eulerAngles.z);
+            Target.rotation = Quaternion.Euler(xRotation, Target.eulerAngles.y, Target.eulerAngles.z);
         }
 
-        public void UpdatePosition(float xRotation, float yRotation)
+        public void UpdateYPosition(float yRotation)
         {
-            followingTarget.CameraFollowTarget.rotation = Quaternion.Euler(xRotation, yRotation, followingTarget.CameraFollowTarget.eulerAngles.z);
+            Target.rotation = Quaternion.Euler(Target.eulerAngles.x, yRotation, Target.eulerAngles.z);
         }
 
-        public void ResetLocal()
+        public void UpdateXYPosition(float xRotation, float yRotation)
         {
-            followingTarget.CameraFollowTarget.localRotation = Quaternion.Euler(0, 0, 0);
+            Target.rotation = Quaternion.Euler(xRotation, yRotation, Target.eulerAngles.z);
+        }
+
+        public void ResetYLocal()
+        {
+            Target.localRotation = Quaternion.Euler(Target.eulerAngles.x, 0, Target.eulerAngles.z);
         }
 
         private void AttachEvents()

@@ -30,11 +30,10 @@ namespace Gameplay.Character.Controller
         #region PROPERTIES
 
         public bool IsMoving => direction != Vector2.zero;
-        private bool IsGrounded => Physics.Raycast(Character.transform.position + CapsuleCollider.center, Vector3.down, (CapsuleCollider.height * 0.5f + 0.2f));
-
-        private Rigidbody Rb => Character.Rb;
-        private CapsuleCollider CapsuleCollider => Character.CapsuleCollider;
-        private Transform CharacterTransform => Character.transform;
+        protected Transform CharacterTransform => Character.transform;
+        protected bool IsGrounded => Physics.Raycast(Character.transform.position + CapsuleCollider.center, Vector3.down, (CapsuleCollider.height * 0.5f + 0.2f));
+        protected Rigidbody Rb => Character.Rb;
+        protected CapsuleCollider CapsuleCollider => Character.CapsuleCollider;
 
         #endregion
 
@@ -51,8 +50,6 @@ namespace Gameplay.Character.Controller
             base.OnUpdate();
             MoveCharacter();
             RotateCharacter();
-
-            Debug.Log(lookDirection);
         }
 
         protected virtual void MoveCharacter()

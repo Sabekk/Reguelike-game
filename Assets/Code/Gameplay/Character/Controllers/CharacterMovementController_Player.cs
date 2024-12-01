@@ -9,7 +9,10 @@ namespace Gameplay.Character.Controller
     {
         #region VARIABLES
 
-        public event Action OnResetPosition;
+        /// <summary>
+        /// Action with degrees of turning
+        /// </summary>
+        public event Action<float> OnTurnAfterLookingAround;
 
         #endregion
 
@@ -45,11 +48,15 @@ namespace Gameplay.Character.Controller
 
         protected override void MoveInDirection(Vector2 direction)
         {
-            if (Player.ControllersModule.CameraController.NeedReset)
+            if (Player.ControllersModule.CameraController.IsLookingAround)
             {
                 //Ustaliæ kierunek kamera->player i tak zmienic rotacjê. Dodatkowo utworzyc event z obliczonym kontem o ile zmienia sie pozycja aby wywo³aæ animacje zwrotu
-                Player.transform.rotation = Quaternion.Euler(0, 0, 0);
-                OnResetPosition?.Invoke();
+
+                float rotateY = Player.ControllersModule.CameraController.RotationOfTarget.eulerAngles.y;
+
+                CharacterTransform.rotation = Quaternion.Euler(CharacterTransform.rotation.x, rotateY, CharacterTransform.rotation.z);
+
+                OnTurnAfterLookingAround?.Invoke(0);
             }
 
             base.MoveInDirection(direction);

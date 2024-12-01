@@ -17,7 +17,9 @@ namespace Gameplay.Character.Controller
 
         #region PROPERTIES
 
-        public bool NeedReset { get; set; }
+        public bool IsLookingAround { get; set; }
+        public Quaternion RotationOfTarget => CharacterCamera.Target.rotation;
+        public Quaternion LocalRotationOfTarget => CharacterCamera.Target.localRotation;
         protected Player Player => Character as Player;
         private FollowingCamera CharacterCamera => CamerasManager.Instance != null ? CamerasManager.Instance.PersonCameraInGame : null;
 
@@ -37,8 +39,7 @@ namespace Gameplay.Character.Controller
             Events.Gameplay.Move.OnLookInDirection += HandleLookInDirection;
 
             if (Player)
-                Player.ControllersModule.MovementController.OnResetPosition += HandleResetCharacterPosition;
-            //Events.Gameplay.Move.OnMoveInDirection += HandleMoveInDirection;
+                Player.ControllersModule.MovementController.OnTurnAfterLookingAround += HandleTurningAfterLookingAround;
         }
 
         protected override void DetachEvents()
@@ -47,8 +48,7 @@ namespace Gameplay.Character.Controller
             Events.Gameplay.Move.OnLookInDirection -= HandleLookInDirection;
 
             if (Player)
-                Player.ControllersModule.MovementController.OnResetPosition -= HandleResetCharacterPosition;
-            //Events.Gameplay.Move.OnMoveInDirection -= HandleMoveInDirection;
+                Player.ControllersModule.MovementController.OnTurnAfterLookingAround -= HandleTurningAfterLookingAround;
         }
         private float UpdateRotation(float currentRotation, float input, float min, float max, bool isXAxis)
         {
@@ -67,34 +67,24 @@ namespace Gameplay.Character.Controller
 
             if (Character.IsMoving == false)
             {
+                IsLookingAround = true;
+
                 currentYRotation = UpdateRotation(currentYRotation, direction.x, float.MinValue, float.MaxValue, false);
-                CharacterCamera.UpdatePosition(currentXRotation, currentYRotation);
-                NeedReset = true;
+                CharacterCamera.UpdateXYPosition(currentXRotation, currentYRotation);
             }
             else
             {
                 currentYRotation = CharacterCamera.Target.eulerAngles.y;
-                CharacterCamera.UpdatePosition(currentXRotation);
+                CharacterCamera.UpdateXPosition(currentXRotation);
             }
         }
 
-        private void HandleMoveInDirection(Vector2 direction)
+        private void HandleTurningAfterLookingAround(float degrees)
         {
-            if (NeedReset)
-            {
-                currentYRotation = 0;
-                currentXRotation = 0;
-                CharacterCamera.ResetLocal();
-                NeedReset = false;
-            }
-        }
+            CharacterCamera.ResetYLocal();
 
-        private void HandleResetCharacterPosition()
-        {
-            currentYRotation = 0;
-            currentXRotation = 0;
-            CharacterCamera.ResetLocal();
-            NeedReset = false;
+            currentYRotation = Character.transform.eulerAngles.y;
+            IsLookingAround = false;
         }
 
         #endregion
