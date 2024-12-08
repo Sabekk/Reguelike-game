@@ -22,19 +22,19 @@ namespace Gameplay.Character.Animations
         {
             base.AttachEvents();
             Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
-            Player.ControllersModule.MovementController.OnTurnAfterLookingAround += HandleTurningAfterLookingAround;
+            Player.ControllersModule.MovementController.OnStartMoving += HandleStartMoving;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
             Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
-            Player.ControllersModule.MovementController.OnTurnAfterLookingAround -= HandleTurningAfterLookingAround;
+            Player.ControllersModule.MovementController.OnStartMoving -= HandleStartMoving;
         }
 
         #region HANDLERS
 
-        private void HandleTurningAfterLookingAround(float degrees)
+        private void HandleStartMoving()
         {
             //Animacja zawracania o odpowiedni stopieñ
         }

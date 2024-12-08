@@ -1,6 +1,7 @@
 using Gameplay.Character.Animations;
 using GlobalEventSystem;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,21 +10,25 @@ namespace Gameplay.Character.Controller
 {
     public class CharacterMovementController : ControllerBase
     {
+        #region ACTIONS
+
+        #endregion
+
         #region VARIABLES
 
         //TODO baza danych z wartosciami startowymi postaci
-        [SerializeField, FoldoutGroup("Values")] float walkSpeed = 4;
-        [SerializeField, FoldoutGroup("Values")] float runSpeed = 7;
-        [SerializeField, FoldoutGroup("Values")] float jumpPower = 10;
-        [SerializeField, FoldoutGroup("Values")] float gravity = 5;
-        [SerializeField, FoldoutGroup("Values")] float rotationSpeed = 25;
+        [SerializeField, FoldoutGroup("Values")] protected float walkSpeed = 4;
+        [SerializeField, FoldoutGroup("Values")] protected float runSpeed = 7;
+        [SerializeField, FoldoutGroup("Values")] protected float jumpPower = 10;
+        [SerializeField, FoldoutGroup("Values")] protected float gravity = 5;
+        [SerializeField, FoldoutGroup("Values")] protected float rotationSpeed = 25;
 
-        private bool isSprinting;
-        private float baseDrag;
+        protected bool isSprinting;
+        protected float baseDrag;
 
-        private Vector2 direction = Vector3.zero;
-        private Vector2 lookDirection = Vector3.zero;
-        private Vector3 moveDirection = Vector3.zero;
+        protected Vector2 direction = Vector3.zero;
+        protected Vector2 lookDirection = Vector3.zero;
+        protected Vector3 moveDirection = Vector3.zero;
 
         #endregion
 
@@ -48,8 +53,9 @@ namespace Gameplay.Character.Controller
         public override void OnUpdate()
         {
             base.OnUpdate();
+
             MoveCharacter();
-            RotateCharacter();
+            RotateCharacterByLookDirection();
         }
 
         protected virtual void MoveCharacter()
@@ -69,7 +75,7 @@ namespace Gameplay.Character.Controller
                 Rb.drag = baseDrag;
         }
 
-        protected virtual void RotateCharacter()
+        protected virtual void RotateCharacterByLookDirection()
         {
             if (Character.AllowToRotate == false)
                 return;
@@ -77,9 +83,14 @@ namespace Gameplay.Character.Controller
             if (lookDirection != Vector2.zero)
             {
                 Quaternion deltaRotation = Quaternion.Euler(0, lookDirection.x * rotationSpeed * Time.fixedDeltaTime, 0);
-                Rb.MoveRotation(Rb.rotation * deltaRotation);
+                RotateCharacter(deltaRotation);
             }
 
+        }
+
+        protected virtual void RotateCharacter(Quaternion rotation)
+        {
+            Rb.MoveRotation(Rb.rotation * rotation);
         }
 
         protected virtual void Jump()
@@ -104,6 +115,7 @@ namespace Gameplay.Character.Controller
         {
             this.isSprinting = isSprinting;
         }
+
         #endregion
     }
 }
