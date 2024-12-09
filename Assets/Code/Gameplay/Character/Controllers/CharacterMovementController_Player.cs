@@ -19,6 +19,7 @@ namespace Gameplay.Character.Controller
 
         #region PROPERTIES
 
+        public bool IsReturningRotation { get; set; }
         public bool IsLookingForward
         {
             get
@@ -60,8 +61,12 @@ namespace Gameplay.Character.Controller
             if (Player.ControllersModule.CameraController.IsLookingAround)
                 return;
 
-            if (!IsLookingForward)
+            if (IsReturningRotation)
+            {
                 RotateCharacterToCamera();
+                if (IsLookingForward)
+                    IsReturningRotation = false;
+            }
             else
                 base.RotateCharacterByLookDirection();
         }
@@ -69,26 +74,36 @@ namespace Gameplay.Character.Controller
         protected override void RotateCharacter(Quaternion rotation)
         {
             //Rotate character to camera direction
-            if (!IsLookingForward)              
+            if (IsReturningRotation)
                 Rb.MoveRotation(rotation);
-            else 
+            else
                 base.RotateCharacter(rotation);
         }
 
+        protected override void MoveCharacter()
+        {
+            if (IsReturningRotation)
+                return;
+            else
+                base.MoveCharacter();
+        }
         protected override void MoveInDirection(Vector2 direction)
         {
             if (Player.ControllersModule.CameraController.IsLookingAround)
+            {
+                IsReturningRotation = true;
                 OnStartMoving?.Invoke();
+            }
 
             base.MoveInDirection(direction);
         }
 
         private void RotateCharacterToCamera()
         {
+            IsReturningRotation = true;
             Quaternion cameraRotation = Quaternion.Euler(0, RotationOfCamera.eulerAngles.y, 0);
             Quaternion deltaRotation = Quaternion.RotateTowards(CharacterTransform.rotation, cameraRotation, rotationSpeed / 2/* * Time.fixedDeltaTime*/);
             RotateCharacter(deltaRotation);
-            Debug.Log("ROtate");
         }
 
         #endregion

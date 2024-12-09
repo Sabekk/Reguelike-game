@@ -39,7 +39,7 @@ namespace Gameplay.Character.Controller
         {
             base.OnUpdate();
 
-            if (MovementController.IsLookingForward == false)
+            if (MovementController.IsReturningRotation)
                 CharacterCamera.UpdateRotation(savedRotation);
         }
 
@@ -74,12 +74,28 @@ namespace Gameplay.Character.Controller
             if (direction == Vector2.zero)
                 return;
 
-            if (Character.IsMoving == false)
-                IsLookingAround = true;
+            //if (Character.IsMoving == false)
+            //    IsLookingAround = true;
+
+            //currentXRotation = UpdateRotation(currentXRotation, direction.y, CharacterCamera.BottomClamp, CharacterCamera.TopClamp, true);
+            //currentYRotation = UpdateRotation(currentYRotation, direction.x, float.MinValue, float.MaxValue, false);
+            //CharacterCamera.UpdateXYRotation(currentXRotation, currentYRotation);
 
             currentXRotation = UpdateRotation(currentXRotation, direction.y, CharacterCamera.BottomClamp, CharacterCamera.TopClamp, true);
-            currentYRotation = UpdateRotation(currentYRotation, direction.x, float.MinValue, float.MaxValue, false);
-            CharacterCamera.UpdateXYRotation(currentXRotation, currentYRotation);
+
+            if (Character.IsMoving == false)
+            {
+                IsLookingAround = true;
+
+                currentYRotation = UpdateRotation(currentYRotation, direction.x, float.MinValue, float.MaxValue, false);
+                CharacterCamera.UpdateXYRotation(currentXRotation, currentYRotation);
+            }
+            else
+            {
+                currentYRotation = CharacterCamera.Target.eulerAngles.y;
+                CharacterCamera.UpdateXRotation(currentXRotation);
+            }
+
 
             if (MovementController.IsLookingForward == false)
                 savedRotation = CharacterCamera.Target.rotation;
