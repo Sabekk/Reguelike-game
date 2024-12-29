@@ -31,7 +31,9 @@ namespace Gameplay.Character.Controller
         }
 
         protected Player Player => Character as Player;
-        private Quaternion RotationOfCamera => Player.ControllersModule.CameraController.RotationOfTarget;
+        private CharacterCameraController CameraController => Player.ControllersModule.CameraController;
+        private Quaternion RotationOfCamera => CameraController.RotationOfTarget;
+        private bool RotateWithCamera => IsReturningRotation || CameraController.IsFocusing;
 
         #endregion
 
@@ -61,7 +63,7 @@ namespace Gameplay.Character.Controller
             if (Player.ControllersModule.CameraController.IsLookingAround)
                 return;
 
-            if (IsReturningRotation)
+            if (RotateWithCamera)
             {
                 RotateCharacterToCamera();
                 if (IsLookingForward)
@@ -74,7 +76,7 @@ namespace Gameplay.Character.Controller
         protected override void RotateCharacter(Quaternion rotation)
         {
             //Rotate character to camera direction
-            if (IsReturningRotation)
+            if (RotateWithCamera)
                 Rb.MoveRotation(rotation);
             else
                 base.RotateCharacter(rotation);

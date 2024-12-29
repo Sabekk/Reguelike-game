@@ -1,14 +1,18 @@
 using Gameplay.Character.Camera;
 using GlobalEventSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Character.Controller
 {
+    [Serializable]
     public class CharacterCameraController : ControllerBase
     {
         #region VARIABLES
+
+        [SerializeField] private Transform lookTransform;
 
         private float currentXRotation;
         private float currentYRotation;
@@ -19,6 +23,7 @@ namespace Gameplay.Character.Controller
 
         #region PROPERTIES
 
+        public bool IsFocusing => lookTransform != null;
         public bool IsLookingAround { get; set; }
         public Quaternion RotationOfTarget => CharacterCamera.Target.rotation;
         private Player Player => Character as Player;
@@ -39,8 +44,15 @@ namespace Gameplay.Character.Controller
         {
             base.OnUpdate();
 
-            if (MovementController.IsReturningRotation)
-                CharacterCamera.UpdateRotation(savedRotation);
+            if (IsFocusing)
+            {
+                CharacterCamera.Target.LookAt(lookTransform);
+            }
+            else
+            {
+                if (MovementController.IsReturningRotation)
+                    CharacterCamera.UpdateRotation(savedRotation);
+            }
         }
 
         protected override void AttachEvents()
@@ -74,12 +86,8 @@ namespace Gameplay.Character.Controller
             if (direction == Vector2.zero)
                 return;
 
-            //if (Character.IsMoving == false)
-            //    IsLookingAround = true;
-
-            //currentXRotation = UpdateRotation(currentXRotation, direction.y, CharacterCamera.BottomClamp, CharacterCamera.TopClamp, true);
-            //currentYRotation = UpdateRotation(currentYRotation, direction.x, float.MinValue, float.MaxValue, false);
-            //CharacterCamera.UpdateXYRotation(currentXRotation, currentYRotation);
+            if (IsFocusing)
+                return;
 
             currentXRotation = UpdateRotation(currentXRotation, direction.y, CharacterCamera.BottomClamp, CharacterCamera.TopClamp, true);
 
