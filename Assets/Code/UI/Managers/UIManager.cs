@@ -77,7 +77,7 @@ namespace UI
                     window.gameObject.SetActiveOptimize(true);
             }
 
-            window.gameObject.transform.SetParent(mainCanvas.transform);
+            window.gameObject.transform.SetParent(mainCanvas.transform, false);
 
             return window;
         }
