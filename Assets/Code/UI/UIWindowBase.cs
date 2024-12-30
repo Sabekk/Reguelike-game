@@ -1,16 +1,18 @@
+using ObjectPooling;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace UI.Window
 {
-    public abstract class UIWindowBase : MonoBehaviour
+    public abstract class UIWindowBase : MonoBehaviour, IPoolable
     {
         #region VARIABLES
 
         #endregion
 
         #region PROPERTIES
+        public PoolObject Poolable { get; set; }
 
         #endregion
 
@@ -31,14 +33,19 @@ namespace UI.Window
 
         #region METHODS
 
-        protected virtual void Initialize()
+        public virtual void Initialize()
         {
             InitializingAttachEvents();
         }
 
-        protected virtual void CleanUp()
+        public virtual void CleanUp()
         {
             InitializingDetachEvents();
+        }
+
+        public void AssignPoolable(PoolObject poolable)
+        {
+            Poolable = poolable;
         }
 
         /// <summary>

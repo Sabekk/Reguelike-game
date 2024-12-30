@@ -5,10 +5,23 @@ namespace GlobalEventSystem
     {
         #region PROPERTIES
 
-        #endregion
+        public Windows Window { get; private set; } = new Windows();
 
-        #region CLASSES
+		#endregion
 
-        #endregion
-    }
+		#region CLASSES
+
+		/// <summary>
+		/// Events of timing
+		/// </summary>
+		public class Windows
+		{
+			/// <summary>
+			/// Called for toggle inventory window
+			/// </summary>
+			public Events.Event ToggleInventory = new Events.Event();
+		}
+
+		#endregion
+	}
 }

@@ -18,18 +18,26 @@ namespace UI.Window
 
         #region METHODS
 
-        protected override void Initialize()
+        public override void Initialize()
         {
             base.Initialize();
             for (int i = 0; i < subWindows.Length; i++)
                 subWindows[i].Initialize();
         }
 
-        protected override void CleanUp()
+        public override void CleanUp()
         {
             base.CleanUp();
             for (int i = 0; i < subWindows.Length; i++)
                 subWindows[i].CleanUp();
+        }
+
+
+        protected override void Refresh()
+        {
+            base.Refresh();
+            for (int i = 0; i < subWindows.Length; i++)
+                subWindows[i].Refresh();
         }
 
         protected override void AttachEvents()
