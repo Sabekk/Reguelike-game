@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 989
   m_ShowMode: 4
-  m_Title: Hierarchy
+  m_Title: Inspector
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 321}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 139
+  controlID: 131
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 54
+  controlID: 18
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 55
+  controlID: 19
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -189,8 +189,8 @@ MonoBehaviour:
     y: 0
     width: 440
     height: 636
-  m_MinSize: {x: 200, y: 200}
-  m_MaxSize: {x: 4000, y: 4000}
+  m_MinSize: {x: 201, y: 221}
+  m_MaxSize: {x: 4001, y: 4021}
   m_ActualView: {fileID: 15}
   m_Panes:
   - {fileID: 15}
@@ -494,21 +494,21 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
-      scrollPos: {x: 0, y: 1722}
-      m_SelectedIDs: 9c3efeff
-      m_LastClickedID: -115044
-      m_ExpandedIDs: d63dfeff923efeff963efeff9c3efeffd2d5feffd6d5feff52d6feff04dcfeff92dcfeff96dcfeff9adcfeffe0e2fefff6e2feffe2e5feff86e7feff8ae7feff90e7feff18faffff06fbffff0afbffff
+      scrollPos: {x: 0, y: 0}
+      m_SelectedIDs: 4e6f0000
+      m_LastClickedID: 0
+      m_ExpandedIDs: 1ce8ffff6cf7fffff8fafffffcfafffffefaffff0afbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
-        m_Name: Chr_Head_Male_00
-        m_OriginalName: Chr_Head_Male_00
+        m_Name: Chr_ElbowAttachLeft_01
+        m_OriginalName: Chr_ElbowAttachLeft_01
         m_EditFieldRect:
           serializedVersion: 2
           x: 0
           y: 0
           width: 0
           height: 0
-        m_UserData: -74610
+        m_UserData: 28426
         m_IsWaitingForDelay: 0
         m_IsRenaming: 0
         m_OriginalEventType: 0
@@ -864,9 +864,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: -0.5324291, y: 1.1873724, z: -12.507485}
+    m_Target: {x: -0.4917203, y: 1.8744922, z: -14.155044}
     speed: 2
-    m_Value: {x: -0.5324291, y: 1.1873724, z: -12.507485}
+    m_Value: {x: -0.4917203, y: 1.8744922, z: -14.155044}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -912,13 +912,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.06915863, y: 0.9306967, z: -0.2624032, w: -0.24529344}
+    m_Target: {x: -0.06073159, y: 0.9320061, z: -0.3055602, w: -0.18524173}
     speed: 2
-    m_Value: {x: -0.071920715, y: 0.92807907, z: -0.2586621, w: -0.25805157}
+    m_Value: {x: -0.06073143, y: 0.9320037, z: -0.3055594, w: -0.18524124}
   m_Size:
-    m_Target: 1.4497783
+    m_Target: 0.7851362
     speed: 2
-    m_Value: 1.4497783
+    m_Value: 0.7851362
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1121,7 +1121,7 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Polygon/PolygonFantasyHeroCharacters/Prefabs/Characters_Presets
+    - Assets/Code/Gameplay/Items
     m_Globs: []
     m_OriginalText: 
     m_ImportLogFlags: 0
@@ -1129,16 +1129,16 @@ MonoBehaviour:
   m_ViewMode: 1
   m_StartGridSize: 16
   m_LastFolders:
-  - Assets/Polygon/PolygonFantasyHeroCharacters/Prefabs/Characters_Presets
+  - Assets/Code/Gameplay/Items
   m_LastFoldersGridSize: 16
   m_LastProjectPath: S:\Projekty\Reguelike-game
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
-    scrollPos: {x: 0, y: 111}
-    m_SelectedIDs: 92520000
-    m_LastClickedID: 21138
-    m_ExpandedIDs: 00000000365100003a510000a65100004652000052520000625200006a52000000ca9a3bffffff7f
+    scrollPos: {x: 0, y: 243}
+    m_SelectedIDs: ce6a0000
+    m_LastClickedID: 27342
+    m_ExpandedIDs: 00000000ea690000ec690000ee690000f0690000f2690000f4690000f6690000f8690000fa690000fc690000fe690000486a0000586a00005e6a0000866a0000886a0000b06a0000986e00009a6e0000de6e000000ca9a3bffffff7f
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1166,7 +1166,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000036510000385100003a5100003c5100003e510000
+    m_ExpandedIDs: 00000000ea690000ec690000ee690000f0690000f2690000f4690000f6690000f8690000fa690000fc690000fe690000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1197,18 +1197,18 @@ MonoBehaviour:
     m_ExpandedInstanceIDs: c6230000784a0000944d00007c4a00005a4c00007e4a0000ae750000d2760000a4700000c0710000cc72000004540000c65000009a530000bc5000007e5200009a500000a84f000042550000c04f0000a4550000fa51000058540000dc4f0000be5200006a550000245000002a5000000853000082540000f85b00008c6100005e6900006269000060130a0020cb0900
     m_RenameOverlay:
       m_UserAcceptedRename: 0
-      m_Name: PolygonStarter
-      m_OriginalName: PolygonStarter
+      m_Name: 
+      m_OriginalName: 
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
-      m_UserData: 20902
+      m_UserData: 0
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 0
+      m_OriginalEventType: 11
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 10}
     m_CreateAssetUtility:
@@ -1218,7 +1218,7 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
     m_NewAssetIndexInList: -1
-    m_ScrollPosition: {x: 0, y: 867}
+    m_ScrollPosition: {x: 0, y: 0}
     m_GridSize: 16
   m_SkipHiddenPackages: 0
   m_DirectoriesAreaWidth: 349
