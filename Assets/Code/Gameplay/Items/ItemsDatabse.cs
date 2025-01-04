@@ -1,3 +1,4 @@
+using Gameplay.Items;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,9 +8,13 @@ public class ItemsDatabse : ScriptableObject
 {
     #region VARIABLES
 
+    [SerializeField] private List<ItemData> itemDatas;
+
     #endregion
 
     #region PROPERTIES
+
+    public List<ItemData> ItemDatas => itemDatas;
 
     #endregion
 

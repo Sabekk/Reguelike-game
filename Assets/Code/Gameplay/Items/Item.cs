@@ -9,13 +9,39 @@ namespace Gameplay.Items
     {
         #region VARIABLES
 
-        [SerializeField] private ItemVisualization[] visualizations;
+        [SerializeField] private string dataId;
+
+        private ItemData itemData;
 
         #endregion
 
         #region PROPERTIES
 
         public PoolObject Poolable { get; set; }
+        public ItemData Data
+        {
+            get
+            {
+                if (itemData == null)
+                    itemData = ItemsManager.Instance.FindItemData(dataId);
+                return itemData;
+            }
+        }
+
+        #endregion
+
+        #region CONSTRUCTORS
+
+        public Item()
+        {
+
+        }
+
+        public Item(ItemData data)
+        {
+            this.itemData = data;
+            dataId = data.Id;
+        }
 
         #endregion
 

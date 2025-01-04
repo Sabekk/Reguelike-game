@@ -14,6 +14,7 @@ public class MainDatabases : ScriptableSingleton<MainDatabases>
     [SerializeField] private EnemiesDatabase enemiesDatabase;
     [SerializeField] private ValuesDatabase valuesDatabase;
     [SerializeField] private CharacterDatabase characterDatabase;
+    [SerializeField] private ItemsDatabse itemsDatabase;
 
     #endregion
 
@@ -26,6 +27,7 @@ public class MainDatabases : ScriptableSingleton<MainDatabases>
     public EnemiesDatabase EnemiesDatabase => enemiesDatabase;
     public ValuesDatabase ValuesDatabase => valuesDatabase;
     public CharacterDatabase CharacterDatabase => characterDatabase;
+    public ItemsDatabse ItemsDatabase => itemsDatabase;
 
     #endregion
 
