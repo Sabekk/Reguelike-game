@@ -9,7 +9,7 @@ namespace Gameplay.Items
     {
         #region VARIABLES
 
-        [SerializeField] private string dataId;
+        [SerializeField] private int dataId;
 
         private ItemData itemData;
 

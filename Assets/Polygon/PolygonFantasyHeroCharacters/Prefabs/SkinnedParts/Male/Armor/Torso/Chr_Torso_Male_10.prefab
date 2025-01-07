@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7398072500317117291}
   - component: {fileID: 7445277918358669535}
+  - component: {fileID: -5006000016443864524}
   m_Layer: 0
   m_Name: Chr_Torso_Male_10
   m_TagString: Untagged
@@ -94,3 +95,16 @@ SkinnedMeshRenderer:
     m_Center: {x: -0.31587932, y: 0.0313728, z: 0.000000029802322}
     m_Extent: {x: 0.35435, y: 0.23967372, z: 0.3055855}
   m_DirtyAABB: 0
+--- !u!114 &-5006000016443864524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7402823616088712593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7b93a9a9b83cf4994e9e9a40132f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  socketType: 1

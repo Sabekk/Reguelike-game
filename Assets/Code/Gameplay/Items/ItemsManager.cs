@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Sirenix.OdinInspector;
+using ObjectPooling;
 
 namespace Gameplay.Items
 {
@@ -18,7 +20,7 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        public ItemData FindItemData(string itemDataId)
+        public ItemData FindItemData(int itemDataId)
         {
             ItemData data = Database.ItemDatas.Find(x => x.Id == itemDataId);
             if (data)

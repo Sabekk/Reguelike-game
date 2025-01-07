@@ -35,7 +35,7 @@ namespace ObjectPooling
             return values;
         }
 
-        public IEnumerable GetCategoryInstancesNames(string category)
+        public static IEnumerable GetCategoryInstancesNames(string category)
         {
             ValueDropdownList<string> values = new();
             foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)

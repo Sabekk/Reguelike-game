@@ -42,3 +42,8 @@ MonoBehaviour:
     - name: InventoryWindow
       poolObject: {fileID: 6701734374586641355, guid: 5a7960c537bd16c4eaf1a0f4bf1cba1a, type: 3}
       size: 1
+  - categoryName: Item
+    instances:
+    - name: TestArmor
+      poolObject: {fileID: 1906995304392437295, guid: 6edb443d3c586e8439198d8b53a79db8, type: 3}
+      size: 5

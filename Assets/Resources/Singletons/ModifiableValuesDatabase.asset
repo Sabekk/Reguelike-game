@@ -54,14 +54,14 @@ MonoBehaviour:
     modifiableValueDatas:
     - id: WalkSpeed
       icon: {fileID: 0}
-      canApplyModifiers: 0
+      canApplyModifiers: 1
       hasMinValue: 1
       hasMaxValue: 0
       minValue: 0
       maxValue: 0
     - id: SprintSpeed
       icon: {fileID: 0}
-      canApplyModifiers: 0
+      canApplyModifiers: 1
       hasMinValue: 1
       hasMaxValue: 0
       minValue: 0
@@ -77,6 +77,127 @@ MonoBehaviour:
       icon: {fileID: 0}
       canApplyModifiers: 0
       hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+  - categoryName: ItemValues
+    modifiableValueDatas:
+    - id: AttackDamage
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: FireAttack
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: ColdAttack
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: DarkAttack
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: LightAttack
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: Armor
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: FireResistance
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: ColdResistance
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: LightResistance
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: DarkFireResistance
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: Weight
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 1
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: AdditionalHealth
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 0
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: AdditionalMana
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 0
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: AdditionalStrenght
+      icon: {fileID: 0}
+      canApplyModifiers: 0
+      hasMinValue: 0
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: AdditionalAgility
+      icon: {fileID: 0}
+      canApplyModifiers: 0
+      hasMinValue: 0
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: AdditionalStamina
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 0
+      hasMaxValue: 0
+      minValue: 0
+      maxValue: 0
+    - id: AdditionalSpeed
+      icon: {fileID: 0}
+      canApplyModifiers: 1
+      hasMinValue: 0
       hasMaxValue: 0
       minValue: 0
       maxValue: 0

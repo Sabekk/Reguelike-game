@@ -5,6 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.Items
 {
+    [System.Serializable]
     public class ItemVisualization : MonoBehaviour, IPoolable
     {
         #region VARIABLES
