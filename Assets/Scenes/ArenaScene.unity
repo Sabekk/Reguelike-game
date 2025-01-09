@@ -4822,8 +4822,12 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 157865207219326795, guid: 78e953f9c60f29c4e877b830dcc04f34, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 98a56ff2c8ee98645a4d3f79fa1506c5, type: 3}
+    - target: {fileID: 157865207219326795, guid: 78e953f9c60f29c4e877b830dcc04f34, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 723261275281909529, guid: 78e953f9c60f29c4e877b830dcc04f34, type: 3}
       propertyPath: controllersModule.animatorStateController.animator

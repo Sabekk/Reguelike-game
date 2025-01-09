@@ -8,12 +8,15 @@ namespace Gameplay.Character
         #region VARIABLES
 
         [SerializeField, FoldoutGroup("Modules")] private PlayerControllersModule controllersModule;
+        [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
 
         #endregion
 
         #region PROPERTIES
 
         public PlayerControllersModule ControllersModule => controllersModule;
+        public EquipmentModule EquipmentModule => equipmentModule;
+
         public override bool IsMoving => ControllersModule.MovementController.IsMoving;
 
         #endregion
