@@ -1,4 +1,5 @@
 using ObjectPooling;
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,12 +7,13 @@ using UnityEngine;
 
 namespace Gameplay.Items
 {
-    public class Item : MonoBehaviour, IPoolable, IIdEqualable
+    [System.Serializable]
+    public class Item : IIdEqualable
     {
         #region VARIABLES
 
-        [SerializeField] private int id = Guid.NewGuid().GetHashCode();
-        [SerializeField] private int dataId;
+        [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
+        [SerializeField, ReadOnly] private int dataId;
 
         private ItemData itemData;
 
@@ -20,7 +22,6 @@ namespace Gameplay.Items
         #region PROPERTIES
 
         public int Id => id;
-        public PoolObject Poolable { get; set; }
         public ItemData Data
         {
             get
@@ -49,12 +50,6 @@ namespace Gameplay.Items
         #endregion
 
         #region METHODS
-
-
-        public void AssignPoolable(PoolObject poolable)
-        {
-            Poolable = poolable;
-        }
 
         public bool IdEquals(int id)
         {

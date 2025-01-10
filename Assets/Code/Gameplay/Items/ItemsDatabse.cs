@@ -51,6 +51,21 @@ namespace Gameplay.Items
             return null;
         }
 
+        public static IEnumerable GetCategoryInstancesNames(ItemCategory category)
+        {
+            ValueDropdownList<int> values = new();
+            foreach (ItemCategoryData itemCategory in MainDatabases.Instance.ItemsDatabase.ItemCategories)
+            {
+                if (category != itemCategory.Category)
+                    continue;
+
+                foreach (var itemData in itemCategory.ItemsData)
+                    values.Add(itemData.ItemName, itemData.Id);
+            }
+
+            return values;
+        }
+
         #endregion
     }
 }

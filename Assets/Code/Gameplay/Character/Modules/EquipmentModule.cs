@@ -15,6 +15,7 @@ namespace Gameplay.Character
 
         [SerializeField] private EquipmentController equipmentController;
         [SerializeField] private InventoryController inventoryController;
+        [SerializeField] private EquipmentVisualizationController visualizationController;
 
         #endregion
 
@@ -22,6 +23,7 @@ namespace Gameplay.Character
 
         public EquipmentController EquipmentController => equipmentController;
         public InventoryController InventoryController => inventoryController;
+        public EquipmentVisualizationController VisualizationController => visualizationController;
 
         #endregion
 
@@ -32,6 +34,7 @@ namespace Gameplay.Character
             base.Initialize(character);
             controllers.Add(equipmentController);
             controllers.Add(inventoryController);
+            controllers.Add(visualizationController);
         }
 
         #endregion

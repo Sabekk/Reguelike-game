@@ -18,7 +18,7 @@ namespace Gameplay.Character.Controller
 
         #region VARIABLES
 
-        [SerializeField] private List<Item> items;
+        [SerializeField] private List<Item> items = new();
 
         #endregion
 
@@ -47,12 +47,12 @@ namespace Gameplay.Character.Controller
             Character.EquipmentModule.EquipmentController.OnItemUnequiped -= AddItem;
         }
 
-
         public void AddItem(Item item)
         {
             if (items.ContainsId(item.Id))
                 return;
 
+            items.Add(item);
             OnItemAdded?.Invoke(item);
         }
 
@@ -61,6 +61,7 @@ namespace Gameplay.Character.Controller
             if (!items.ContainsId(item.Id))
                 return;
 
+            items.Remove(item);
             OnItemRemoved?.Invoke(item);
         }
 
