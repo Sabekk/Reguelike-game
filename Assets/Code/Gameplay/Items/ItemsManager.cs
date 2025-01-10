@@ -20,15 +20,6 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        public ItemData FindItemData(int itemDataId)
-        {
-            ItemData data = Database.ItemDatas.Find(x => x.Id == itemDataId);
-            if (data)
-                return data;
-
-            return null;
-        }
-
         #endregion
     }
 }

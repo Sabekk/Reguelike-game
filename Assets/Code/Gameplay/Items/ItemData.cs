@@ -10,18 +10,16 @@ namespace Gameplay.Items
 {
 
     [CreateAssetMenu(menuName = "Item/ItemData", fileName = "ItemData")]
-    public class ItemData : ScriptableObject
+    public class ItemData : ScriptableObject, IIdEqualable
     {
         #region VARIABLES
-
-        public const string GET_POOL_ITEMS_METHOD = "@GetItemPools()";
 
         [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
         [SerializeField, FoldoutGroup("BaseInfo")] private string itemName;
         [SerializeField, FoldoutGroup("BaseInfo")] private Sprite icon;
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemType itemType;
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemUseType useType;
-        [SerializeField, FoldoutGroup("Visualization"), ValueDropdown(GET_POOL_ITEMS_METHOD)] private List<string> visualizationsIds;
+        [SerializeField, FoldoutGroup("Visualization"), ValueDropdown(ObjectPoolDatabase.GET_POOL_ITEMS_METHOD)] private List<string> visualizationsIds;
         [SerializeField, FoldoutGroup("Stats")] private ItemAttributes attributes;
         //TODO dodatkowe efekty
 
@@ -41,9 +39,9 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        private IEnumerable GetItemPools()
+        public bool IdEquals(int id)
         {
-            return ObjectPoolDatabase.GetCategoryInstancesNames("Item");
+            return Id == id;
         }
 
         #endregion

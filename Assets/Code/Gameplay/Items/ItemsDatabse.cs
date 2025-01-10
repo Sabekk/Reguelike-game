@@ -5,22 +5,52 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Database/ItemsDatabse", fileName = "ItemsDatabse")]
-public class ItemsDatabse : ScriptableObject
+namespace Gameplay.Items
 {
-    #region VARIABLES
+    [CreateAssetMenu(menuName = "Database/ItemsDatabse", fileName = "ItemsDatabse")]
+    public class ItemsDatabse : ScriptableObject
+    {
+        #region VARIABLES
 
-    [SerializeField] private List<ItemData> itemDatas;
+        [SerializeField] private List<ItemCategoryData> itemCategories;
 
-    #endregion
+        #endregion
 
-    #region PROPERTIES
+        #region PROPERTIES
 
-    public List<ItemData> ItemDatas => itemDatas;
+        public List<ItemCategoryData> ItemCategories => itemCategories;
 
-    #endregion
+        #endregion
 
-    #region METHODS
+        #region METHODS
 
-    #endregion
+        public ItemData FindItemData(int itemDataId, ItemCategory category)
+        {
+            foreach (var itemCategory in ItemCategories)
+            {
+                if (itemCategory.Category != category)
+                    continue;
+
+                ItemData itemData = itemCategory.FindItemData(itemDataId);
+                if (itemData != null)
+                    return itemData;
+            }
+
+            return null;
+        }
+
+        public ItemData FindItemData(int itemDataId)
+        {
+            foreach (var itemCategory in ItemCategories)
+            {
+                ItemData itemData = itemCategory.FindItemData(itemDataId);
+                if (itemData != null)
+                    return itemData;
+            }
+
+            return null;
+        }
+
+        #endregion
+    }
 }

@@ -1,3 +1,4 @@
+using Gameplay.Character.Body;
 using Gameplay.Character.Module;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -19,7 +20,11 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
         [SerializeField, FoldoutGroup("Components")] private Transform cameraFollowTarget;
 
+        [SerializeField, HideInInspector] private CharacterBodyContainer bodyContainer;
         [SerializeField, HideInInspector] protected List<CharacterModule> modules;
+
+        [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
+
 
         #endregion
 
@@ -30,6 +35,8 @@ namespace Gameplay.Character
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
         public Transform CameraFollowTarget => cameraFollowTarget;
+
+        public EquipmentModule EquipmentModule => equipmentModule;
 
         public abstract bool IsMoving { get; }
         public bool AllowToRotate => IsMoving;// + inne warunki typu celowanie aby obracaæ postaæ lecuj¹c¹

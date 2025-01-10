@@ -1,14 +1,16 @@
 using ObjectPooling;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Items
 {
-    public class Item : MonoBehaviour, IPoolable
+    public class Item : MonoBehaviour, IPoolable, IIdEqualable
     {
         #region VARIABLES
 
+        [SerializeField] private int id = Guid.NewGuid().GetHashCode();
         [SerializeField] private int dataId;
 
         private ItemData itemData;
@@ -17,13 +19,14 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
+        public int Id => id;
         public PoolObject Poolable { get; set; }
         public ItemData Data
         {
             get
             {
                 if (itemData == null)
-                    itemData = ItemsManager.Instance.FindItemData(dataId);
+                    itemData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId);
                 return itemData;
             }
         }
@@ -51,6 +54,11 @@ namespace Gameplay.Items
         public void AssignPoolable(PoolObject poolable)
         {
             Poolable = poolable;
+        }
+
+        public bool IdEquals(int id)
+        {
+            return Id == id;
         }
 
         #endregion

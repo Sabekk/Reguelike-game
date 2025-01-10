@@ -19,4 +19,14 @@ public static class CollectionExtensions
         T lastElement = list[list.Count - 1];
         return lastElement;
     }
+
+    public static bool ContainsId<T>(this IList<T> list, int id) where T : IIdEqualable
+    {
+        for (int i = 0; i < list.Count; i++)
+        {
+            if (list[i].IdEquals(id))
+                return true;
+        }
+        return false;
+    }
 }

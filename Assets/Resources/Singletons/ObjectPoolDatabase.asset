@@ -47,3 +47,8 @@ MonoBehaviour:
     - name: TestArmor
       poolObject: {fileID: 1906995304392437295, guid: 6edb443d3c586e8439198d8b53a79db8, type: 3}
       size: 5
+  - categoryName: Character
+    instances:
+    - name: Base_Male
+      poolObject: {fileID: 1752634011024786, guid: 668fe7f591eb61b40a9ba303fe0c9189, type: 3}
+      size: 1

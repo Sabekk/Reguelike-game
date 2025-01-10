@@ -1,6 +1,9 @@
-public enum ItemUseType
+namespace Gameplay.Items
 {
-    WEARABLE,
-    ONE_USE
+    public enum ItemUseType
+    {
+        WEARABLE,
+        ONE_USE
+    }
 }
-    
+

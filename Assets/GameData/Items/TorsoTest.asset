@@ -15,12 +15,18 @@ MonoBehaviour:
   id: -1576720422
   itemName: Basic test armor
   icon: {fileID: 0}
-  itemType: 1
+  itemType: 16
   useType: 0
   visualizationsIds:
   - TestArmor
   attributes:
     attributes:
+    - valueId: Armor
+      hasMaxValue: 0
+      minValue1: 10
+      minValue2: 10
+      maxValue1: 0
+      maxValue2: 0
     - valueId: AdditionalHealth
       hasMaxValue: 1
       minValue1: 3

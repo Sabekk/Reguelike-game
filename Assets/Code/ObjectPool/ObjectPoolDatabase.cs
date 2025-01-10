@@ -10,7 +10,8 @@ namespace ObjectPooling
     {
         #region VARIABLES
 
-        public const string GET_POOL_CATEGORIES_METHOD = "@ObjectPoolDatabase.GetCategoriesNames()";
+        public const string GET_POOL_CATEGORIES_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetCategoriesNames) + "()";
+        public const string GET_POOL_ITEMS_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolItems) + "()";
 
         [SerializeField] private List<PoolCategoryData> poolCategories;
 
@@ -33,6 +34,11 @@ namespace ObjectPooling
             }
 
             return values;
+        }
+
+        public static IEnumerable GetPoolItems()
+        {
+            return GetCategoryInstancesNames("Item");
         }
 
         public static IEnumerable GetCategoryInstancesNames(string category)
