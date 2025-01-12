@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using Sirenix.OdinInspector;
+using ObjectPooling;
 
 [Serializable]
 public class EnemyData : CharacterData
 {
     #region VARIABLES
 
-    [ValueDropdown("@ObjectPoolDatabase.Instance.GetCategoryInstancesNames(\"ENEMY\")")]
-    [SerializeField] private string modelPool;
+    [SerializeField, ValueDropdown(ObjectPoolDatabase.GET_POOL_ENEMY_METHOD)] private int modelPoolId;
 
     #endregion
 
     #region PROPERTIES
 
-    public string ModelPool => modelPool;
+    public int ModelPoolId => modelPoolId;
 
     #endregion
 }

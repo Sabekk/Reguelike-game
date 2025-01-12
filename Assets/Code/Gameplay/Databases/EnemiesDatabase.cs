@@ -1,3 +1,4 @@
+using ObjectPooling;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,12 +9,14 @@ public class EnemiesDatabase : ScriptableObject
 {
     #region VARIABLES
 
+    [SerializeField, ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)] private int enemyPoolCategoryId;
     [SerializeField] private List<EnemyBiomCategoryData> enemyBiomData;
 
     #endregion
 
     #region PROPERTIES
 
+    public int EnemyPoolCategoryId => enemyPoolCategoryId;
     public List<EnemyBiomCategoryData> EnemyBiomData => enemyBiomData;
 
     #endregion
@@ -65,7 +68,7 @@ public class EnemiesDatabase : ScriptableObject
         return enemyData;
     }
 
-    public EnemyData GetEnemyData(BiomType biomType, EnemyType enemyType, string enemyId)
+    public EnemyData GetEnemyData(BiomType biomType, EnemyType enemyType, int enemyId)
     {
         List<EnemyTypeCategoryData> categoryDatas = GetCategoriesData(biomType);
 
@@ -75,7 +78,7 @@ public class EnemiesDatabase : ScriptableObject
             {
                 EnemyData data = categoryData.EnemyDatas.Find(x => x.Id == enemyId);
                 if (data == null)
-                    Debug.LogError(StringBuilderScaler.GetScaledText("Nie znaleziono EnemyData dla BiomType:{0} - EnemyType:{1} - Id{2}", biomType, enemyType, enemyId));
+                    Debug.LogError($"Nie znaleziono EnemyData dla BiomType:{biomType} - EnemyType:{enemyType} - Id{enemyId}");
                 return data;
             }
         }
@@ -104,11 +107,11 @@ public class EnemiesDatabase : ScriptableObject
 
     public IEnumerable GetEnemyIds(BiomType biomType, EnemyType enemyType)
     {
-        ValueDropdownList<string> values = new();
+        ValueDropdownList<int> values = new();
         List<EnemyData> enemyData = GetEnemyDatas(biomType, enemyType);
 
         foreach (var enemy in enemyData)
-            values.Add(enemy.Id);
+            values.Add(enemy.CharacterName, enemy.Id);
 
         return values;
     }

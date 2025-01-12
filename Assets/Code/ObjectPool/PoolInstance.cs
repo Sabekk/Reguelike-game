@@ -6,10 +6,11 @@ using UnityEngine;
 namespace ObjectPooling
 {
     [Serializable]
-    public class PoolInstance
+    public class PoolInstance : IIdEqualable
     {
         #region VARIABLES
 
+        private int dataId;
         private string name;
         private string category;
         private GameObject prefab;
@@ -21,6 +22,10 @@ namespace ObjectPooling
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Id of data
+        /// </summary>
+        public int Id => dataId;
         public string Name => name;
 
         #endregion
@@ -29,6 +34,7 @@ namespace ObjectPooling
 
         public PoolInstance(PoolInstanceData data, string category, Transform parent)
         {
+            dataId = data.Id;
             name = data.Name;
             prefab = data.PoolObject;
             objects = new Stack<PoolObject>(data.Size);
@@ -79,6 +85,11 @@ namespace ObjectPooling
             GameObject newPoolObject = GameObject.Instantiate(prefab);
             newPoolObject.name = newPoolObject.name + "_Pool";
             ReturnToPool(new PoolObject(name, category, newPoolObject));
+        }
+
+        public bool IdEquals(int id)
+        {
+            return Id == id;
         }
 
         #endregion

@@ -44,7 +44,7 @@ namespace Gameplay.Arena
 
         private async Task<Enemy> CreateEnemyAsync(EnemyData enemyData)
         {
-            Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPool).GetComponent<Enemy>();
+            Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPoolId, MainDatabases.Instance.EnemiesDatabase.EnemyPoolCategoryId).GetComponent<Enemy>();
             if (enemy == null)
             {
                 Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawny przypisany model enemy dla {0}", enemyData.Id));

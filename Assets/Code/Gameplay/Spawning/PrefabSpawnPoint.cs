@@ -18,11 +18,11 @@ namespace Gameplay.Arena
 
         #region METHODS
 
-        public bool VariantsContainCategory(string categoryName)
+        public bool VariantsContainCategory(int categoryId)
         {
             foreach (var variant in SpawnVariants)
             {
-                if (variant.CategoryName == categoryName)
+                if (variant.CategoryId == categoryId)
                     return true;
             }
 
@@ -32,16 +32,16 @@ namespace Gameplay.Arena
         #endregion
 
         #region EDITOR_METHODS
-        public static IEnumerable GetChoosenCategoryInstances(string categoryName)
+        public static IEnumerable GetChoosenCategoryInstances(int categoryId)
         {
-            ValueDropdownList<string> values = new();
+            ValueDropdownList<int> values = new();
             foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
             {
-                if (categoryName != poolCategory.CategoryName)
+                if (poolCategory.IdEquals(categoryId))
                     continue;
 
                 foreach (var instance in poolCategory.Instances)
-                    values.Add(instance.Name);
+                    values.Add(instance.Name, instance.Id);
             }
 
             return values;
@@ -56,34 +56,35 @@ namespace Gameplay.Arena
     {
         #region VARIABLES
 
-        public const string GET_POOL_CATEGORY_INSTANCES_METHOD = "@PrefabSpawnPoint.GetChoosenCategoryInstances(categoryName)";
+        public const string GET_POOL_CATEGORY_INSTANCES_METHOD = "@PrefabSpawnPoint.GetChoosenCategoryInstances(categoryid)";
 
         [SerializeField]
         [ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)]
-        private string categoryName;
+        private int categoryid;
         [SerializeField]
         [ValueDropdown(GET_POOL_CATEGORY_INSTANCES_METHOD)]
-        private string[] instanceName;
+        private int[] instanceIds;
 
         #endregion
 
         #region PROPERTIES
 
-        public string CategoryName => categoryName;
-        public string[] InstanceName => instanceName;
+        public int CategoryId => categoryid;
+        public int[] InstanceIds => instanceIds;
 
         #endregion
 
         #region METHODS
 
-        public override string GetCategory()
+        public override int GetCategoryId()
         {
-            return CategoryName;
+            return CategoryId;
         }
 
-        public override string[] GetVariants()
+
+        public override int[] GetVariantIds()
         {
-            return InstanceName;
+            return InstanceIds;
         }
 
         #endregion

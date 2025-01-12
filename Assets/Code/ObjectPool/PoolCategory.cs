@@ -6,7 +6,7 @@ using UnityEngine;
 namespace ObjectPooling
 {
     [Serializable]
-    public class PoolCategory
+    public class PoolCategory : IIdEqualable
     {
         #region VARIABLES
 
@@ -18,6 +18,10 @@ namespace ObjectPooling
 
         #region PROPERTIES
 
+        /// <summary>
+        /// Id of data
+        /// </summary>
+        public int Id => data.Id;
         public string Name => data.CategoryName;
 
         #endregion
@@ -57,6 +61,21 @@ namespace ObjectPooling
                     return instance;
             }
             return null;
+        }
+
+        public PoolInstance TryGetInstance(int instanceDataId)
+        {
+            foreach (var instance in instances)
+            {
+                if (instance.IdEquals(instanceDataId))
+                    return instance;
+            }
+            return null;
+        }
+
+        public bool IdEquals(int id)
+        {
+            return Id == id;
         }
 
         #endregion

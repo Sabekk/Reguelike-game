@@ -11,9 +11,8 @@ public class CamerasManager : GameplayManager<CamerasManager>
     #region VARIABLES
 
     [SerializeField, FoldoutGroup("Character")] private FollowingCamera personCameraInGame;
-
-    private const string CAMERA_POOL_CATEGORY = "CAMERA";
-    private const string CAMERA_POOL_INSTANCE = "CharacterCamera";
+    [SerializeField, FoldoutGroup("Settings"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)] private int cameraPoolCategoryId;
+    [SerializeField, FoldoutGroup("Settings"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CAMERAS_METHOD)] private int characterCameraId;
 
     #endregion
 
@@ -24,7 +23,7 @@ public class CamerasManager : GameplayManager<CamerasManager>
         get
         {
             if (personCameraInGame == null)
-                personCameraInGame = TryGetCamera(CAMERA_POOL_INSTANCE, CAMERA_POOL_CATEGORY);
+                personCameraInGame = TryGetCamera(characterCameraId, cameraPoolCategoryId);
             return personCameraInGame;
         }
     }
@@ -45,9 +44,9 @@ public class CamerasManager : GameplayManager<CamerasManager>
             personCameraInGame.CleanUp();
     }
 
-    private FollowingCamera TryGetCamera(string cameraName, string category)
+    private FollowingCamera TryGetCamera(int cameraId, int categoryId)
     {
-        return ObjectPool.Instance.GetFromPool(cameraName, category).GetComponent<FollowingCamera>();
+        return ObjectPool.Instance.GetFromPool(cameraId, categoryId).GetComponent<FollowingCamera>();
     }
 
     #endregion

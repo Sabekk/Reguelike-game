@@ -31,7 +31,7 @@ namespace Gameplay.Arena
                     DestroyImmediate(transform.GetChild(i).gameObject);
         }
 
-        public TC SpawnAndGetObject<TC>(BiomType biomType) where TC : Component 
+        public TC SpawnAndGetObject<TC>(BiomType biomType) where TC : Component
         {
             ClearChildren();
 
@@ -44,7 +44,7 @@ namespace Gameplay.Arena
             if (variant == null)
                 return null;
 
-            PoolObject polledObject = ObjectPool.Instance.GetFromPool(variant.GetRandomVariantName(), variant.GetCategory());
+            PoolObject polledObject = ObjectPool.Instance.GetFromPool(variant.GetRandomVariantId(), variant.GetCategoryId());
             polledObject.Prefab.transform.SetParent(transform);
             TC spawnedObject = polledObject.GetComponent<TC>();
             return spawnedObject;
@@ -73,18 +73,18 @@ namespace Gameplay.Arena
             if (variant == null)
                 return;
 
-            string instanceName = variant.GetRandomVariantName();
+            int instanceId = variant.GetRandomVariantId();
             GameObject spawnedObject = null;
 
             if (useObjectPool)
-                spawnedObject = ObjectPool.Instance.GetFromPool(instanceName, variant.GetCategory()).Prefab;
+                spawnedObject = ObjectPool.Instance.GetFromPool(instanceId, variant.GetCategoryId()).Prefab;
             else
             {
-                PoolCategoryData poolCategoryData = MainDatabases.Instance.ObjectPoolDatabase.FindCategoryData(variant?.GetCategory());
+                PoolCategoryData poolCategoryData = MainDatabases.Instance.ObjectPoolDatabase.FindCategoryData(variant.GetCategoryId());
                 if (poolCategoryData == null)
                     return;
 
-                PoolInstanceData poolInstanceData = poolCategoryData.FindInstanceData(instanceName);
+                PoolInstanceData poolInstanceData = poolCategoryData.FindInstanceData(instanceId);
                 if (poolInstanceData == null)
                     return;
 
@@ -130,12 +130,12 @@ namespace Gameplay.Arena
 
         #region METHODS
 
-        public abstract string GetCategory();
-        public abstract string[] GetVariants();
+        public abstract int GetCategoryId();
+        public abstract int[] GetVariantIds();
 
-        public string GetRandomVariantName()
+        public int GetRandomVariantId()
         {
-            return GetVariants()[UnityEngine.Random.Range(0, GetVariants().Length)];
+            return GetVariantIds()[UnityEngine.Random.Range(0, GetVariantIds().Length)];
         }
 
         #endregion

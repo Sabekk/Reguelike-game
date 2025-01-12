@@ -17,21 +17,10 @@ MonoBehaviour:
     enemyTypes:
     - enemyType: 0
       enemyData:
-      - id: Warrior_test
-        startingValues:
-        - valueId: HP
-          value: 10
-        movementStartingValues: []
-        modelPool: SphereTest
-      - id: Warrior test 2
-        startingValues: []
-        movementStartingValues: []
-        modelPool: 
+      - {fileID: 0}
+      - {fileID: 0}
   - biomType: 1
     enemyTypes:
     - enemyType: 1
       enemyData:
-      - id: fire archer
-        startingValues: []
-        movementStartingValues: []
-        modelPool: 
+      - {fileID: 0}

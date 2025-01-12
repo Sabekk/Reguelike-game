@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterData
+[CreateAssetMenu(menuName = "Character/CharacterData", fileName = "CharacterData")]
+public class CharacterData : ScriptableObject
 {
     #region VARIABLES
 
-    [SerializeField] private string id;
+    [SerializeField] private int id = Guid.NewGuid().GetHashCode();
+    [SerializeField] private string characterName;
     [SerializeField] private List<CharacterStartingValue> startingValues;
     [SerializeField] private List<MovementStartingValue> movementStartingValues;
 
@@ -14,7 +17,8 @@ public class CharacterData
 
     #region PROPERTIES
 
-    public string Id => id;
+    public int Id => id;
+    public string CharacterName => characterName;
     public List<CharacterStartingValue> StartingValues => startingValues;
     public List<MovementStartingValue> MovementStartingValues => movementStartingValues;
 

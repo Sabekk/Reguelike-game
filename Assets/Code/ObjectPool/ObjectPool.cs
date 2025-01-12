@@ -63,6 +63,30 @@ namespace ObjectPooling
             return null;
         }
 
+        public PoolObject GetFromPool(int instanceId, int categoryId = -1)
+        {
+            foreach (var category in poolCategories)
+            {
+                if (categoryId > 0)
+                    if (category.IdEquals(categoryId))
+                        continue;
+
+                PoolInstance instance = category.TryGetInstance(instanceId);
+
+                if (instance != null)
+                    return instance.GetFromPool();
+                else
+                {
+                    Debug.LogError("Pool cannot be found");
+                    return null;
+                }
+            }
+
+            Debug.LogError("Pool cannot be found");
+            return null;
+        }
+
+
         public void ReturnToPool(IPoolable poolableObject)
         {
             PoolObject poolObj = poolableObject.Poolable;

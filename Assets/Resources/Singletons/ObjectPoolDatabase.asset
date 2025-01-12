@@ -13,42 +13,57 @@ MonoBehaviour:
   m_Name: ObjectPoolDatabase
   m_EditorClassIdentifier: 
   poolCategories:
-  - categoryName: ENEMY
+  - id: 1994169894
+    categoryName: ENEMY
     instances:
-    - name: SphereTest
+    - id: -1476226272
+      name: SphereTest
       poolObject: {fileID: 3665806011371310988, guid: 94b49064959a3584bb9b65b07d99ff67, type: 3}
       size: 5
-  - categoryName: PREFABS
+  - id: 1325294621
+    categoryName: PREFABS
     instances:
-    - name: Cube
+    - id: -1758903023
+      name: Cube
       poolObject: {fileID: 1396126744804500699, guid: 74d9f2a06f745bc498e463592ffd5d6a, type: 3}
       size: 5
-    - name: Sphere
+    - id: -1002000161
+      name: Sphere
       poolObject: {fileID: 28536912901491910, guid: 851203590fa3a3846b90ac53acc8eb17, type: 3}
       size: 5
-    - name: Capsule
+    - id: -712816875
+      name: Capsule
       poolObject: {fileID: 3801882830187069914, guid: 10f1f72119e986640b79d0e5b3a2f056, type: 3}
       size: 5
-    - name: Cylinder
+    - id: -2010763999
+      name: Cylinder
       poolObject: {fileID: 2842577236933452976, guid: 96b6e7158bddd6145b124466528ae4dc, type: 3}
       size: 5
-  - categoryName: CAMERA
+  - id: -1652455849
+    categoryName: CAMERA
     instances:
-    - name: CharacterCamera
+    - id: 360769895
+      name: CharacterCamera
       poolObject: {fileID: 4629367535341152602, guid: 4a9e69944e4a7d848b529b25a71a0dde, type: 3}
       size: 1
-  - categoryName: UIWindow
+  - id: -1625041914
+    categoryName: UIWindow
     instances:
-    - name: InventoryWindow
+    - id: -366597969
+      name: InventoryWindow
       poolObject: {fileID: 6701734374586641355, guid: 5a7960c537bd16c4eaf1a0f4bf1cba1a, type: 3}
       size: 1
-  - categoryName: Item
+  - id: 2101986524
+    categoryName: Item
     instances:
-    - name: TestArmor
+    - id: -979455232
+      name: TestArmor
       poolObject: {fileID: 1906995304392437295, guid: 6edb443d3c586e8439198d8b53a79db8, type: 3}
       size: 5
-  - categoryName: Character
+  - id: -1917852970
+    categoryName: Character
     instances:
-    - name: Base_Male
+    - id: 486982860
+      name: Base_Male
       poolObject: {fileID: 1752634011024786, guid: 668fe7f591eb61b40a9ba303fe0c9189, type: 3}
       size: 1

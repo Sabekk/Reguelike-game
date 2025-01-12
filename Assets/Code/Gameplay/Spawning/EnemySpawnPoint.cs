@@ -37,7 +37,7 @@ namespace Gameplay.Arena
             if (variant == null)
                 return null;
 
-            return MainDatabases.Instance.EnemiesDatabase.GetEnemyData(biomType, variant.EnemyType, variant.GetRandomVariantName());
+            return MainDatabases.Instance.EnemiesDatabase.GetEnemyData(biomType, variant.EnemyType, variant.GetRandomVariantId());
         }
 
         #endregion
@@ -53,25 +53,25 @@ namespace Gameplay.Arena
         private EnemyType enemyType;
         [SerializeField]
         [ValueDropdown("@EnemiesDatabase.Instance.GetEnemyIds(biomType, enemyType)")]
-        private string[] enemyIds;
+        private int[] enemyIds;
 
         #endregion
 
         #region PROPERTIES
 
         public EnemyType EnemyType => enemyType;
-        public string[] EnemyIds => enemyIds;
+        public int[] EnemyIds => enemyIds;
 
         #endregion
 
         #region METHODS
 
-        public override string GetCategory()
+        public override int GetCategoryId()
         {
-            return EnemyType.ToString();
+            return MainDatabases.Instance.EnemiesDatabase.EnemyPoolCategoryId;
         }
 
-        public override string[] GetVariants()
+        public override int[] GetVariantIds()
         {
             return EnemyIds;
         }
