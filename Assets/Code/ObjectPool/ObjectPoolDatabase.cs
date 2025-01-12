@@ -41,22 +41,22 @@ namespace ObjectPooling
 
         public static IEnumerable GetPoolItems()
         {
-            return GetCategoryInstancesNames("Item");
+            return GetCategoryInstancesIds("Item");
         }
 
         public static IEnumerable GetPoolBaseCharacters()
         {
-            return GetCategoryInstancesNames("Character");
+            return GetCategoryInstancesIds("Character");
         }
 
         public static IEnumerable GetPoolCameras()
         {
-            return GetCategoryInstancesNames("Camera");
+            return GetCategoryInstancesIds("Camera");
         }
 
         public static IEnumerable GetPoolEnemies()
         {
-            return GetCategoryInstancesNames("Enemy");
+            return GetCategoryInstancesIds("Enemy");
         }
 
         public IEnumerable GetCategoryInstanceIds(int categoryId)
@@ -74,16 +74,16 @@ namespace ObjectPooling
             return values;
         }
 
-        public static IEnumerable GetCategoryInstancesNames(string category)
+        public static IEnumerable GetCategoryInstancesIds(string categoryName)
         {
-            ValueDropdownList<string> values = new();
+            ValueDropdownList<int> values = new();
             foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
             {
-                if (category != poolCategory.CategoryName)
+                if (categoryName != poolCategory.CategoryName)
                     continue;
 
                 foreach (var instance in poolCategory.Instances)
-                    values.Add(instance.Name);
+                    values.Add(instance.Name, instance.Id);
             }
 
             return values;

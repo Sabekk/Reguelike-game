@@ -49,10 +49,10 @@ namespace Gameplay.Arena
         #region VARIABLES
 
         [SerializeField]
-        [ValueDropdown("@EnemiesDatabase.Instance.GetCategoriesNamesOfBiom(biomType)")]
+        [ValueDropdown("@MainDatabases.Instance.EnemiesDatabase.GetCategoriesNamesOfBiom(biomType)")]
         private EnemyType enemyType;
         [SerializeField]
-        [ValueDropdown("@EnemiesDatabase.Instance.GetEnemyIds(biomType, enemyType)")]
+        [ValueDropdown("@MainDatabases.Instance.EnemiesDatabase.GetEnemyIds(biomType, enemyType)")]
         private int[] enemyIds;
 
         #endregion

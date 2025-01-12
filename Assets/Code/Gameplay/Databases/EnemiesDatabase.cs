@@ -111,7 +111,8 @@ public class EnemiesDatabase : ScriptableObject
         List<EnemyData> enemyData = GetEnemyDatas(biomType, enemyType);
 
         foreach (var enemy in enemyData)
-            values.Add(enemy.CharacterName, enemy.Id);
+            if (enemy != null)
+                values.Add(enemy.CharacterName, enemy.Id);
 
         return values;
     }
