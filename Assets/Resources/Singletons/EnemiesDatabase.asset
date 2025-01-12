@@ -12,14 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b83c98a449646cd45877399344666ac5, type: 3}
   m_Name: EnemiesDatabase
   m_EditorClassIdentifier: 
-  enemyPoolCategoryId: 0
+  enemyPoolCategoryId: 1994169894
   enemyBiomData:
   - biomType: 0
     enemyTypes:
     - enemyType: 0
       enemyData:
-      - {fileID: 0}
-      - {fileID: 0}
+      - {fileID: 11400000, guid: f194676c907981f429a2298d8f77e08d, type: 2}
   - biomType: 1
     enemyTypes:
     - enemyType: 1

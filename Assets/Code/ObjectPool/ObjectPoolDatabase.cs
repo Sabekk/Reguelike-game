@@ -30,10 +30,10 @@ namespace ObjectPooling
 
         public static IEnumerable GetCategoriesNames()
         {
-            ValueDropdownList<string> values = new();
+            ValueDropdownList<int> values = new();
             foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
             {
-                values.Add(poolCategory.CategoryName);
+                values.Add(poolCategory.CategoryName, poolCategory.Id);
             }
 
             return values;

@@ -16,6 +16,8 @@ public class CharacterManager : GameplayManager<CharacterManager>
 
     #region PROPERTIES
 
+    public Player Player => player;
+
     #endregion
 
     #region METHODS

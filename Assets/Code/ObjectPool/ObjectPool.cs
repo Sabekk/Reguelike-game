@@ -68,7 +68,7 @@ namespace ObjectPooling
             foreach (var category in poolCategories)
             {
                 if (categoryId > 0)
-                    if (category.IdEquals(categoryId))
+                    if (!category.IdEquals(categoryId))
                         continue;
 
                 PoolInstance instance = category.TryGetInstance(instanceId);

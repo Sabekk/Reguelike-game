@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ public class CharacterData : ScriptableObject
 {
     #region VARIABLES
 
-    [SerializeField] private int id = Guid.NewGuid().GetHashCode();
+    [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
     [SerializeField] private string characterName;
     [SerializeField] private List<CharacterStartingValue> startingValues;
     [SerializeField] private List<MovementStartingValue> movementStartingValues;

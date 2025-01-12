@@ -98,7 +98,7 @@ namespace Gameplay.Character
 
         protected void UpdateModules()
         {
-            modules.ForEach(m => m.OnUpdate());
+            modules?.ForEach(m => m.OnUpdate());
         }
 
         protected void CleanUpModules()

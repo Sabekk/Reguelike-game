@@ -14,14 +14,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolCategories:
   - id: 1994169894
-    categoryName: ENEMY
+    categoryName: Enemy
     instances:
     - id: -1476226272
       name: SphereTest
       poolObject: {fileID: 3665806011371310988, guid: 94b49064959a3584bb9b65b07d99ff67, type: 3}
       size: 5
   - id: 1325294621
-    categoryName: PREFABS
+    categoryName: Prefabs
     instances:
     - id: -1758903023
       name: Cube
@@ -40,7 +40,7 @@ MonoBehaviour:
       poolObject: {fileID: 2842577236933452976, guid: 96b6e7158bddd6145b124466528ae4dc, type: 3}
       size: 5
   - id: -1652455849
-    categoryName: CAMERA
+    categoryName: Camera
     instances:
     - id: 360769895
       name: CharacterCamera
