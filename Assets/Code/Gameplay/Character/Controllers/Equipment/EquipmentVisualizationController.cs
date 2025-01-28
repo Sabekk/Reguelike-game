@@ -1,10 +1,12 @@
 using Gameplay.Items;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Character.Controller
 {
+    [Serializable]
     public class EquipmentVisualizationController : ControllerBase
     {
         #region VARIABLES
@@ -20,15 +22,15 @@ namespace Gameplay.Character.Controller
         protected override void AttachEvents()
         {
             base.AttachEvents();
-            Character.EquipmentModule.EquipmentController.OnItemEquiped += HandleItemEquiped;
-            Character.EquipmentModule.EquipmentController.OnItemUnequiped += HandleItemUnequiped;
+            Character.EquipmentModule.OnItemEquip += HandleItemEquiped;
+            Character.EquipmentModule.OnItemUnequip += HandleItemUnequiped;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
-            Character.EquipmentModule.EquipmentController.OnItemEquiped -= HandleItemEquiped;
-            Character.EquipmentModule.EquipmentController.OnItemUnequiped -= HandleItemUnequiped;
+            Character.EquipmentModule.OnItemEquip -= HandleItemEquiped;
+            Character.EquipmentModule.OnItemUnequip -= HandleItemUnequiped;
         }
 
 

@@ -32,12 +32,12 @@ namespace Gameplay.Items
 
         public void AddItemToCharacter(CharacterBase character, ItemData itemData)
         {
-            AddItemToCHaracter(character, CreateItem(itemData));
+            AddItemToCharacter(character, CreateItem(itemData));
         }
 
-        public void AddItemToCHaracter(CharacterBase character, Item item)
+        public void AddItemToCharacter(CharacterBase character, Item item)
         {
-            character.EquipmentModule.InventoryController.AddItem(item);
+            character.EquipmentModule.CollectItem(item);
         }
 
         #region EDITOR_METHODS

@@ -9,13 +9,6 @@ namespace Gameplay.Character.Controller
     [System.Serializable]
     public class EquipmentController : ControllerBase
     {
-        #region ACTIONS
-
-        public Action<Item> OnItemEquiped;
-        public Action<Item> OnItemUnequiped;
-
-        #endregion
-
         #region VARIABLES
 
         [SerializeField] private List<Item> itemsInUse;
@@ -39,28 +32,33 @@ namespace Gameplay.Character.Controller
             return equipedItem != null;
         }
 
-        public void EquipItem(Item item)
+        protected override void AttachEvents()
         {
-            if (!Character.EquipmentModule.InventoryController.ContainItem(item))
-                return;
+            base.AttachEvents();
+            Character.EquipmentModule.OnItemEquip += HandleItemEquip;
+            Character.EquipmentModule.OnItemUnequip += HandleItemUnequip;
+        }
 
-            if (IsItemTypeEquiped(item.Data.ItemType, out Item equipedItem))
-                UnequipItem(equipedItem);
+        protected override void DetachEvents()
+        {
+            base.DetachEvents();
+            Character.EquipmentModule.OnItemEquip -= HandleItemEquip;
+            Character.EquipmentModule.OnItemUnequip -= HandleItemUnequip;
+        }
 
+        #region HANDLERS
+
+        private void HandleItemEquip(Item item)
+        {
             itemsInUse.Add(item);
-
-            OnItemEquiped?.Invoke(item);
         }
 
-        public void UnequipItem(Item item)
+        private void HandleItemUnequip(Item item)
         {
-            if (!IsEquiped(item))
-                return;
-
             itemsInUse.Remove(item);
-
-            OnItemUnequiped?.Invoke(item);
         }
+
+        #endregion
 
         #endregion
     }

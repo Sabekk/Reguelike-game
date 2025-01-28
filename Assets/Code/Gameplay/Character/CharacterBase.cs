@@ -35,7 +35,6 @@ namespace Gameplay.Character
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
         public Transform CameraFollowTarget => cameraFollowTarget;
-
         public EquipmentModule EquipmentModule => equipmentModule;
 
         public abstract bool IsMoving { get; }
@@ -89,6 +88,7 @@ namespace Gameplay.Character
         protected virtual void SetModules()
         {
             modules = new();
+            modules.Add(equipmentModule);
         }
 
         protected void InitializeModules()
