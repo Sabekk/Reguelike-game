@@ -60,7 +60,7 @@ namespace Gameplay.Items
                     continue;
 
                 foreach (var itemData in itemCategory.ItemsData)
-                    values.Add(itemData.ItemName, itemData.Id);
+                    values.Add(itemData.ElementName, itemData.Id);
             }
 
             return values;

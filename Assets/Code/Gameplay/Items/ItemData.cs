@@ -8,15 +8,11 @@ using ObjectPooling;
 
 namespace Gameplay.Items
 {
-
     [CreateAssetMenu(menuName = "Item/ItemData", fileName = "ItemData")]
-    public class ItemData : ScriptableObject, IIdEqualable
+    public class ItemData : ElementDataBase
     {
         #region VARIABLES
 
-        [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
-        [SerializeField, FoldoutGroup("BaseInfo")] private string itemName;
-        [SerializeField, FoldoutGroup("BaseInfo")] private Sprite icon;
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemType itemType;
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemUseType useType;
         [SerializeField, FoldoutGroup("Visualization"), ValueDropdown(ObjectPoolDatabase.GET_POOL_ITEMS_METHOD)] private List<int> visualizationsIds;
@@ -27,9 +23,6 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
-        public int Id => id;
-        public string ItemName => itemName;
-        public Sprite Icon => icon;
         public ItemType ItemType => itemType;
         public ItemUseType UseType => useType;
         public List<int> VisualizationsIds => visualizationsIds;
@@ -38,11 +31,6 @@ namespace Gameplay.Items
         #endregion
 
         #region METHODS
-
-        public bool IdEquals(int id)
-        {
-            return Id == id;
-        }
 
         #endregion
     }

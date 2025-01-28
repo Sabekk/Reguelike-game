@@ -12,6 +12,7 @@ namespace ObjectPooling
 
         public const string GET_POOL_CATEGORIES_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetCategoriesNames) + "()";
         public const string GET_POOL_ITEMS_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolItems) + "()";
+        public const string GET_POOL_BODY_ELEMENTS_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolBodyElements) + "()";
         public const string GET_POOL_CAMERAS_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolCameras) + "()";
         public const string GET_POOL_CHARACTER_BASE_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolBaseCharacters) + "()";
         public const string GET_POOL_ENEMY_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolEnemies) + "()";
@@ -42,6 +43,11 @@ namespace ObjectPooling
         public static IEnumerable GetPoolItems()
         {
             return GetCategoryInstancesIds("Item");
+        }
+
+        public static IEnumerable GetPoolBodyElements()
+        {
+            return GetCategoryInstancesIds("Body");
         }
 
         public static IEnumerable GetPoolBaseCharacters()
