@@ -9,7 +9,7 @@ using ObjectPooling;
 namespace Gameplay.Items
 {
     [CreateAssetMenu(menuName = "Item/ItemData", fileName = "ItemData")]
-    public class ItemData : ElementDataBase
+    public class EquipmentItemData : ItemDataBase
     {
         #region VARIABLES
 

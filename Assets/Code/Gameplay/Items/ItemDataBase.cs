@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gameplay.Items
 {
-    public abstract class ElementDataBase : ScriptableObject, IIdEqualable
+    public abstract class ItemDataBase : ScriptableObject, IIdEqualable
     {
         #region VARIABLES
 

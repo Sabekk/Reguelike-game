@@ -13,10 +13,10 @@ namespace Gameplay.Character
     {
         #region ACTIONS
 
-        public Action<Item> OnItemCollect;
-        public Action<Item> OnItemRemove;
-        public Action<Item> OnItemEquip;
-        public Action<Item> OnItemUnequip;
+        public Action<EquipmentItem> OnItemCollect;
+        public Action<EquipmentItem> OnItemRemove;
+        public Action<EquipmentItem> OnItemEquip;
+        public Action<EquipmentItem> OnItemUnequip;
 
         #endregion
 
@@ -49,28 +49,28 @@ namespace Gameplay.Character
             controllers.Add(VisualizationController);
         }
 
-        public bool IsEquiped(Item item)
+        public bool IsEquiped(EquipmentItem item)
         {
             return EquipmentController.IsEquiped(item);
         }
 
-        public bool IsItemTypeEquiped(ItemType type, out Item equipedItem)
+        public bool IsItemTypeEquiped(ItemType type, out EquipmentItem equipedItem)
         {
             return EquipmentController.IsItemTypeEquiped(type, out equipedItem);
         }
 
-        public void EquipItem(Item item)
+        public void EquipItem(EquipmentItem item)
         {
             if (!InventoryController.ContainItem(item))
                 return;
 
-            if (IsItemTypeEquiped(item.Data.ItemType, out Item equipedItem))
+            if (IsItemTypeEquiped(item.Data.ItemType, out EquipmentItem equipedItem))
                 UnequipItem(equipedItem);
 
             OnItemEquip?.Invoke(item);
         }
 
-        public void UnequipItem(Item item)
+        public void UnequipItem(EquipmentItem item)
         {
             if (!IsEquiped(item))
                 return;
@@ -78,12 +78,12 @@ namespace Gameplay.Character
             OnItemUnequip?.Invoke(item);
         }
 
-        public void CollectItem(Item item)
+        public void CollectItem(EquipmentItem item)
         {
             OnItemCollect?.Invoke(item);
         }
 
-        public void RemoveItem(Item item)
+        public void RemoveItem(EquipmentItem item)
         {
             UnequipItem(item);
 

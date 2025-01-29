@@ -10,22 +10,22 @@ namespace Gameplay.Items
         #region VARIABLES
 
         [SerializeField] private ItemCategory category;
-        [SerializeField] private List<ItemData> itemsData;
+        [SerializeField] private List<EquipmentItemData> itemsData;
 
         #endregion
 
         #region PROPERTIES
 
         public ItemCategory Category => category;
-        public List<ItemData> ItemsData => itemsData;
+        public List<EquipmentItemData> ItemsData => itemsData;
 
         #endregion
 
         #region METHODS
 
-        public ItemData FindItemData(int itemDataId)
+        public EquipmentItemData FindItemData(int itemDataId)
         {
-            ItemData data = ItemsData.Find(x => x.IdEquals(itemDataId));
+            EquipmentItemData data = ItemsData.Find(x => x.IdEquals(itemDataId));
             if (data)
                 return data;
 

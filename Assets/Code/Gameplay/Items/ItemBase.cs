@@ -7,7 +7,7 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public abstract class EquipmentElementBase<T>: IIdEqualable where T : ElementDataBase
+    public abstract class ItemBase<T>: IIdEqualable where T : ItemDataBase
     {
         #region VARIABLES
 
@@ -27,12 +27,12 @@ namespace Gameplay.Items
 
         #region CONSTRUCTORS
 
-        public EquipmentElementBase()
+        public ItemBase()
         {
 
         }
 
-        public EquipmentElementBase(T data)
+        public ItemBase(T data)
         {
             this.elementData = data;
             dataId = data.Id;

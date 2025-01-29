@@ -11,14 +11,14 @@ namespace Gameplay.Character.Controller
     {
         #region ACTIONS
 
-        public Action<Item> OnItemAdded;
-        public Action<Item> OnItemRemoved;
+        public Action<EquipmentItem> OnItemAdded;
+        public Action<EquipmentItem> OnItemRemoved;
 
         #endregion
 
         #region VARIABLES
 
-        [SerializeField] private List<Item> items = new();
+        [SerializeField] private List<EquipmentItem> items = new();
 
         #endregion
 
@@ -28,7 +28,7 @@ namespace Gameplay.Character.Controller
 
         #region METHODS
 
-        public bool ContainItem(Item item)
+        public bool ContainItem(EquipmentItem item)
         {
             return items.ContainsId(item.Id);
         }
@@ -53,13 +53,13 @@ namespace Gameplay.Character.Controller
             Character.EquipmentModule.OnItemRemove -= HandleItemRemove;
         }
 
-        private void AddItem(Item item)
+        private void AddItem(EquipmentItem item)
         {
             items.Add(item);
             OnItemAdded?.Invoke(item);
         }
 
-        private void RemoveItem(Item item)
+        private void RemoveItem(EquipmentItem item)
         {
             items.Remove(item);
             OnItemRemoved?.Invoke(item);
@@ -67,22 +67,22 @@ namespace Gameplay.Character.Controller
 
         #region HANDLERS
 
-        private void HandleItemEquip(Item item)
+        private void HandleItemEquip(EquipmentItem item)
         {
             RemoveItem(item);
         }
 
-        private void HandleItemUnequip(Item item)
+        private void HandleItemUnequip(EquipmentItem item)
         {
             AddItem(item);
         }
 
-        private void HandleItemCollect(Item item)
+        private void HandleItemCollect(EquipmentItem item)
         {
             AddItem(item);
         }
 
-        private void HandleItemRemove(Item item)
+        private void HandleItemRemove(EquipmentItem item)
         {
             RemoveItem(item);
         }

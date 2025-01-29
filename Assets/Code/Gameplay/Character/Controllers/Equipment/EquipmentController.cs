@@ -11,7 +11,7 @@ namespace Gameplay.Character.Controller
     {
         #region VARIABLES
 
-        [SerializeField] private List<Item> itemsInUse;
+        [SerializeField] private List<EquipmentItem> itemsInUse;
 
         #endregion
 
@@ -21,12 +21,12 @@ namespace Gameplay.Character.Controller
 
         #region METHODS
 
-        public bool IsEquiped(Item item)
+        public bool IsEquiped(EquipmentItem item)
         {
             return itemsInUse.ContainsId(item.Id);
         }
 
-        public bool IsItemTypeEquiped(ItemType type, out Item equipedItem)
+        public bool IsItemTypeEquiped(ItemType type, out EquipmentItem equipedItem)
         {
             equipedItem = itemsInUse.Find(x => x.Data.ItemType == type);
             return equipedItem != null;
@@ -48,12 +48,12 @@ namespace Gameplay.Character.Controller
 
         #region HANDLERS
 
-        private void HandleItemEquip(Item item)
+        private void HandleItemEquip(EquipmentItem item)
         {
             itemsInUse.Add(item);
         }
 
-        private void HandleItemUnequip(Item item)
+        private void HandleItemUnequip(EquipmentItem item)
         {
             itemsInUse.Remove(item);
         }

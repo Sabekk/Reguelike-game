@@ -36,12 +36,12 @@ namespace Gameplay.Character.Controller
 
         #region HANDLERS
 
-        private void HandleItemEquiped(Item item)
+        private void HandleItemEquiped(EquipmentItem item)
         {
 
         }
 
-        private void HandleItemUnequiped(Item item)
+        private void HandleItemUnequiped(EquipmentItem item)
         {
 
         }

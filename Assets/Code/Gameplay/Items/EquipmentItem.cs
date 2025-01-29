@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public class Item : EquipmentElementBase<ItemData>
+    public class EquipmentItem : ItemBase<EquipmentItemData>
     {
         #region VARIABLES
 
@@ -13,7 +13,7 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
-        public override ItemData Data
+        public override EquipmentItemData Data
         {
             get
             {
@@ -27,12 +27,12 @@ namespace Gameplay.Items
 
         #region CONSTRUCTORS
 
-        public Item()
+        public EquipmentItem()
         {
 
         }
 
-        public Item(ItemData data) : base(data)
+        public EquipmentItem(EquipmentItemData data) : base(data)
         {
 
         }

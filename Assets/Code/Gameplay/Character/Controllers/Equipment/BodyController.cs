@@ -1,6 +1,6 @@
+using Gameplay.Character.Body;
 using Gameplay.Character.Controller;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,9 +14,18 @@ namespace Gameplay.Character
     {
         #region VARIABLES
 
+        [SerializeField] private List<BodyElement> itemsInUse;
+
         #endregion
 
+
         #region PROPERTIES
+
+        #endregion
+
+        #region CONSTRUCTORS
+
+
 
         #endregion
 
