@@ -14,7 +14,7 @@ namespace Gameplay.Character
     {
         #region VARIABLES
 
-        [SerializeField] private List<BodyElement> itemsInUse;
+        [SerializeField] private List<BodySocket> itemsInUse;
 
         #endregion
 

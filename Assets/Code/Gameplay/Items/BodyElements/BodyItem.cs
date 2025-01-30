@@ -12,6 +12,16 @@ namespace Gameplay.Items
         #endregion
 
         #region PROPERTIES
+        public override BodyItemData Data
+        {
+            get
+            {
+                //if (elementData == null)
+                //    elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId);
+                //return elementData;
+                return null;
+            }
+        }
 
         #endregion
 
@@ -33,7 +43,6 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        public override BodyItemData Data => null;
 
 
         #endregion

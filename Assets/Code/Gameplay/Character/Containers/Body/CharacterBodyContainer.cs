@@ -9,7 +9,7 @@ namespace Gameplay.Character.Body
     {
         #region VARIABLES
 
-        [SerializeField] private List<BodyElement> bodyElements;
+        [SerializeField] private List<BodySocket> bodyElements;
 
         #endregion
 
@@ -23,7 +23,7 @@ namespace Gameplay.Character.Body
         private void FindAllBodyElements()
         {
             bodyElements.Clear();
-            bodyElements.AddRange(transform.GetComponentsInChildren<BodyElement>());
+            bodyElements.AddRange(transform.GetComponentsInChildren<BodySocket>());
         }
 
         #endregion

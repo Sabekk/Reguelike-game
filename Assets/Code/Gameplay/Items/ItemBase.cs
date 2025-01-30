@@ -42,6 +42,9 @@ namespace Gameplay.Items
 
         #region METHODS
 
+        //public abstract void Visualize();
+        //public abstract void HideVisualization();
+
         public bool IdEquals(int id)
         {
             return Id == id;

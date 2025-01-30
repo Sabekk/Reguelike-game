@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Gameplay.Character.Body
 {
     [System.Serializable]
-    public class BodyElement : MonoBehaviour
+    public class BodySocket : MonoBehaviour
     {
         #region VARIABLES
 
