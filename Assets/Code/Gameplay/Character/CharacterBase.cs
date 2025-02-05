@@ -20,7 +20,7 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
         [SerializeField, FoldoutGroup("Components")] private Transform cameraFollowTarget;
 
-        [SerializeField, HideInInspector] private CharacterBodyContainer bodyContainer;
+        [SerializeField] private CharacterBodyContainer bodyContainer;
         [SerializeField, HideInInspector] protected List<CharacterModule> modules;
 
         [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
@@ -36,6 +36,7 @@ namespace Gameplay.Character
         public Rigidbody Rb => rb;
         public Transform CameraFollowTarget => cameraFollowTarget;
         public EquipmentModule EquipmentModule => equipmentModule;
+        public CharacterBodyContainer BodyContainer => bodyContainer;
 
         public abstract bool IsMoving { get; }
         public bool AllowToRotate => IsMoving;// + inne warunki typu celowanie aby obracaæ postaæ lecuj¹c¹

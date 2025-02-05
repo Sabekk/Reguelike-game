@@ -9,21 +9,70 @@ namespace Gameplay.Character.Body
     {
         #region VARIABLES
 
-        [SerializeField] private List<BodySocket> bodyElements;
+        [SerializeField] private List<BodySocket> bodySockets;
+        [SerializeField] private Transform rootBone;
+        [SerializeField] private Dictionary<int, BodyBone> bodyBones;
 
         #endregion
 
         #region PROPERTIES
 
+        public Transform RootBone => rootBone;
+        public Dictionary<int, BodyBone> BodyBones => bodyBones;
+
         #endregion
 
         #region METHODS
 
+        public BodyBone GetBodyBoneById(int id)
+        {
+            if (BodyBones.TryGetValue(id, out BodyBone bone))
+                return bone;
+            else
+            {
+                Debug.LogError($"Errored bone ID: {id}, check called item");
+                return null;
+            }
+
+        }
+
+        public BodyBone GetBodyBone(string name)
+        {
+            foreach (var bodyBone in BodyBones.Values)
+            {
+                if (bodyBone.transform.name == name)
+                    return bodyBone;
+            }
+
+            return null;
+        }
+
+        [Button]
+        private void SetBodyBones()
+        {
+            bodyBones = null;
+
+            Transform[] bonesTmp = RootBone.GetComponentsInChildren<Transform>();
+            Dictionary<int, BodyBone> bodyBonesTmp = new();
+
+            foreach (var bone in bonesTmp)
+            {
+                BodyBone bodyBone = bone.GetComponent<BodyBone>();
+
+                if (bodyBone == null)
+                    bodyBone = bone.gameObject.AddComponent<BodyBone>();
+
+                bodyBonesTmp.Add(bodyBone.Id, bodyBone);
+            }
+
+            bodyBones = bodyBonesTmp;
+        }
+
         [Button]
         private void FindAllBodyElements()
         {
-            bodyElements.Clear();
-            bodyElements.AddRange(transform.GetComponentsInChildren<BodySocket>());
+            bodySockets.Clear();
+            bodySockets.AddRange(transform.GetComponentsInChildren<BodySocket>());
         }
 
         #endregion
