@@ -16,7 +16,6 @@ namespace Gameplay.Items
         [SerializeField, ReadOnly] private int[] bonesIds;
         [SerializeField] private Transform[] itemCoreBones;
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
-        [SerializeField] private Player player;
         [SerializeField] private ItemVisualizationSocketType socketType;
 
         private List<Transform> settingBones = new();
@@ -46,6 +45,7 @@ namespace Gameplay.Items
         private void ApplyPlayerBones()
         {
             settingBones.Clear();
+            Player player = FindAnyObjectByType<Player>();
 
             for (int i = 0; i < bonesIds.Length; i++)
             {
@@ -66,6 +66,11 @@ namespace Gameplay.Items
         private void FixBones()
         {
             bonesIds = null;
+
+            if (skinnedMeshRenderer == null)
+                skinnedMeshRenderer.GetComponent<SkinnedMeshRenderer>();
+            Player player = FindAnyObjectByType<Player>();
+
             BoneRemapper remapper = GetComponent<BoneRemapper>();
             if (remapper == null)
                 remapper = gameObject.AddComponent<BoneRemapper>();
@@ -86,15 +91,7 @@ namespace Gameplay.Items
                     ids.Add(bone.Id);
             }
             bonesIds = ids.ToArray();
-
             DestroyImmediate(remapper);
-        }
-
-        [Button]
-        private void TestBone()
-        {
-            //SetBonesOfSkinnedMeshRenderer(player.BodyContainer.RootBone);
-            skinnedMeshRenderer.bones = itemCoreBones;
         }
 
         #endregion

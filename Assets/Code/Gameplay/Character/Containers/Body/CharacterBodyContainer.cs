@@ -11,14 +11,14 @@ namespace Gameplay.Character.Body
 
         [SerializeField] private List<BodySocket> bodySockets;
         [SerializeField] private Transform rootBone;
-        [SerializeField] private Dictionary<int, BodyBone> bodyBones;
+        [SerializeField] private SerializableDictionary<int, BodyBone> bodyBones;
 
         #endregion
 
         #region PROPERTIES
 
         public Transform RootBone => rootBone;
-        public Dictionary<int, BodyBone> BodyBones => bodyBones;
+        public SerializableDictionary<int, BodyBone> BodyBones => bodyBones;
 
         #endregion
 
@@ -53,7 +53,7 @@ namespace Gameplay.Character.Body
             bodyBones = null;
 
             Transform[] bonesTmp = RootBone.GetComponentsInChildren<Transform>();
-            Dictionary<int, BodyBone> bodyBonesTmp = new();
+            SerializableDictionary<int, BodyBone> bodyBonesTmp = new();
 
             foreach (var bone in bonesTmp)
             {
