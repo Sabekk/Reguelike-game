@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8176236614837637616}
   - component: {fileID: 8111238392888776580}
+  - component: {fileID: -7912696766008559504}
   m_Layer: 0
   m_Name: Chr_Eyebrow_Male_07
   m_TagString: Untagged
@@ -25,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8178035941669343210}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -86,3 +87,19 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.0000024437904, y: -0.016004682, z: -0.0017278641}
     m_Extent: {x: 0.08797607, y: 0.019179106, z: 0.015835805}
   m_DirtyAABB: 0
+--- !u!114 &-7912696766008559504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8178035941669343210}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e7b93a9a9b83cf4994e9e9a40132f69, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bonesIds: 
+  itemCoreBones: []
+  skinnedMeshRenderer: {fileID: 0}
+  socketType: 16

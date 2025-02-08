@@ -10,6 +10,7 @@ namespace StudioJAW
     {
         public Transform[] bones = null;
 
+        private Transform customTransform;
         private BoneRemapperEditor editor;
         public BoneRemapperEditor BoneEditor
         {
@@ -21,6 +22,21 @@ namespace StudioJAW
                     editor.InitCheck();
                 }
                 return editor;
+            }
+        }
+
+        public Transform Transform
+        {
+            get
+            {
+                if (customTransform != null)
+                    return customTransform;
+
+                return transform;
+            }
+            set
+            {
+                customTransform = value;
             }
         }
     }
@@ -122,14 +138,15 @@ namespace StudioJAW
             }
         }
 
-        public void ForceSpawnBones()
+        public void ForceSpawnBones(Transform customTransform = null)
         {
+            br.Transform = customTransform;
             Run(Mode.SpawnBones);
         }
 
         private void SpawnBones(SkinnedMeshRenderer prefabSMR)
         {
-            prefabSMR.rootBone.parent = br.transform;
+            prefabSMR.rootBone.parent = br.Transform;
             br.bones = prefabSMR.bones;
         }
 

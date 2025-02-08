@@ -11,4 +11,22 @@ public static class GameObjectExtensions
 
         gameObject.SetActive(state);
     }
+
+    public static void DestroyChildren(this Transform transform)
+    {
+        int childCount = transform.childCount;
+        for (int i = childCount - 1; i >= 0; i--)
+        {
+            UnityEngine.Object.Destroy(transform.GetChild(i).gameObject);
+        }
+    }
+
+    public static void DestroyChildrenImmediate(this Transform transform)
+    {
+        int childCount = transform.childCount;
+        for (int i = childCount - 1; i >= 0; i--)
+        {
+            UnityEngine.Object.DestroyImmediate(transform.GetChild(i).gameObject);
+        }
+    }
 }

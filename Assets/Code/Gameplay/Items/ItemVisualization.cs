@@ -4,6 +4,7 @@ using Sirenix.OdinInspector;
 using StudioJAW;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Gameplay.Items
@@ -65,17 +66,18 @@ namespace Gameplay.Items
         [Button]
         private void FixBones()
         {
-            bonesIds = null;
+            EditorUtility.SetDirty(this);
+
+            transform.DestroyChildrenImmediate();
 
             if (skinnedMeshRenderer == null)
-                skinnedMeshRenderer.GetComponent<SkinnedMeshRenderer>();
-            Player player = FindAnyObjectByType<Player>();
+                skinnedMeshRenderer = GetComponent<SkinnedMeshRenderer>();
 
             BoneRemapper remapper = GetComponent<BoneRemapper>();
             if (remapper == null)
                 remapper = gameObject.AddComponent<BoneRemapper>();
 
-            remapper.BoneEditor.ForceSpawnBones();
+            remapper.BoneEditor.ForceSpawnBones(transform);
 
             itemCoreBones = remapper.bones;
 
@@ -83,6 +85,20 @@ namespace Gameplay.Items
             skinnedMeshRenderer.rootBone = rootBone;
             skinnedMeshRenderer.bones = itemCoreBones;
 
+            DestroyImmediate(remapper);
+
+            if (UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() == null)
+                PrefabUtility.ApplyPrefabInstance(gameObject, InteractionMode.UserAction);
+            GetIdsOfCharacterBones();
+        }
+
+        [Button]
+        private void GetIdsOfCharacterBones()
+        {
+            EditorUtility.SetDirty(this);
+            bonesIds = null;
+
+            Player player = FindAnyObjectByType<Player>();
             List<int> ids = new();
             for (int i = 0; i < itemCoreBones.Length; i++)
             {
@@ -91,7 +107,9 @@ namespace Gameplay.Items
                     ids.Add(bone.Id);
             }
             bonesIds = ids.ToArray();
-            DestroyImmediate(remapper);
+
+            if (UnityEditor.SceneManagement.PrefabStageUtility.GetCurrentPrefabStage() == null)
+                PrefabUtility.ApplyPrefabInstance(gameObject, InteractionMode.UserAction);
         }
 
         #endregion
