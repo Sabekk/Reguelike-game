@@ -2,6 +2,7 @@
 using UnityEngine;
 using UnityEditor;
 using System;
+using System.Collections.Generic;
 
 namespace StudioJAW
 {
@@ -147,7 +148,15 @@ namespace StudioJAW
         private void SpawnBones(SkinnedMeshRenderer prefabSMR)
         {
             prefabSMR.rootBone.parent = br.Transform;
-            br.bones = prefabSMR.bones;
+            List<Transform> bonesTmp = new();
+            bonesTmp.AddRange(prefabSMR.bones);
+
+            for (int i = bonesTmp.Count - 1; i >= 0; i--)
+            {
+                if (bonesTmp[i] == null)
+                    bonesTmp.RemoveAt(i);
+            }
+            br.bones = bonesTmp.ToArray();
         }
 
         //the most important process of the script.
