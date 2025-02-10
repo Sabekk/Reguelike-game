@@ -1,5 +1,6 @@
 using ObjectPooling;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -12,6 +13,7 @@ namespace Editor
         [SerializeField] private string poolName;
         [SerializeField] private int startIndex;
         [SerializeField] private int itemSize;
+        [SerializeField] private bool useIndexOfObjects;
 
         private const string NAME_FORM = "{0}_{1}";
 
@@ -39,9 +41,12 @@ namespace Editor
             poolName = EditorGUILayout.TextField("Pool name", poolName);
             startIndex = EditorGUILayout.IntField("Starting number", startIndex);
             itemSize = EditorGUILayout.IntField("Pool size", itemSize);
+            useIndexOfObjects = EditorGUILayout.Toggle("Use index of objects", useIndexOfObjects);
 
             if (GUILayout.Button("Add selected items to pool"))
+            {
                 TryAddSelectedToPool();
+            }
         }
 
         #endregion
@@ -66,7 +71,7 @@ namespace Editor
             int currentIndex = startIndex;
             isAlternative = false;
 
-            for (int i = 0; i < objects.Count; i++)
+            for (int i = objects.Count - 1; i >= 0; i--)
             {
                 string newName = StringBuilderScaler.GetScaledText(NAME_FORM, poolName, currentIndex);
                 while (SelectedCategory.FindInstanceData(newName) != null || namesOfInstances.ContainsValue(newName) == true)
@@ -76,9 +81,65 @@ namespace Editor
                     newName = StringBuilderScaler.GetScaledText(NAME_FORM, poolName, currentIndex);
                 }
                 namesOfInstances.Add(objects[i], newName);
+                currentIndex++;
             }
 
             return namesOfInstances;
+        }
+
+        private Dictionary<GameObject, string> GetPossibleNamesOfObjectsIndexes(List<GameObject> objects, out bool isAlternative)
+        {
+            Dictionary<int, KeyValuePair<GameObject, string>> possibleInstancesWithIndex = new();
+            Dictionary<GameObject, string> namesOfInstances = new();
+            int currentIndex = startIndex;
+            isAlternative = false;
+
+            bool alternativeItem = false;
+
+            for (int i = objects.Count - 1; i >= 0; i--)
+            {
+                int indexOfPoolName = GetIndexFromName(objects[i].name);
+                if (indexOfPoolName < 0)
+                    indexOfPoolName = currentIndex;
+
+                alternativeItem = false;
+                string newName = StringBuilderScaler.GetScaledText(NAME_FORM, poolName, indexOfPoolName);
+
+                while (SelectedCategory.FindInstanceData(newName) != null || namesOfInstances.ContainsValue(newName) == true)
+                {
+                    alternativeItem = true;
+                    isAlternative = true;
+                    currentIndex++;
+                    newName = StringBuilderScaler.GetScaledText(NAME_FORM, poolName, currentIndex);
+                }
+
+                possibleInstancesWithIndex.Add(alternativeItem ? currentIndex : indexOfPoolName, new KeyValuePair<GameObject, string>(objects[i], newName));
+                currentIndex++;
+            }
+
+            foreach (var nameOfInstance in possibleInstancesWithIndex.OrderBy(x => x.Key))
+            {
+                namesOfInstances.Add(nameOfInstance.Value.Key, nameOfInstance.Value.Value);
+            }
+
+            return namesOfInstances;
+        }
+
+        private int GetIndexFromName(string name)
+        {
+            int index = -1;
+
+            int lastCharToIndex = name.LastIndexOf("_");
+
+            if (lastCharToIndex >= 0)
+            {
+                string indexName = name.Remove(0, lastCharToIndex + 1);
+
+                if (int.TryParse(indexName, out int indexFromName))
+                    index = indexFromName;
+            }
+
+            return index;
         }
 
         private void TryAddSelectedToPool()
@@ -97,7 +158,8 @@ namespace Editor
                 return;
             }
 
-            Dictionary<GameObject, string> instancesNames = GetPossibleNames(selected, out bool isAlternative);
+            bool isAlternative;
+            Dictionary<GameObject, string> instancesNames = useIndexOfObjects ? GetPossibleNamesOfObjectsIndexes(selected, out isAlternative) : GetPossibleNames(selected, out isAlternative);
             if (isAlternative)
             {
                 if (EditorUtility.DisplayDialog("Duplicate", "There is one or more name of iterated names are duplicated.", "Use possible names", "Back"))
