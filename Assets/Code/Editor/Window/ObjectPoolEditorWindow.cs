@@ -10,6 +10,8 @@ namespace Editor
 {
     public class ObjectPoolEditorWindow : OdinMenuEditorWindow
     {
+        public PoolCategoryData CurrentCategorySelected => MenuTree == null ? null : MenuTree.Selection.SelectedValue as PoolCategoryData;
+
         [MenuItem("Tools/ObjectPool Editor")]
 
         public static void OpenWindow()
@@ -20,6 +22,7 @@ namespace Editor
 
             window.Show();
         }
+
 
         protected override OdinMenuTree BuildMenuTree()
         {
@@ -67,6 +70,22 @@ namespace Editor
             }
 
             SirenixEditorGUI.EndHorizontalToolbar();
+
+            EditorGUILayout.LabelField("Editing tools", SirenixGUIStyles.BoldLabelCentered);
+            SirenixEditorGUI.BeginHorizontalToolbar();
+
+            if (GUILayout.Button("SelectAndAdd", SirenixGUIStyles.Button))
+            {
+                OpenAddingToCategoryWindow();
+            }
+
+            if (GUILayout.Button("DeleteFromCategory", SirenixGUIStyles.Button))
+            {
+                OpenDeletingWindow();
+            }
+
+
+            SirenixEditorGUI.EndHorizontalToolbar();
         }
 
         protected override void OnDestroy()
@@ -98,16 +117,24 @@ namespace Editor
 
         private void DeleteCategory()
         {
-            PoolCategoryData categoryToDelete = MenuTree.Selection.SelectedValue as PoolCategoryData;
-
-            if (categoryToDelete != null)
+            if (CurrentCategorySelected != null)
             {
-                if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this category?", categoryToDelete.CategoryName), "Yes", "Cancel") == false)
+                if (EditorUtility.DisplayDialog("Are you sure?", StringBuilderScaler.GetScaledText("{0} - {1}", "Delete this category?", CurrentCategorySelected.CategoryName), "Yes", "Cancel") == false)
                     return;
 
-                MainDatabases.Instance.ObjectPoolDatabase.RemoveCategory(categoryToDelete);
+                MainDatabases.Instance.ObjectPoolDatabase.RemoveCategory(CurrentCategorySelected);
                 ForceMenuTreeRebuild();
             }
+        }
+
+        private void OpenAddingToCategoryWindow()
+        {
+            ObjectPool_AddingTool addingWindow = GetWindow<ObjectPool_AddingTool>();
+        }
+
+        private void OpenDeletingWindow()
+        {
+            ObjectPool_RemovingTool deletingWindow = GetWindow<ObjectPool_RemovingTool>();
         }
     }
 }

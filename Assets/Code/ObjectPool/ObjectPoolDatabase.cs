@@ -40,6 +40,17 @@ namespace ObjectPooling
             return values;
         }
 
+        public static IEnumerable GetCategoriesNamesArray()
+        {
+            List<string> values = new();
+            foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
+            {
+                values.Add(poolCategory.CategoryName);
+            }
+
+            return values;
+        }
+
         public static IEnumerable GetPoolItems()
         {
             return GetCategoryInstancesIds("Item");

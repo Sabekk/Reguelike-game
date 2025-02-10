@@ -14,6 +14,7 @@ namespace Gameplay.Character
     {
         #region VARIABLES
 
+        [SerializeField] private BodyType bodyType;
         [SerializeField] private List<BodySocket> itemsInUse;
 
         #endregion
@@ -21,11 +22,11 @@ namespace Gameplay.Character
 
         #region PROPERTIES
 
+        public BodyType BodyType => bodyType;
+
         #endregion
 
         #region CONSTRUCTORS
-
-
 
         #endregion
 

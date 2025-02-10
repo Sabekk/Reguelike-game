@@ -27,6 +27,18 @@ namespace ObjectPooling
 
         #endregion
 
+        #region CONSTRUCTOES
+
+        public PoolInstanceData() { }
+        public PoolInstanceData(string name, GameObject poolObject, int size)
+        {
+            this.name = name;
+            this.poolObject = poolObject;
+            this.size = size;
+        }
+
+        #endregion
+
         #region METHODS
 
         public bool IdEquals(int id)
