@@ -94,14 +94,23 @@ namespace ObjectPooling
         public static IEnumerable GetCategoryInstancesIds(string categoryName)
         {
             ValueDropdownList<int> values = new();
-            foreach (PoolCategoryData poolCategory in MainDatabases.Instance.ObjectPoolDatabase.PoolCategories)
-            {
-                if (categoryName != poolCategory.CategoryName)
-                    continue;
+            PoolCategoryData category = MainDatabases.Instance.ObjectPoolDatabase.FindCategoryData(categoryName);
 
-                foreach (var instance in poolCategory.Instances)
+            if (category != null)
+                foreach (var instance in category.Instances)
                     values.Add(instance.Name, instance.Id);
-            }
+
+            return values;
+        }
+
+        public static IEnumerable GetCategoryInstancesIds(int categoryId)
+        {
+            ValueDropdownList<int> values = new();
+            PoolCategoryData category = MainDatabases.Instance.ObjectPoolDatabase.FindCategoryData(categoryId);
+
+            if (category != null)
+                foreach (var instance in category.Instances)
+                    values.Add(instance.Name, instance.Id);
 
             return values;
         }

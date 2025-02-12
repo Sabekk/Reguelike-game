@@ -15,7 +15,6 @@ namespace Gameplay.Items
 
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemType itemType;
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemUseType useType;
-        [SerializeField, FoldoutGroup("Visualization"), ValueDropdown(ObjectPoolDatabase.GET_POOL_ITEMS_METHOD)] private List<int> visualizationsIds;
         [SerializeField, FoldoutGroup("Stats")] private ItemAttributes attributes;
         //TODO dodatkowe efekty
 
@@ -25,7 +24,6 @@ namespace Gameplay.Items
 
         public ItemType ItemType => itemType;
         public ItemUseType UseType => useType;
-        public List<int> VisualizationsIds => visualizationsIds;
         public ItemAttributes Attributes => attributes;
 
         #endregion

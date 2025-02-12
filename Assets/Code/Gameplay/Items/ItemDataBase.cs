@@ -13,6 +13,7 @@ namespace Gameplay.Items
         [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
         [SerializeField, FoldoutGroup("BaseInfo")] private string elementName;
         [SerializeField, FoldoutGroup("BaseInfo")] private Sprite icon;
+        [SerializeField, FoldoutGroup("Visualization")] private SerializableDictionary<BodyType, ItemVisualizationData[]> visualizationIds;
 
         #endregion
 
@@ -21,6 +22,7 @@ namespace Gameplay.Items
         public int Id => id;
         public string ElementName => elementName;
         public Sprite Icon => icon;
+        public SerializableDictionary<BodyType, ItemVisualizationData[]> VisualizationIds => visualizationIds;
 
         #endregion
 
@@ -29,6 +31,15 @@ namespace Gameplay.Items
         public bool IdEquals(int id)
         {
             return Id == id;
+        }
+
+        #endregion
+
+        #region STRUCTS
+
+        protected struct VisualizationPerType
+        {
+
         }
 
         #endregion
