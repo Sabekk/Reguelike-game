@@ -1,27 +1,19 @@
 using Sirenix.OdinInspector;
-using System;
-using UnityEngine;
 
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public class EquipmentItem : ItemBase<EquipmentItemData>
+    public class EquipmentItem : ItemBase
     {
         #region VARIABLES
+
+        private EquipmentItemData elementData;
 
         #endregion
 
         #region PROPERTIES
 
-        public override EquipmentItemData Data
-        {
-            get
-            {
-                if (elementData == null)
-                    elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId);
-                return elementData;
-            }
-        }
+        public EquipmentItemData ElementData => Data as EquipmentItemData;
 
         #endregion
 
@@ -40,6 +32,13 @@ namespace Gameplay.Items
         #endregion
 
         #region METHODS
+
+        protected override void CatchData()
+        {
+            if (elementData == null)
+                elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId) as EquipmentItemData;
+        }
+
 
         #endregion
     }

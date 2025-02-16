@@ -1,14 +1,12 @@
 using ObjectPooling;
 using Sirenix.OdinInspector;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public abstract class ItemBase<T> : IIdEqualable where T : ItemDataBase
+    public class ItemBase: IIdEqualable
     {
         #region VARIABLES
 
@@ -16,15 +14,29 @@ namespace Gameplay.Items
         [SerializeField, ReadOnly] protected int dataId;
         [SerializeField] private SerializableDictionary<ItemVisualizationSocketType, ItemElementVisualization> visualizations;
 
-        protected T elementData;
+        private ItemDataBase elementData;
 
         #endregion
 
         #region PROPERTIES
 
-        public abstract T Data { get; }
+        public virtual ItemDataBase Data
+        {
+            get
+            {
+                CatchData();
+                return elementData;
+            }
+        }
+
         public int Id => id;
-        public SerializableDictionary<ItemVisualizationSocketType, ItemElementVisualization> Visualizations => visualizations;
+        public SerializableDictionary<ItemVisualizationSocketType, ItemElementVisualization> Visualizations { get
+            {
+                if (visualizations == null)
+                    visualizations = new();
+                return visualizations;
+            }
+        }
 
         #endregion
 
@@ -35,7 +47,7 @@ namespace Gameplay.Items
 
         }
 
-        public ItemBase(T data)
+        public ItemBase(ItemDataBase data)
         {
             this.elementData = data;
             dataId = data.Id;
@@ -54,22 +66,22 @@ namespace Gameplay.Items
                 {
                     ItemElementVisualization visualization = ObjectPool.Instance.GetFromPool(poolId, visualizationData.Category).GetComponent<ItemElementVisualization>();
                     if (visualization != null)
-                        visualizations.Add(visualization.Socket, visualization);
+                        Visualizations.Add(visualization.Socket, visualization);
                 }
             }
         }
 
         public void ClearAllVisualizations()
         {
-            foreach (var visualization in visualizations)
+            foreach (var visualization in Visualizations)
                 ObjectPool.Instance.ReturnToPool(visualization.Value);
-            visualizations.Clear();
+            Visualizations.Clear();
         }
 
         public void ClearVisualization(ItemElementVisualization visualization)
         {
             ObjectPool.Instance.ReturnToPool(visualization);
-            visualizations.Remove(visualization.Socket);
+            Visualizations.Remove(visualization.Socket);
         }
 
         //public abstract void Visualize();
@@ -78,6 +90,12 @@ namespace Gameplay.Items
         public bool IdEquals(int id)
         {
             return Id == id;
+        }
+
+        protected virtual void CatchData()
+        {
+            if (elementData == null)
+                elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId);
         }
 
         #endregion

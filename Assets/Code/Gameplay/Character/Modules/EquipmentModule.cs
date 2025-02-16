@@ -13,7 +13,7 @@ namespace Gameplay.Character
     {
         #region ACTIONS
 
-        public Action<EquipmentItem> OnItemCollect;
+        public Action<ItemBase> OnItemCollect;
         public Action<EquipmentItem> OnItemRemove;
         public Action<EquipmentItem> OnItemEquip;
         public Action<EquipmentItem> OnItemUnequip;
@@ -69,7 +69,7 @@ namespace Gameplay.Character
             if (!InventoryController.ContainItem(item))
                 return;
 
-            if (IsItemTypeEquiped(item.Data.ItemType, out EquipmentItem equipedItem))
+            if (IsItemTypeEquiped(item.ElementData.ItemType, out EquipmentItem equipedItem))
                 UnequipItem(equipedItem);
 
             OnItemEquip?.Invoke(item);
@@ -83,9 +83,12 @@ namespace Gameplay.Character
             OnItemUnequip?.Invoke(item);
         }
 
-        public void CollectItem(EquipmentItem item)
+        public void CollectItem(ItemBase item)
         {
-            OnItemCollect?.Invoke(item);
+            if (item is EquipmentItem equipmentItem)
+                OnItemCollect?.Invoke(equipmentItem);
+            if (item is BodyItem bodyItem)
+                EquipBodyItem(bodyItem);
         }
 
         public void RemoveItem(EquipmentItem item)
@@ -103,9 +106,9 @@ namespace Gameplay.Character
 
         public void EquipBodyItem(BodyItem bodyItem)
         {
-            if (BodyController.ItemsInUse.TryGetValue(bodyItem.Data.ElementType, out _))
+            if (BodyController.ItemsInUse.TryGetValue(bodyItem.BodyItemData.ElementType, out _))
             {
-                Debug.LogWarning($"[{GetType().Name}] Body item of type [{bodyItem.Data.ElementType}] is already in use. Check settings");
+                Debug.LogWarning($"[{GetType().Name}] Body item of type [{bodyItem.BodyItemData.ElementType}] is already in use. Check settings");
                 return;
             }
 

@@ -41,7 +41,7 @@ namespace Gameplay.Character.Controller
             Character.EquipmentModule.OnBodyItemUnequip -= HandleBodyItemUnequip;
         }
 
-        private void TryToggleIncompatibileVisualizations<T>(ItemBase<T> item, bool state) where T : ItemDataBase
+        private void TryToggleIncompatibileVisualizations(ItemBase item, bool state)
         {
             foreach (var visualization in item.Visualizations.Values)
             {
@@ -53,14 +53,17 @@ namespace Gameplay.Character.Controller
             }
         }
 
-        private void CreateVisualization<T>(ItemBase<T> item) where T : ItemDataBase
+        private void CreateVisualization(ItemBase item)
         {
             item.CreateVisualization(Character.EquipmentModule.BodyController.BodyType);
             List<ItemElementVisualization> elementVisualizationsTmp = null;
 
             foreach (var visualization in item.Visualizations)
                 if (Character.BodyContainer.BodySockets.TryGetValue(visualization.Key, out BodySocket bodySocket))
+                {
                     visualization.Value.transform.SetParent(bodySocket.transform);
+                    visualization.Value.transform.localPosition = Vector3.zero;
+                }
                 else
                 {
                     Debug.LogError($"Missing socket of type {visualization.Key}. Visualization will be removed to pool");
@@ -69,8 +72,9 @@ namespace Gameplay.Character.Controller
                     elementVisualizationsTmp.Add(visualization.Value); ;
                 }
 
-            foreach (var toRemove in elementVisualizationsTmp)
-                item.ClearVisualization(toRemove);
+            if (elementVisualizationsTmp != null)
+                foreach (var toRemove in elementVisualizationsTmp)
+                    item.ClearVisualization(toRemove);
 
             TryToggleIncompatibileVisualizations(item, false);
         }

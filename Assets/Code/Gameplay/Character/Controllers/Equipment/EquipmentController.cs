@@ -28,7 +28,7 @@ namespace Gameplay.Character.Controller
 
         public bool IsItemTypeEquiped(ItemType type, out EquipmentItem equipedItem)
         {
-            equipedItem = itemsInUse.Find(x => x.Data.ItemType == type);
+            equipedItem = itemsInUse.Find(x => x.ElementData.ItemType == type);
             return equipedItem != null;
         }
 

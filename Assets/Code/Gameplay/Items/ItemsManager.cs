@@ -25,17 +25,22 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        public EquipmentItem CreateItem(EquipmentItemData itemData)
+        public ItemBase CreateItem(ItemDataBase itemData)
         {
-            return new EquipmentItem(itemData);
+            if (itemData is EquipmentItemData equipmentData)
+                return new EquipmentItem(equipmentData);
+            if (itemData is BodyItemData bodyItemData)
+                return new BodyItem(bodyItemData);
+
+            return new ItemBase(itemData);
         }
 
-        public void AddItemToCharacter(CharacterBase character, EquipmentItemData itemData)
+        public void AddItemToCharacter(CharacterBase character, ItemDataBase itemData)
         {
             AddItemToCharacter(character, CreateItem(itemData));
         }
 
-        public void AddItemToCharacter(CharacterBase character, EquipmentItem item)
+        public void AddItemToCharacter(CharacterBase character, ItemBase item)
         {
             character.EquipmentModule.CollectItem(item);
         }
@@ -45,7 +50,7 @@ namespace Gameplay.Items
         [Button]
         private void AddDebugItemToPlayer()
         {
-            EquipmentItemData itemData = MainDatabases.Instance.ItemsDatabase.FindItemData(debugItemId, debugItemCategory);
+            ItemDataBase itemData = MainDatabases.Instance.ItemsDatabase.FindItemData(debugItemId, debugItemCategory);
             if (itemData == null)
                 return;
 

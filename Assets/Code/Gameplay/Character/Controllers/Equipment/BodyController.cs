@@ -52,30 +52,30 @@ namespace Gameplay.Character
 
         private void HandleBodyItemEquip(BodyItem item)
         {
-            if (ItemsInUse.TryGetValue(item.Data.ElementType, out _))
+            if (ItemsInUse.TryGetValue(item.BodyItemData.ElementType, out _))
             {
-                Debug.LogWarning($"[{GetType().Name}] Body item of type [{item.Data.ElementType}] is already in use. Check settings");
+                Debug.LogWarning($"[{GetType().Name}] Body item of type [{item.BodyItemData.ElementType}] is already in use. Check settings");
                 return;
             }
 
-            ItemsInUse.Add(item.Data.ElementType, item);
+            ItemsInUse.Add(item.BodyItemData.ElementType, item);
         }
 
         private void HandleBodyItemUnequip(BodyItem item)
         {
-            if (ItemsInUse.TryGetValue(item.Data.ElementType, out BodyItem equipedItem))
+            if (ItemsInUse.TryGetValue(item.BodyItemData.ElementType, out BodyItem equipedItem))
             {
                 if (item.IdEquals(equipedItem.Id))
-                    ItemsInUse.Add(item.Data.ElementType, item);
+                    ItemsInUse.Add(item.BodyItemData.ElementType, item);
                 else
                 {
-                    Debug.LogWarning($"[{GetType().Name}] Body item of type [{item.Data.ElementType}] is different then in use");
+                    Debug.LogWarning($"[{GetType().Name}] Body item of type [{item.BodyItemData.ElementType}] is different then in use");
                     return;
                 }
             }
             else
             {
-                Debug.LogWarning($"[{GetType().Name}] Body item of type [{item.Data.ElementType}] is not in use");
+                Debug.LogWarning($"[{GetType().Name}] Body item of type [{item.BodyItemData.ElementType}] is not in use");
                 return;
             }
         }

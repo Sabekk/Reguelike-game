@@ -24,14 +24,14 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        public EquipmentItemData FindItemData(int itemDataId, ItemCategory category)
+        public ItemDataBase FindItemData(int itemDataId, ItemCategory category)
         {
             foreach (var itemCategory in ItemCategories)
             {
                 if (itemCategory.Category != category)
                     continue;
 
-                EquipmentItemData itemData = itemCategory.FindItemData(itemDataId);
+                ItemDataBase itemData = itemCategory.FindItemData(itemDataId);
                 if (itemData != null)
                     return itemData;
             }
@@ -39,11 +39,11 @@ namespace Gameplay.Items
             return null;
         }
 
-        public EquipmentItemData FindItemData(int itemDataId)
+        public ItemDataBase FindItemData(int itemDataId)
         {
             foreach (var itemCategory in ItemCategories)
             {
-                EquipmentItemData itemData = itemCategory.FindItemData(itemDataId);
+                ItemDataBase itemData = itemCategory.FindItemData(itemDataId);
                 if (itemData != null)
                     return itemData;
             }
@@ -56,11 +56,17 @@ namespace Gameplay.Items
             ValueDropdownList<int> values = new();
             foreach (ItemCategoryData itemCategory in MainDatabases.Instance.ItemsDatabase.ItemCategories)
             {
+                if (itemCategory == null)
+                    continue;
+
                 if (category != itemCategory.Category)
                     continue;
 
                 foreach (var itemData in itemCategory.ItemsData)
-                    values.Add(itemData.ElementName, itemData.Id);
+                {
+                    if (itemData != null)
+                        values.Add(itemData.ElementName, itemData.Id);
+                }
             }
 
             return values;

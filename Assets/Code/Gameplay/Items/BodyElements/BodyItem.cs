@@ -1,27 +1,17 @@
-using Gameplay.Items;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace Gameplay.Items
 {
-    public class BodyItem : ItemBase<BodyItemData>
+    [System.Serializable]
+    public class BodyItem : ItemBase
     {
         #region VARIABLES
+
+        private BodyItemData bodyData;
 
         #endregion
 
         #region PROPERTIES
-        public override BodyItemData Data
-        {
-            get
-            {
-                //if (elementData == null)
-                //    elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId);
-                //return elementData;
-                return null;
-            }
-        }
+
+        public BodyItemData BodyItemData => Data as BodyItemData;
 
         #endregion
 
@@ -43,7 +33,11 @@ namespace Gameplay.Items
 
         #region METHODS
 
-
+        protected override void CatchData()
+        {
+            if (bodyData == null)
+                bodyData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId) as BodyItemData;
+        }
 
         #endregion
     }

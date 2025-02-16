@@ -77,9 +77,10 @@ namespace Gameplay.Character.Controller
             AddItem(item);
         }
 
-        private void HandleItemCollect(EquipmentItem item)
+        private void HandleItemCollect(ItemBase item)
         {
-            AddItem(item);
+            if (item is EquipmentItem equipmentItem)
+                AddItem(equipmentItem);
         }
 
         private void HandleItemRemove(EquipmentItem item)
