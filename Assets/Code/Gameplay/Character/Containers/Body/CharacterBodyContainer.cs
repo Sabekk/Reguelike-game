@@ -1,3 +1,4 @@
+using Gameplay.Items;
 using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +10,7 @@ namespace Gameplay.Character.Body
     {
         #region VARIABLES
 
-        [SerializeField] private List<BodySocket> bodySockets;
+        [SerializeField] private SerializableDictionary<ItemVisualizationSocketType, BodySocket> bodySockets;
         [SerializeField] private Transform rootBone;
         [SerializeField] private SerializableDictionary<int, BodyBone> bodyBones;
 
@@ -19,6 +20,7 @@ namespace Gameplay.Character.Body
 
         public Transform RootBone => rootBone;
         public SerializableDictionary<int, BodyBone> BodyBones => bodyBones;
+        public SerializableDictionary<ItemVisualizationSocketType, BodySocket> BodySockets => bodySockets;
 
         #endregion
 
@@ -47,6 +49,11 @@ namespace Gameplay.Character.Body
             return null;
         }
 
+        public BodySocket GetBodySocket(ItemVisualizationSocketType socketType)
+        {
+            return null;
+        }
+
         [Button]
         private void SetBodyBones()
         {
@@ -72,7 +79,18 @@ namespace Gameplay.Character.Body
         private void FindAllBodyElements()
         {
             bodySockets.Clear();
-            bodySockets.AddRange(transform.GetComponentsInChildren<BodySocket>());
+
+            BodySocket[] sockets = transform.GetComponentsInChildren<BodySocket>();
+            foreach (var socket in sockets)
+            {
+                if (bodySockets.ContainsKey(socket.SocketType))
+                {
+                    Debug.LogWarning($"Doubled socket type {socket.SocketType}", socket);
+                    return;
+                }
+
+                bodySockets.Add(socket.SocketType, socket);
+            }
         }
 
         #endregion

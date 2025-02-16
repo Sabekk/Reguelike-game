@@ -18,6 +18,9 @@ namespace Gameplay.Character
         public Action<EquipmentItem> OnItemEquip;
         public Action<EquipmentItem> OnItemUnequip;
 
+        public Action<BodyItem> OnBodyItemEquip;
+        public Action<BodyItem> OnBodyItemUnequip;
+
         #endregion
 
         #region VARIABLES
@@ -48,6 +51,8 @@ namespace Gameplay.Character
             controllers.Add(InventoryController);
             controllers.Add(VisualizationController);
         }
+
+        #region EQUIP ITEMS
 
         public bool IsEquiped(EquipmentItem item)
         {
@@ -90,6 +95,29 @@ namespace Gameplay.Character
             if (InventoryController.ContainItem(item))
                 OnItemRemove?.Invoke(item);
         }
+
+        #endregion
+
+        #region BODY ITEMS
+
+
+        public void EquipBodyItem(BodyItem bodyItem)
+        {
+            if (BodyController.ItemsInUse.TryGetValue(bodyItem.Data.ElementType, out _))
+            {
+                Debug.LogWarning($"[{GetType().Name}] Body item of type [{bodyItem.Data.ElementType}] is already in use. Check settings");
+                return;
+            }
+
+            OnBodyItemEquip?.Invoke(bodyItem);
+        }
+
+        public void UnequipBodyItem(BodyItem bodyItem)
+        {
+            OnBodyItemUnequip?.Invoke(bodyItem);
+        }
+
+        #endregion
 
         #endregion
     }

@@ -15,6 +15,13 @@ public class ItemVisualizationData
 
     #endregion
 
+    #region PROPERTIES
+
+    public int Category => category;
+    public List<int> PoolIds => poolIds;
+
+    #endregion
+
     #region METHODS
 
     public IEnumerable GetCategoryInstancesNames()

@@ -10,14 +10,15 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public class ItemVisualization : MonoBehaviour, IPoolable
+    public class ItemElementVisualization : MonoBehaviour, IPoolable
     {
         #region VARIABLES
 
         [SerializeField, ReadOnly] private int[] bonesIds;
         [SerializeField] private Transform[] itemCoreBones;
         [SerializeField] private SkinnedMeshRenderer skinnedMeshRenderer;
-        [SerializeField] private ItemVisualizationSocketType socketType;
+        [SerializeField] private ItemVisualizationSocketType socket;
+        [SerializeField, Tooltip("Items in this sockets will be hide")] private List<ItemVisualizationSocketType> incompatibleSockets;
 
         private List<Transform> settingBones = new();
 
@@ -26,6 +27,8 @@ namespace Gameplay.Items
         #region PROPERTIES
 
         public PoolObject Poolable { get; set; }
+        public ItemVisualizationSocketType Socket => socket;
+        public List<ItemVisualizationSocketType> IncompatibleSockets => incompatibleSockets;
 
         #endregion
 

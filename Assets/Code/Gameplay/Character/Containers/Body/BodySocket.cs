@@ -16,6 +16,8 @@ namespace Gameplay.Character.Body
 
         #region PROPERTIES
 
+        public ItemVisualizationSocketType SocketType => socketType;
+
         #endregion
 
         #region METHODS
