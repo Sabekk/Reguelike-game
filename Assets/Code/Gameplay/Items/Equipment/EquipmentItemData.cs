@@ -1,19 +1,14 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
-using UnityEditor;
-using System;
-using ObjectPooling;
 
 namespace Gameplay.Items
 {
     [CreateAssetMenu(menuName = "Item/ItemData", fileName = "ItemData")]
-    public class EquipmentItemData : ItemDataBase
+    public class EquipmentItemData : ItemData
     {
         #region VARIABLES
 
-        [SerializeField, FoldoutGroup("BaseInfo")] private ItemType itemType;
+        [SerializeField, FoldoutGroup("BaseInfo")] private EquipmentItemType equipmentItemType;
         [SerializeField, FoldoutGroup("BaseInfo")] private ItemUseType useType;
         [SerializeField, FoldoutGroup("Stats")] private ItemAttributes attributes;
         //TODO dodatkowe efekty
@@ -22,9 +17,11 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
-        public ItemType ItemType => itemType;
+        public override ItemType ItemType => ItemType.EQUIPMENT;
+        public EquipmentItemType EquipmentItemType => equipmentItemType;
         public ItemUseType UseType => useType;
         public ItemAttributes Attributes => attributes;
+
 
         #endregion
 

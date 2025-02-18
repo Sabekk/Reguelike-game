@@ -1,13 +1,11 @@
-using Sirenix.OdinInspector;
+using System;
 
 namespace Gameplay.Items
 {
-    [System.Serializable]
+    [Serializable]
     public class EquipmentItem : ItemBase
     {
         #region VARIABLES
-
-        private EquipmentItemData elementData;
 
         #endregion
 
@@ -32,13 +30,6 @@ namespace Gameplay.Items
         #endregion
 
         #region METHODS
-
-        protected override void CatchData()
-        {
-            if (elementData == null)
-                elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId) as EquipmentItemData;
-        }
-
 
         #endregion
     }

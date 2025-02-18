@@ -5,7 +5,6 @@ using UnityEngine;
 
 namespace Gameplay.Character.Controller
 {
-    [Serializable]
     public abstract class ControllerBase
     {
         #region VARIABLES

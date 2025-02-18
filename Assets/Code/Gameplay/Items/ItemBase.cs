@@ -5,8 +5,7 @@ using UnityEngine;
 
 namespace Gameplay.Items
 {
-    [System.Serializable]
-    public class ItemBase: IIdEqualable
+    public class ItemBase : IIdEqualable
     {
         #region VARIABLES
 
@@ -14,13 +13,13 @@ namespace Gameplay.Items
         [SerializeField, ReadOnly] protected int dataId;
         [SerializeField] private SerializableDictionary<ItemVisualizationSocketType, ItemElementVisualization> visualizations;
 
-        private ItemDataBase elementData;
+        private ItemData elementData;
 
         #endregion
 
         #region PROPERTIES
 
-        public virtual ItemDataBase Data
+        public ItemData Data
         {
             get
             {
@@ -30,7 +29,10 @@ namespace Gameplay.Items
         }
 
         public int Id => id;
-        public SerializableDictionary<ItemVisualizationSocketType, ItemElementVisualization> Visualizations { get
+        public ItemType ItemType => Data.ItemType;
+        public SerializableDictionary<ItemVisualizationSocketType, ItemElementVisualization> Visualizations
+        {
+            get
             {
                 if (visualizations == null)
                     visualizations = new();
@@ -47,7 +49,7 @@ namespace Gameplay.Items
 
         }
 
-        public ItemBase(ItemDataBase data)
+        public ItemBase(ItemData data)
         {
             this.elementData = data;
             dataId = data.Id;

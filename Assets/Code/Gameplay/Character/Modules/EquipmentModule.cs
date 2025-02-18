@@ -59,7 +59,7 @@ namespace Gameplay.Character
             return EquipmentController.IsEquiped(item);
         }
 
-        public bool IsItemTypeEquiped(ItemType type, out EquipmentItem equipedItem)
+        public bool IsItemTypeEquiped(EquipmentItemType type, out EquipmentItem equipedItem)
         {
             return EquipmentController.IsItemTypeEquiped(type, out equipedItem);
         }
@@ -69,7 +69,7 @@ namespace Gameplay.Character
             if (!InventoryController.ContainItem(item))
                 return;
 
-            if (IsItemTypeEquiped(item.ElementData.ItemType, out EquipmentItem equipedItem))
+            if (IsItemTypeEquiped(item.ElementData.EquipmentItemType, out EquipmentItem equipedItem))
                 UnequipItem(equipedItem);
 
             OnItemEquip?.Invoke(item);
@@ -85,13 +85,22 @@ namespace Gameplay.Character
 
         public void CollectItem(ItemBase item)
         {
-            if (item is EquipmentItem equipmentItem)
+            switch (item.ItemType)
             {
-                OnItemCollect?.Invoke(equipmentItem);
-                EquipItem(equipmentItem);
+                case ItemType.BODY:
+                    if (item is BodyItem bodyItem)
+                        EquipBodyItem(bodyItem);
+                    break;
+                case ItemType.EQUIPMENT:
+                    if (item is EquipmentItem equipmentItem)
+                    {
+                        OnItemCollect?.Invoke(equipmentItem);
+                        EquipItem(equipmentItem);
+                    }
+                    break;
+                default:
+                    break;
             }
-            if (item is BodyItem bodyItem)
-                EquipBodyItem(bodyItem);
         }
 
         public void RemoveItem(EquipmentItem item)

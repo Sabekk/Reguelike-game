@@ -24,14 +24,14 @@ namespace Gameplay.Items
 
         #region METHODS
 
-        public ItemDataBase FindItemData(int itemDataId, ItemCategory category)
+        public ItemData FindItemData(int itemDataId, ItemCategory category)
         {
             foreach (var itemCategory in ItemCategories)
             {
                 if (itemCategory.Category != category)
                     continue;
 
-                ItemDataBase itemData = itemCategory.FindItemData(itemDataId);
+                ItemData itemData = itemCategory.FindItemData(itemDataId);
                 if (itemData != null)
                     return itemData;
             }
@@ -39,11 +39,11 @@ namespace Gameplay.Items
             return null;
         }
 
-        public ItemDataBase FindItemData(int itemDataId)
+        public ItemData FindItemData(int itemDataId)
         {
             foreach (var itemCategory in ItemCategories)
             {
-                ItemDataBase itemData = itemCategory.FindItemData(itemDataId);
+                ItemData itemData = itemCategory.FindItemData(itemDataId);
                 if (itemData != null)
                     return itemData;
             }

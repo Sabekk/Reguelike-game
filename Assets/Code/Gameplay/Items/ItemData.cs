@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gameplay.Items
 {
-    public abstract class ItemDataBase : ScriptableObject, IIdEqualable
+    public abstract class ItemData : ScriptableObject, IIdEqualable
     {
         #region VARIABLES
 
@@ -19,6 +19,7 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
+        public abstract ItemType ItemType { get; }
         public int Id => id;
         public string ElementName => elementName;
         public Sprite Icon => icon;

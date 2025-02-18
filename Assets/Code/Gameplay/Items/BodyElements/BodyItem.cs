@@ -5,8 +5,6 @@ namespace Gameplay.Items
     {
         #region VARIABLES
 
-        private BodyItemData bodyData;
-
         #endregion
 
         #region PROPERTIES
@@ -14,7 +12,6 @@ namespace Gameplay.Items
         public BodyItemData BodyItemData => Data as BodyItemData;
 
         #endregion
-
 
         #region CONSTRUCTORS
 
@@ -30,14 +27,7 @@ namespace Gameplay.Items
 
         #endregion
 
-
         #region METHODS
-
-        protected override void CatchData()
-        {
-            if (bodyData == null)
-                bodyData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId) as BodyItemData;
-        }
 
         #endregion
     }

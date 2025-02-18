@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [CreateAssetMenu(menuName = "Body/BodyItemData", fileName = "BodyItemData")]
-    public class BodyItemData : ItemDataBase
+    public class BodyItemData : ItemData
     {
         #region VARIABLES
 
@@ -19,6 +19,7 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
+        public override ItemType ItemType => ItemType.BODY;
         public BodyElementType ElementType => elementType;
 
         #endregion

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gameplay.Character.Controller
 {
-    [System.Serializable]
+    [Serializable]
     public class EquipmentController : ControllerBase
     {
         #region VARIABLES
@@ -26,9 +26,9 @@ namespace Gameplay.Character.Controller
             return itemsInUse.ContainsId(item.Id);
         }
 
-        public bool IsItemTypeEquiped(ItemType type, out EquipmentItem equipedItem)
+        public bool IsItemTypeEquiped(EquipmentItemType type, out EquipmentItem equipedItem)
         {
-            equipedItem = itemsInUse.Find(x => x.ElementData.ItemType == type);
+            equipedItem = itemsInUse.Find(x => x.ElementData.EquipmentItemType == type);
             return equipedItem != null;
         }
 
