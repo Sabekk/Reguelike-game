@@ -86,7 +86,10 @@ namespace Gameplay.Character
         public void CollectItem(ItemBase item)
         {
             if (item is EquipmentItem equipmentItem)
+            {
                 OnItemCollect?.Invoke(equipmentItem);
+                EquipItem(equipmentItem);
+            }
             if (item is BodyItem bodyItem)
                 EquipBodyItem(bodyItem);
         }

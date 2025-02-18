@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &542128080832897556
+--- !u!1 &6169034045858614957
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,7 +8,7 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5342364533557002302}
+  - component: {fileID: 7266774554234066785}
   m_Layer: 0
   m_Name: Hips_Attachment
   m_TagString: Untagged
@@ -16,22 +16,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5342364533557002302
+--- !u!4 &7266774554234066785
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 542128080832897556}
+  m_GameObject: {fileID: 6169034045858614957}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -9.666941e-20, y: 0.8762761, z: 1.7564173e-17}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1.0000001}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5789589244786261093}
+  m_Father: {fileID: 8829743181841699687}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &5788057165526183037
+--- !u!1 &8835901639086534933
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39,39 +39,39 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5789589244786261093}
-  - component: {fileID: 5890219146738566077}
-  - component: {fileID: 5344047547595060130}
+  - component: {fileID: 8829743181841699687}
+  - component: {fileID: 8894788737175952517}
+  - component: {fileID: -4616647053866383183}
   m_Layer: 0
-  m_Name: Chr_HipsAttachment_12
+  m_Name: Chr_HipsAttachment_11
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5789589244786261093
+--- !u!4 &8829743181841699687
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788057165526183037}
+  m_GameObject: {fileID: 8835901639086534933}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 5342364533557002302}
+  - {fileID: 7266774554234066785}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!137 &5890219146738566077
+--- !u!137 &8894788737175952517
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788057165526183037}
+  m_GameObject: {fileID: 8835901639086534933}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -110,22 +110,22 @@ SkinnedMeshRenderer:
   m_Quality: 0
   m_UpdateWhenOffscreen: 0
   m_SkinnedMotionVectors: 1
-  m_Mesh: {fileID: 4300318, guid: 98a56ff2c8ee98645a4d3f79fa1506c5, type: 3}
+  m_Mesh: {fileID: 4300316, guid: 98a56ff2c8ee98645a4d3f79fa1506c5, type: 3}
   m_Bones:
-  - {fileID: 5342364533557002302}
+  - {fileID: 7266774554234066785}
   m_BlendShapeWeights: []
-  m_RootBone: {fileID: 5342364533557002302}
+  m_RootBone: {fileID: 7266774554234066785}
   m_AABB:
-    m_Center: {x: -0.20248154, y: -0.12879613, z: -0.015643187}
-    m_Extent: {x: 0.042105407, y: 0.15274051, z: 0.10885604}
+    m_Center: {x: -0.17436649, y: -0.040140554, z: 0.04698097}
+    m_Extent: {x: 0.075783625, y: 0.06164746, z: 0.08635632}
   m_DirtyAABB: 0
---- !u!114 &5344047547595060130
+--- !u!114 &-4616647053866383183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5788057165526183037}
+  m_GameObject: {fileID: 8835901639086534933}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0e7b93a9a9b83cf4994e9e9a40132f69, type: 3}
@@ -133,6 +133,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bonesIds: 8a70458f
   itemCoreBones:
-  - {fileID: 5342364533557002302}
-  skinnedMeshRenderer: {fileID: 5890219146738566077}
-  socketType: 27
+  - {fileID: 7266774554234066785}
+  skinnedMeshRenderer: {fileID: 8894788737175952517}
+  socket: 27
+  incompatibleSockets: 

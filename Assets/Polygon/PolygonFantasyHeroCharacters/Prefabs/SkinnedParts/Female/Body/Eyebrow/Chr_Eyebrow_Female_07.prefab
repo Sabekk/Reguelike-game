@@ -104,7 +104,8 @@ MonoBehaviour:
   itemCoreBones:
   - {fileID: 7080362998827517230}
   skinnedMeshRenderer: {fileID: 644726645929516875}
-  socketType: 16
+  socket: 16
+  incompatibleSockets: 
 --- !u!1 &8611918842873147738
 GameObject:
   m_ObjectHideFlags: 0

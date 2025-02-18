@@ -61,6 +61,12 @@ namespace Gameplay.Character.Controller
             foreach (var visualization in item.Visualizations)
                 if (Character.BodyContainer.BodySockets.TryGetValue(visualization.Key, out BodySocket bodySocket))
                 {
+                    if (bodySocket.transform.childCount > 0)
+                    {
+                        Debug.LogWarning($"Socket contains elements until creating visualizations. All destroyed");
+                        bodySocket.transform.DestroyChildren();
+                    }
+
                     visualization.Value.transform.SetParent(bodySocket.transform);
                     visualization.Value.transform.localPosition = Vector3.zero;
                 }
@@ -75,6 +81,7 @@ namespace Gameplay.Character.Controller
             if (elementVisualizationsTmp != null)
                 foreach (var toRemove in elementVisualizationsTmp)
                     item.ClearVisualization(toRemove);
+
 
             TryToggleIncompatibileVisualizations(item, false);
         }

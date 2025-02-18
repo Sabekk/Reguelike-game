@@ -30,5 +30,6 @@ namespace Gameplay.Items
         HELMET_ATTACHMENT = 25,
         TORSO_ATTACHMENT = 26,
         HIPS_ATTACHMENT_LEFT = 27,
+        HEAD_COVER_NO_HAIR = 28
     }
 }
