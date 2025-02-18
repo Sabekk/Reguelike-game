@@ -25,7 +25,6 @@ namespace Gameplay.Character
 
         [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
 
-
         #endregion
 
         #region PROPERTIES
@@ -39,7 +38,7 @@ namespace Gameplay.Character
         public CharacterBodyContainer BodyContainer => bodyContainer;
 
         public abstract bool IsMoving { get; }
-        public bool AllowToRotate => IsMoving;// + inne warunki typu celowanie aby obracaæ postaæ lecuj¹c¹
+        public bool AllowToRotate => IsMoving;// + inne warunki typu celowanie aby obracaæ postaæ celuj¹c¹
         protected bool IsInitialzied => isInitialzied;
 
 
@@ -64,6 +63,7 @@ namespace Gameplay.Character
         #endregion
 
         #region METHODS
+
         public void Initialize()
         {
             values = new();

@@ -1,8 +1,6 @@
 using Gameplay.Character.Body;
 using Gameplay.Items;
-using ObjectPooling;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

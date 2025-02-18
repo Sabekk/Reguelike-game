@@ -8,7 +8,7 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [CreateAssetMenu(menuName = "Database/ItemsDatabse", fileName = "ItemsDatabse")]
-    public class ItemsDatabse : ScriptableObject
+    public class ItemsDatabase : ScriptableObject
     {
         #region VARIABLES
 

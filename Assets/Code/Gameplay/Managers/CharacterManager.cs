@@ -29,7 +29,6 @@ public class CharacterManager : GameplayManager<CharacterManager>
     {
         if (player != null)
             return;
-
     }
 
     #endregion

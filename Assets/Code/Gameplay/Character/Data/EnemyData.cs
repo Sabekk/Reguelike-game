@@ -5,7 +5,7 @@ using System;
 using Sirenix.OdinInspector;
 using ObjectPooling;
 
-[CreateAssetMenu(menuName = "Character/EnemyData", fileName = "EnemyData")]
+[CreateAssetMenu(menuName = "Data/Character/EnemyData", fileName = "EnemyData")]
 [Serializable]
 public class EnemyData : CharacterData
 {

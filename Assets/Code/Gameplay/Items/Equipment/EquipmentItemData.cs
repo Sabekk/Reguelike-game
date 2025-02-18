@@ -3,7 +3,7 @@ using Sirenix.OdinInspector;
 
 namespace Gameplay.Items
 {
-    [CreateAssetMenu(menuName = "Item/ItemData", fileName = "ItemData")]
+    [CreateAssetMenu(menuName = "Data/Item/EquipmentItemData", fileName = "EquipmentItemData")]
     public class EquipmentItemData : ItemData
     {
         #region VARIABLES

@@ -1,13 +1,9 @@
-using ObjectPooling;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gameplay.Items
 {
-    [CreateAssetMenu(menuName = "Body/BodyItemData", fileName = "BodyItemData")]
+    [CreateAssetMenu(menuName = "Data/Item/BodyItemData", fileName = "BodyItemData")]
     public class BodyItemData : ItemData
     {
         #region VARIABLES

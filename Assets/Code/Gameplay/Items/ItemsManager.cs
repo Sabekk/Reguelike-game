@@ -19,7 +19,7 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
-        private ItemsDatabse Database => MainDatabases.Instance.ItemsDatabase;
+        private ItemsDatabase Database => MainDatabases.Instance.ItemsDatabase;
 
         #endregion
 
@@ -69,7 +69,7 @@ namespace Gameplay.Items
 
         public IEnumerable GetCategoryInstancesNames()
         {
-            return ItemsDatabse.GetCategoryInstancesNames(debugItemCategory);
+            return ItemsDatabase.GetCategoryInstancesNames(debugItemCategory);
         }
 
         #endregion
