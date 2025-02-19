@@ -22,7 +22,7 @@ public class StartingBodyItem
 
     public IEnumerable GetCategoryInstancesNames()
     {
-        return ItemsDatabase.GetCategoryInstancesNames(ItemCategory.BODY);
+        return null;
     }
 
 

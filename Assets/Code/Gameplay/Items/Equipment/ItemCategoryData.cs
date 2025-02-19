@@ -5,27 +5,25 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public class ItemCategoryData
+    public class ItemCategoryData<T> where T : ItemData
     {
         #region VARIABLES
 
-        [SerializeField] private ItemCategory category;
-        [SerializeField] private List<ItemData> itemsData;
+        [SerializeField] private List<T> itemsData;
 
         #endregion
 
         #region PROPERTIES
 
-        public ItemCategory Category => category;
-        public List<ItemData> ItemsData => itemsData;
+        public List<T> ItemsData => itemsData;
 
         #endregion
 
         #region METHODS
 
-        public ItemData FindItemData(int itemDataId)
+        public T FindItemData(int itemDataId)
         {
-            ItemData data = ItemsData.Find(x => x.IdEquals(itemDataId));
+            T data = ItemsData.Find(x => x.IdEquals(itemDataId));
             if (data)
                 return data;
 

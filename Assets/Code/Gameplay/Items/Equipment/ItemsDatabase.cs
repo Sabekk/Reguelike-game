@@ -12,61 +12,47 @@ namespace Gameplay.Items
     {
         #region VARIABLES
 
-        [SerializeField] private List<ItemCategoryData> itemCategories;
+        [SerializeField] private BodyItemsContainer bodyItems;
+        [SerializeField] private EqupmentItemsContainer equipmentItems;
 
         #endregion
 
         #region PROPERTIES
 
-        public List<ItemCategoryData> ItemCategories => itemCategories;
+        public BodyItemsContainer BodyItems => bodyItems;
+        public EqupmentItemsContainer EquipmentItems => equipmentItems;
 
         #endregion
 
         #region METHODS
 
-        public ItemData FindItemData(int itemDataId, ItemCategory category)
+        public ItemData FindItemData(int itemDataId, ItemType itemType)
         {
-            foreach (var itemCategory in ItemCategories)
+            switch (itemType)
             {
-                if (itemCategory.Category != category)
-                    continue;
-
-                ItemData itemData = itemCategory.FindItemData(itemDataId);
-                if (itemData != null)
-                    return itemData;
+                case ItemType.BODY:
+                    return BodyItems.FindItemData(itemDataId);
+                case ItemType.EQUIPMENT:
+                    return EquipmentItems.FindItemData(itemDataId);
+                default:
+                    break;
             }
 
             return null;
         }
 
-        public ItemData FindItemData(int itemDataId)
+        public static IEnumerable GetCategoryInstancesNames(ItemType itemType)
         {
-            foreach (var itemCategory in ItemCategories)
-            {
-                ItemData itemData = itemCategory.FindItemData(itemDataId);
-                if (itemData != null)
-                    return itemData;
-            }
-
-            return null;
-        }
-
-        public static IEnumerable GetCategoryInstancesNames(ItemCategory category)
-        {
+            ItemsDatabase database = MainDatabases.Instance.ItemsDatabase;
             ValueDropdownList<int> values = new();
-            foreach (ItemCategoryData itemCategory in MainDatabases.Instance.ItemsDatabase.ItemCategories)
+            switch (itemType)
             {
-                if (itemCategory == null)
-                    continue;
-
-                if (category != itemCategory.Category)
-                    continue;
-
-                foreach (var itemData in itemCategory.ItemsData)
-                {
-                    if (itemData != null)
-                        values.Add(itemData.ElementName, itemData.Id);
-                }
+                case ItemType.BODY:
+                    return database.BodyItems.GetCategoryInstancesNames();
+                case ItemType.EQUIPMENT:
+                    return database.EquipmentItems.GetCategoryInstancesNames();
+                default:
+                    break;
             }
 
             return values;

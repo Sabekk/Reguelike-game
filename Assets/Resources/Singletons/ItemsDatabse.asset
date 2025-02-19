@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62df57763ffe2a34fb2aad378596cbaf, type: 3}
   m_Name: ItemsDatabse
   m_EditorClassIdentifier: 
-  itemCategories:
-  - category: 1
-    itemsData:
-    - {fileID: 11400000, guid: d60cfdcb7205c4647b93c1df13d0cffa, type: 2}
-  - category: 0
-    itemsData: []
+  bodyItems:
+    itemCategories:
+    - itemsData: []
+      elementType: 0
+  equipmentItems:
+    itemCategories: []

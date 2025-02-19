@@ -12,7 +12,7 @@ namespace Gameplay.Items
         #region VARIABLES
 
         [SerializeField, FoldoutGroup("DEBUG")] private Player player;
-        [SerializeField, FoldoutGroup("DEBUG")] private ItemCategory debugItemCategory;
+        [SerializeField, FoldoutGroup("DEBUG")] private ItemType debugItemType;
         [SerializeField, FoldoutGroup("DEBUG"), ValueDropdown(nameof(GetCategoryInstancesNames))] private int debugItemId;
 
         #endregion
@@ -59,7 +59,7 @@ namespace Gameplay.Items
         [Button]
         private void AddDebugItemToPlayer()
         {
-            ItemData itemData = MainDatabases.Instance.ItemsDatabase.FindItemData(debugItemId, debugItemCategory);
+            ItemData itemData = MainDatabases.Instance.ItemsDatabase.FindItemData(debugItemId, debugItemType);
             if (itemData == null)
                 return;
 
@@ -69,7 +69,7 @@ namespace Gameplay.Items
 
         public IEnumerable GetCategoryInstancesNames()
         {
-            return ItemsDatabase.GetCategoryInstancesNames(debugItemCategory);
+            return ItemsDatabase.GetCategoryInstancesNames(debugItemType);
         }
 
         #endregion

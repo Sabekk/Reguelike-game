@@ -97,7 +97,7 @@ namespace Gameplay.Items
         protected virtual void CatchData()
         {
             if (elementData == null)
-                elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId);
+                elementData = MainDatabases.Instance.ItemsDatabase.FindItemData(dataId, elementData.ItemType);
         }
 
         #endregion

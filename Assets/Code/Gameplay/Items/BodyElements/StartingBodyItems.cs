@@ -18,6 +18,10 @@ public class StartingBodyItems : ScriptableObject
     #endregion
 
     #region METHODS
+    private void Test()
+    {
+
+    }
 
     #endregion
 }
