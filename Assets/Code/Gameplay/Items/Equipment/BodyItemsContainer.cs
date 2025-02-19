@@ -21,7 +21,6 @@ namespace Gameplay.Items
 
         #region METHODS
 
-
         public IEnumerable GetCategoryInstancesNames(BodyElementType elementType)
         {
             ValueDropdownList<int> values = new();
@@ -42,6 +41,34 @@ namespace Gameplay.Items
 
             return values;
         }
+
+        private BodyCategoryData TryGetCategoryForType(BodyElementType bodyElementType)
+        {
+            return ItemCategories.Find(x => x.ElementType == bodyElementType);
+        }
+
+        #region UNITY_METHODS
+
+#if UNITY_EDITOR
+
+        public override void TryAddItem(BodyItemData itemData)
+        {
+            BodyCategoryData categoryData = TryGetCategoryForType(itemData.ElementType);
+
+            if (categoryData == null)
+            {
+                categoryData = new BodyCategoryData(itemData.ElementType);
+                ItemCategories.Add(categoryData);
+            }
+            else if (categoryData.ItemsData.ContainsId(itemData.Id))
+                return;
+
+            categoryData.ItemsData.Add(itemData);
+        }
+
+#endif
+
+        #endregion
 
         #endregion
     }

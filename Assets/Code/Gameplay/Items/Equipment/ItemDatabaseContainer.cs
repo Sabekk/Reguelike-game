@@ -7,11 +7,11 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [Serializable]
-    public abstract class ItemDatabaseContainer<T1, T2> where T1 : ItemCategoryData<T2> where T2: ItemData
+    public abstract class ItemDatabaseContainer<T1, T2> where T1 : ItemCategoryData<T2> where T2 : ItemData
     {
         #region VARIABLES
 
-        [SerializeField] private List<T1> itemCategories;
+        [SerializeField] protected List<T1> itemCategories;
 
         #endregion
 
@@ -53,6 +53,16 @@ namespace Gameplay.Items
 
             return values;
         }
+
+        #region EDITOR_METHODS
+
+#if UNITY_EDITOR
+
+        public abstract void TryAddItem(T2 itemData);
+
+#endif
+
+        #endregion
 
         #endregion
     }

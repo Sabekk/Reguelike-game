@@ -5,7 +5,7 @@ using UnityEngine;
 namespace Gameplay.Items
 {
     [System.Serializable]
-    public class BodyCategoryData: ItemCategoryData<BodyItemData>
+    public class BodyCategoryData : ItemCategoryData<BodyItemData>
     {
         #region VARIABLES
 
@@ -13,8 +13,19 @@ namespace Gameplay.Items
 
         #endregion
 
-        #region PROPERTIE
+        #region PROPERTIES
+
         public BodyElementType ElementType => elementType;
+
+        #endregion
+
+        #region CONSTRUCTORS
+
+        public BodyCategoryData() { }
+        public BodyCategoryData(BodyElementType elementType)
+        {
+            this.elementType = elementType;
+        }
 
         #endregion
 

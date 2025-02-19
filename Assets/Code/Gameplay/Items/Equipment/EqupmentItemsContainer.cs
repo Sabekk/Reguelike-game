@@ -20,6 +20,31 @@ namespace Gameplay.Items
 
         #region METHODS
 
+        private EquipmentCategoryData TryGetCategoryForType(EquipmentItemType elementType)
+        {
+            return ItemCategories.Find(x => x.ElementType == elementType);
+        }
+
+
+#if UNITY_EDITOR
+
+        public override void TryAddItem(EquipmentItemData itemData)
+        {
+            EquipmentCategoryData categoryData = TryGetCategoryForType(itemData.EquipmentItemType);
+
+            if (categoryData == null)
+            {
+                categoryData = new EquipmentCategoryData(itemData.EquipmentItemType);
+                ItemCategories.Add(categoryData);
+            }
+            else if (categoryData.ItemsData.ContainsId(itemData.Id))
+                return;
+
+            categoryData.ItemsData.Add(itemData);
+        }
+
+#endif
+
         #endregion
     }
 }

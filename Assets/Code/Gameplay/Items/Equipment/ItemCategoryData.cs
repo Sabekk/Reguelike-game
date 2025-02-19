@@ -15,7 +15,15 @@ namespace Gameplay.Items
 
         #region PROPERTIES
 
-        public List<T> ItemsData => itemsData;
+        public List<T> ItemsData
+        {
+            get
+            {
+                if (itemsData == null)
+                    itemsData = new();
+                return itemsData;
+            }
+        }
 
         #endregion
 

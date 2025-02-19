@@ -18,6 +18,15 @@ namespace Gameplay.Items
         public EquipmentItemType ElementType => elementType;
 
         #endregion
+        #region CONSTRUCTORS
+
+        public EquipmentCategoryData() { }
+        public EquipmentCategoryData(EquipmentItemType elementType)
+        {
+            this.elementType = elementType;
+        }
+
+        #endregion
 
         #region METHODS
 

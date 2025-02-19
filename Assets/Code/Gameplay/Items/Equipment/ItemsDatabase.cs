@@ -1,8 +1,10 @@
 using Gameplay.Items;
 using ObjectPooling;
 using Sirenix.OdinInspector;
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 namespace Gameplay.Items
@@ -57,6 +59,52 @@ namespace Gameplay.Items
 
             return values;
         }
+
+        #region EDITOR_METHODS
+
+        [Button]
+        private void FullfillDatabase()
+        {
+            BodyItems.ItemCategories.Clear();
+            EquipmentItems.ItemCategories.Clear();
+
+            var itemDataTypes = TypeCache.GetTypesDerivedFrom<ItemData>();
+            List<ItemData> items = new();
+
+            foreach (var itemDataType in itemDataTypes)
+            {
+                items.Clear();
+
+                string name = itemDataType.Name;
+                var itemGuids = AssetDatabase.FindAssets($"t:{name}");
+
+                foreach (var itemGuid in itemGuids)
+                {
+                    string path = AssetDatabase.GUIDToAssetPath(itemGuid);
+                    ItemData item = AssetDatabase.LoadAssetAtPath<ItemData>(path);
+                    items.Add(item);
+                }
+
+                foreach (var item in items)
+                {
+                    switch (item.ItemType)
+                    {
+                        case ItemType.BODY:
+                            if (item is BodyItemData bodyItemData)
+                                BodyItems.TryAddItem(bodyItemData);
+                            break;
+                        case ItemType.EQUIPMENT:
+                            if (item is EquipmentItemData equipmentItemData)
+                                EquipmentItems.TryAddItem(equipmentItemData);
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+        }
+
+        #endregion
 
         #endregion
     }
