@@ -10,7 +10,7 @@ namespace Gameplay.Items
     {
         #region VARIABLES
 
-        [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
+        [SerializeField, ReadOnly] private int id;
         [SerializeField, FoldoutGroup("BaseInfo")] private string elementName;
         [SerializeField, FoldoutGroup("BaseInfo")] private Sprite icon;
         [SerializeField, FoldoutGroup("Visualization")] private SerializableDictionary<BodyType, ItemVisualizationData[]> visualizationIds;
@@ -26,6 +26,15 @@ namespace Gameplay.Items
         public SerializableDictionary<BodyType, ItemVisualizationData[]> VisualizationIds => visualizationIds;
 
         #endregion
+
+        #region UNITY_METHODS
+
+        private void Awake()
+        {
+            id = Guid.NewGuid().GetHashCode();
+        }
+
+        #endregion  
 
         #region METHODS
 
