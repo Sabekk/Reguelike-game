@@ -9,7 +9,7 @@ public class StartingBodyItems : ScriptableObject
 {
     #region VARIABLES
 
-    [SerializeField] private SerializableDictionary<BodyElementType, StartingBodyItem> bodyElements;
+    [SerializeField, OnValueChanged(nameof(SetTypesForElements)), OnCollectionChanged(nameof(ResetElementTypes))] private SerializableDictionary<BodyElementType, StartingBodyItem> bodyElements;
 
     #endregion
 
@@ -18,9 +18,20 @@ public class StartingBodyItems : ScriptableObject
     #endregion
 
     #region METHODS
-    private void Test()
+    private void SetTypesForElements()
     {
+        foreach (var bodyElement in bodyElements)
+        {
+            bodyElement.Value.TrySetElementType(bodyElement.Key);
+        }
+    }
 
+    private void ResetElementTypes()
+    {
+        foreach (var bodyElement in bodyElements)
+        {
+            bodyElement.Value.TrySetElementType(bodyElement.Key, true);
+        }
     }
 
     #endregion

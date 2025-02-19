@@ -10,7 +10,10 @@ public class StartingBodyItem
 {
     #region VARIABLES
 
-    [SerializeField, ValueDropdown(nameof(GetCategoryInstancesNames))] private int bodyElement;
+    [SerializeField, ValueDropdown(nameof(GetCategoryInstancesNames)), ShowIf(nameof(setted))] private int bodyElement;
+
+    [SerializeField, HideInInspector] private BodyElementType elementType;
+    [SerializeField, HideInInspector] private bool setted;
 
     #endregion
 
@@ -20,9 +23,28 @@ public class StartingBodyItem
 
     #region METHODS
 
+    public void TrySetElementType(BodyElementType elementType, bool forcedChange = false)
+    {
+        if (setted == true)
+        {
+            if (forcedChange == false)
+                return;
+            else if (this.elementType != elementType)
+                bodyElement = 0;
+            else 
+                return;
+        }
+
+        this.elementType = elementType;
+        setted = true;
+    }
+
     public IEnumerable GetCategoryInstancesNames()
     {
-        return null;
+        if (setted)
+            return MainDatabases.Instance.ItemsDatabase.BodyItems.GetCategoryInstancesNames(elementType);
+        else
+            return null;
     }
 
 
