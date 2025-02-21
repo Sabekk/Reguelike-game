@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Data/Character/CharacterData", fileName = "CharacterData")]
+[Serializable]
 public class CharacterData : ScriptableObject
 {
     #region VARIABLES

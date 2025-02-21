@@ -62,7 +62,11 @@ namespace Gameplay.Items
         public void CreateVisualization(BodyType bodyType)
         {
             ClearAllVisualizations();
-            foreach (var visualizationData in Data.VisualizationIds[bodyType])
+            var visualizations = Data.GetVisualizations(bodyType);
+            if (visualizations == null)
+                return;
+
+            foreach (var visualizationData in visualizations)
             {
                 foreach (var poolId in visualizationData.PoolIds)
                 {

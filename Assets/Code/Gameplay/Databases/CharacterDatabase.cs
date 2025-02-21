@@ -7,7 +7,7 @@ public class CharacterDatabase : ScriptableObject
 {
     #region VARIABLES
 
-    [SerializeField] private CharacterData playerData;
+    [SerializeReference] private CharacterData playerData;
 
     #endregion
 
