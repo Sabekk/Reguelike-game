@@ -1,28 +1,47 @@
+using ObjectPooling;
 using Sirenix.OdinInspector;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Data/Character/CharacterData", fileName = "CharacterData")]
-[Serializable]
-public class CharacterData : ScriptableObject
+namespace Gameplay.Character.Data
 {
-    #region VARIABLES
+    [CreateAssetMenu(menuName = "Data/Character/CharacterData", fileName = "CharacterData")]
+    [Serializable]
+    public class CharacterData : ScriptableObject, IIdEqualable
+    {
+        #region VARIABLES
 
-    [SerializeField, ReadOnly] private int id = Guid.NewGuid().GetHashCode();
-    [SerializeField] private string characterName;
-    [SerializeField] private List<CharacterStartingValue> startingValues;
-    [SerializeField] private List<MovementStartingValue> movementStartingValues;
+        [SerializeField, FoldoutGroup("Data"), ReadOnly] private int id = Guid.NewGuid().GetHashCode();
+        [SerializeField, FoldoutGroup("Data")] private string characterName;
+        [SerializeField, FoldoutGroup("Starting values")] private List<CharacterStartingValue> startingValues;
+        [SerializeField, FoldoutGroup("Starting values")] private List<MovementStartingValue> movementStartingValues;
+        [SerializeReference, FoldoutGroup("Starting values")] private StartingBodyData startingBody;
+        [SerializeField, FoldoutGroup("Pool"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CHARACTER_BASE_METHOD)] private int characterPoolId;
+        [SerializeField, FoldoutGroup("Pool"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)] private int characterCategoryPoolId;
 
-    #endregion
+        #endregion
 
-    #region PROPERTIES
+        #region PROPERTIES
 
-    public int Id => id;
-    public string CharacterName => characterName;
-    public List<CharacterStartingValue> StartingValues => startingValues;
-    public List<MovementStartingValue> MovementStartingValues => movementStartingValues;
+        public int Id => id;
+        public int CharacterPoolId => characterPoolId;
+        public int CharacterCategoryPoolId => characterCategoryPoolId;
+        public string CharacterName => characterName;
+        public List<CharacterStartingValue> StartingValues => startingValues;
+        public List<MovementStartingValue> MovementStartingValues => movementStartingValues;
+        public StartingBodyData StartingBody => startingBody;
 
-    #endregion
+        #endregion
+
+        #region METHODS
+
+        public bool IdEquals(int id)
+        {
+            return Id == id;
+        }
+
+        #endregion
+    }
 }

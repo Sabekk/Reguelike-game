@@ -11,7 +11,7 @@ namespace ObjectPooling
     {
         #region VARIABLES
 
-        [SerializeField, ReadOnly] private string groupName;
+        [SerializeField] private string groupName;
         [SerializeField] private List<PoolInstanceData> instances;
 
         #endregion

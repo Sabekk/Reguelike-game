@@ -20,12 +20,6 @@ namespace Gameplay.Character
 
         #region UNITY_METHODS
 
-        //Tymczasowe - do zmiany - inicjalizacja przez manager
-        private void Start()
-        {
-            Initialize();
-        }
-
         #endregion
 
         #region METHODS

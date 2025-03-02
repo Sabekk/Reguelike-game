@@ -1,19 +1,18 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using System;
-using Sirenix.OdinInspector;
-using ObjectPooling;
 
-[CreateAssetMenu(menuName = "Data/Character/PlayerData", fileName = "PlayerData")]
-[Serializable]
-public class PlayerData : CharacterData
+namespace Gameplay.Character.Data
 {
-    #region VARIABLES
+    [CreateAssetMenu(menuName = "Data/Character/PlayerData", fileName = "PlayerData")]
+    [Serializable]
+    public class PlayerData : CharacterData
+    {
+        #region VARIABLES
 
-    #endregion
+        #endregion
 
-    #region PROPERTIES
+        #region PROPERTIES
 
-    #endregion
+        #endregion
+    }
 }

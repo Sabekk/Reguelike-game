@@ -1,4 +1,5 @@
 using Gameplay.Character;
+using Gameplay.Character.Data;
 using ObjectPooling;
 using Sirenix.OdinInspector;
 using System;

@@ -11,11 +11,13 @@ namespace Gameplay.Character.Body
         [SerializeField] private SerializableDictionary<ItemVisualizationSocketType, BodySocket> bodySockets;
         [SerializeField] private Transform rootBone;
         [SerializeField] private SerializableDictionary<int, BodyBone> bodyBones;
+        [SerializeField] private Avatar animatorAvatar;
 
         #endregion
 
         #region PROPERTIES
 
+        public Avatar AnimatorAvatar => animatorAvatar;
         public Transform RootBone => rootBone;
         public SerializableDictionary<int, BodyBone> BodyBones => bodyBones;
         public SerializableDictionary<ItemVisualizationSocketType, BodySocket> BodySockets => bodySockets;

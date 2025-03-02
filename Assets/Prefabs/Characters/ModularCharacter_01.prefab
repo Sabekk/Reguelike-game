@@ -31663,7 +31663,6 @@ GameObject:
   m_Component:
   - component: {fileID: 4571756472629890}
   - component: {fileID: 2396269625709266051}
-  - component: {fileID: 95001415476118014}
   m_Layer: 0
   m_Name: ModularCharacter_01
   m_TagString: Untagged
@@ -31885,27 +31884,7 @@ MonoBehaviour:
       Value: {fileID: 7219373029210159977}
     - Key: 285763337
       Value: {fileID: 3010807265902253740}
---- !u!95 &95001415476118014
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1752634011024786}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 98a56ff2c8ee98645a4d3f79fa1506c5, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 1
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 1
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
+  animatorAvatar: {fileID: 9000000, guid: 98a56ff2c8ee98645a4d3f79fa1506c5, type: 3}
 --- !u!1 &1752719088688438
 GameObject:
   m_ObjectHideFlags: 0

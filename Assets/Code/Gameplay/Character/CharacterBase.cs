@@ -1,4 +1,5 @@
 using Gameplay.Character.Body;
+using Gameplay.Character.Data;
 using Gameplay.Character.Module;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
@@ -13,29 +14,40 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Values")] private CharacterValues values;
         [SerializeField, FoldoutGroup("Values")] private MovementValues movementValues;
 
-        [SerializeField] private CharacterData data;
+        [SerializeField, ReadOnly] private int characterDataId;
         [SerializeField, HideInInspector] private bool isInitialzied;
 
+        [SerializeField] private CharacterBodyContainer bodyContainer;
         [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
         [SerializeField, FoldoutGroup("Components")] private Transform cameraFollowTarget;
 
-        [SerializeField] private CharacterBodyContainer bodyContainer;
+        [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
         [SerializeField, HideInInspector] protected List<CharacterModule> modules;
 
-        [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
+        private CharacterData data;
 
         #endregion
 
         #region PROPERTIES
 
+        public CharacterBodyContainer BodyContainer => bodyContainer;
         public CharacterValues Values => values;
         public MovementValues MovementValues => movementValues;
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
         public Transform CameraFollowTarget => cameraFollowTarget;
         public EquipmentModule EquipmentModule => equipmentModule;
-        public CharacterBodyContainer BodyContainer => bodyContainer;
+
+        public CharacterData Data
+        {
+            get
+            {
+                if (data == null)
+                    data = MainDatabases.Instance.CharacterDatabase.GetData(characterDataId);
+                return data;
+            }
+        }
 
         public abstract bool IsMoving { get; }
         public bool AllowToRotate => IsMoving;// + inne warunki typu celowanie aby obracaæ postaæ celuj¹c¹
@@ -57,6 +69,9 @@ namespace Gameplay.Character
 
         protected virtual void Update()
         {
+            if (!isInitialzied)
+                return;
+
             UpdateModules();
         }
 
@@ -67,9 +82,9 @@ namespace Gameplay.Character
         public void Initialize()
         {
             values = new();
-            data = new();
-
             values.Initialze();
+
+            InitializeBodyContainer();
             SetModules();
             InitializeModules();
 
@@ -79,11 +94,13 @@ namespace Gameplay.Character
         public void SetData(CharacterData data)
         {
             this.data = data;
+            characterDataId = data.Id;
         }
 
         public void SetStartingValues()
         {
-            Values.SetStartingValues(new List<StartingValue>(data.StartingValues));
+            if (Data.StartingValues != null)
+                Values.SetStartingValues(new List<StartingValue>(Data.StartingValues));
         }
 
         protected virtual void SetModules()
@@ -105,6 +122,22 @@ namespace Gameplay.Character
         protected void CleanUpModules()
         {
             modules.ForEach(m => m.CleanUp());
+        }
+
+        private void InitializeBodyContainer()
+        {
+            if (bodyContainer == null)
+            {
+                if (Data == null)
+                    return;
+
+                bodyContainer = ObjectPooling.ObjectPool.Instance.GetFromPool(Data.StartingBody.BodyContainerId).GetComponent<CharacterBodyContainer>();
+                if (bodyContainer == null)
+                {
+                    Debug.LogError($"Wrong settings in character data ID [{Data.Id}]");
+                }
+            }
+            bodyContainer.transform.SetParent(transform);
         }
 
         #endregion

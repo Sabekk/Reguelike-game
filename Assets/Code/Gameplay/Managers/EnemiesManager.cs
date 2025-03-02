@@ -1,4 +1,5 @@
 using Gameplay.Character;
+using Gameplay.Character.Data;
 using ObjectPooling;
 using Sirenix.OdinInspector;
 using System.Collections;
@@ -44,16 +45,13 @@ namespace Gameplay.Arena
 
         private async Task<Enemy> CreateEnemyAsync(EnemyData enemyData)
         {
-            Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPoolId, MainDatabases.Instance.EnemiesDatabase.EnemyPoolCategoryId).GetComponent<Enemy>();
+            //Enemy enemy = ObjectPool.Instance.GetFromPool(enemyData.ModelPoolId, MainDatabases.Instance.EnemiesDatabase.EnemyPoolCategoryId).GetComponent<Enemy>();
+            Enemy enemy = CharacterManager.Instance.SpawnCharacter<Enemy>(enemyData);
             if (enemy == null)
             {
                 Debug.LogError(StringBuilderScaler.GetScaledText("Niepoprawny przypisany model enemy dla {0}", enemyData.Id));
                 return null;
             }
-
-            enemy.Initialize();
-            enemy.SetData(enemyData);
-            enemy.SetStartingValues();
 
             enemies.Add(enemy);
 

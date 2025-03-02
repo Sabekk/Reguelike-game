@@ -1,8 +1,6 @@
+using Gameplay.Character.Data;
 using Gameplay.Items;
-using ModifiableValues;
 using ObjectPooling;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Database/MainDatabases", fileName = "MainDatabases")]

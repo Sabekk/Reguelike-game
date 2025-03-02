@@ -51,6 +51,8 @@ namespace Gameplay.Character.Animations
             base.Initialize(character);
             if (animator == null)
                 animator = Character.GetComponent<Animator>();
+
+            animator.avatar = Character.BodyContainer.AnimatorAvatar;
         }
 
         protected virtual void MoveInDirection(Vector2 direction)

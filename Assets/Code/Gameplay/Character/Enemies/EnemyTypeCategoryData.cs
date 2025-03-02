@@ -3,34 +3,37 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-[Serializable]
-public class EnemyTypeCategoryData
+namespace Gameplay.Character.Data
 {
-    #region VARIABLES
-
-    [SerializeField] private EnemyType enemyType;
-    [SerializeField] private List<EnemyData> enemyData;
-
-    #endregion
-
-    #region PROPERTIES
-
-    public EnemyType EnemyType => enemyType;
-    public List<EnemyData> EnemyDatas => enemyData;
-
-    #endregion
-
-    #region METHODS
-
-    public void AddEnemyData(EnemyData data)
+    [Serializable]
+    public class EnemyTypeCategoryData
     {
-        EnemyDatas.Add(data);
-    }
+        #region VARIABLES
 
-    public void RemoveEnemyData(EnemyData data)
-    {
-        EnemyDatas.Remove(data);
-    }
+        [SerializeField] private EnemyType enemyType;
+        [SerializeField] private List<EnemyData> enemyData;
 
-    #endregion
+        #endregion
+
+        #region PROPERTIES
+
+        public EnemyType EnemyType => enemyType;
+        public List<EnemyData> EnemyDatas => enemyData;
+
+        #endregion
+
+        #region METHODS
+
+        public void AddEnemyData(EnemyData data)
+        {
+            EnemyDatas.Add(data);
+        }
+
+        public void RemoveEnemyData(EnemyData data)
+        {
+            EnemyDatas.Remove(data);
+        }
+
+        #endregion
+    }
 }

@@ -1,3 +1,4 @@
+using Gameplay.Character.Data;
 using Sirenix.OdinInspector.Editor;
 using Sirenix.Utilities.Editor;
 using System;

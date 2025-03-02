@@ -1,24 +1,50 @@
+using Sirenix.OdinInspector;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(menuName = "Database/CharacterDatabase", fileName = "CharactersDatabase")]
-public class CharacterDatabase : ScriptableObject
+namespace Gameplay.Character.Data
 {
-    #region VARIABLES
+    [CreateAssetMenu(menuName = "Database/CharacterDatabase", fileName = "CharactersDatabase")]
+    public class CharacterDatabase : ScriptableObject
+    {
+        #region VARIABLES
 
-    [SerializeReference] private CharacterData playerData;
+        public const string GET_DATA_METHOD = "@" + nameof(CharacterDatabase) + "." + nameof(GetDatasNames) + "()";
 
-    #endregion
+        [SerializeReference] private CharacterData defaultData;
+        [SerializeField] private List<CharacterData> datas;
 
-    #region PROPERTIES
+        #endregion
 
-    public CharacterData PlayerData => playerData;
+        #region PROPERTIES
 
-    #endregion
+        public CharacterData DefaultData => defaultData;
+        public List<CharacterData> Datas => datas;
 
-    #region METHODS
+        #endregion
 
-    #endregion
+        #region METHODS
 
+        public CharacterData GetData(int dataId)
+        {
+            CharacterData data = datas.Find(x => x.IdEquals(dataId));
+            if (data == null)
+                data = defaultData;
+
+            return data;
+        }
+
+        public static IEnumerable GetDatasNames()
+        {
+            ValueDropdownList<int> values = new();
+            foreach (CharacterData characterData in MainDatabases.Instance.CharacterDatabase.Datas)
+                values.Add(characterData.CharacterName, characterData.Id);
+
+            return values;
+        }
+
+        #endregion
+
+    }
 }

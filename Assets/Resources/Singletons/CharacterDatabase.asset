@@ -10,6 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 73fcf8fdfc4d3a949a7044ce84b98e4a, type: 3}
-  m_Name: CharactersDatabase
+  m_Name: CharacterDatabase
   m_EditorClassIdentifier: 
-  playerData: {fileID: 11400000, guid: ad6a11e5c2b8eda44b9a92c51a336933, type: 2}
+  defaultData: {fileID: 0}
+  datas:
+  - {fileID: 11400000, guid: d7a77be1f5824f945bbb47e2a3340fd8, type: 2}
+  - {fileID: 11400000, guid: f194676c907981f429a2298d8f77e08d, type: 2}

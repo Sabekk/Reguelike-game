@@ -67,7 +67,7 @@ namespace ObjectPooling
         {
             foreach (var category in poolCategories)
             {
-                if (categoryId > 0)
+                if (categoryId != -1)
                     if (!category.IdEquals(categoryId))
                         continue;
 
@@ -75,7 +75,7 @@ namespace ObjectPooling
 
                 if (instance != null)
                     return instance.GetFromPool();
-                else
+                else if (categoryId != -1)
                 {
                     Debug.LogError("Pool cannot be found");
                     return null;

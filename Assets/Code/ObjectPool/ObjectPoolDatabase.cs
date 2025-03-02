@@ -15,7 +15,7 @@ namespace ObjectPooling
         public const string GET_POOL_BODY_ELEMENTS_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolBodyElements) + "()";
         public const string GET_POOL_CAMERAS_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolCameras) + "()";
         public const string GET_POOL_CHARACTER_BASE_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolBaseCharacters) + "()";
-        public const string GET_POOL_ENEMY_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolEnemies) + "()";
+        public const string GET_POOL_CONTAINER_METHOD = "@" + nameof(ObjectPoolDatabase) + "." + nameof(GetPoolContainers) + "()";
 
         [SerializeField] private List<PoolCategoryData> poolCategories;
 
@@ -66,14 +66,14 @@ namespace ObjectPooling
             return GetCategoryInstancesIds("Character");
         }
 
+        public static IEnumerable GetPoolContainers()
+        {
+            return GetCategoryInstancesIds("Container");
+        }
+
         public static IEnumerable GetPoolCameras()
         {
             return GetCategoryInstancesIds("Camera");
-        }
-
-        public static IEnumerable GetPoolEnemies()
-        {
-            return GetCategoryInstancesIds("Enemy");
         }
 
         public IEnumerable GetCategoryInstanceIds(int categoryId)

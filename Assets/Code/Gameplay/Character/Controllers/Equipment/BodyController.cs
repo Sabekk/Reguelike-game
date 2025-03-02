@@ -34,6 +34,12 @@ namespace Gameplay.Character
 
         #region METHODS
 
+        public override void Initialize(CharacterBase character)
+        {
+            base.Initialize(character);
+            //Character.EquipmentModule.bo
+        }
+
         protected override void AttachEvents()
         {
             base.AttachEvents();
