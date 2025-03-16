@@ -18,18 +18,18 @@ namespace Gameplay.Character.Animations
 
         #region METHODS
 
-        protected override void AttachEvents()
+        public override void AttachEvents()
         {
             base.AttachEvents();
             Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
-            Player.PlayerMovementController.MovementModule.OnStartMoving += HandleStartMoving;
+            Player.PlayerMovementController.PlayerMovementModule.OnStartMoving += HandleStartMoving;
         }
 
-        protected override void DetachEvents()
+        public override void DetachEvents()
         {
             base.DetachEvents();
             Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
-            Player.PlayerMovementController.MovementModule.OnStartMoving -= HandleStartMoving;
+            Player.PlayerMovementController.PlayerMovementModule.OnStartMoving -= HandleStartMoving;
         }
 
         #region HANDLERS

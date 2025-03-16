@@ -63,7 +63,7 @@ namespace ObjectPooling
 
         public static IEnumerable GetPoolBaseCharacters()
         {
-            return GetCategoryInstancesIds("Character");
+            return GetCategoryInstancesIds("CharacterInGame");
         }
 
         public static IEnumerable GetPoolContainers()

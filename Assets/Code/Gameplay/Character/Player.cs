@@ -25,10 +25,10 @@ namespace Gameplay.Character
 
         #region METHODS
 
-        protected override void SetControllers()
+        protected override void CreateControllers()
         {
-            base.SetControllers();
-            controllers.Add(playerMovementController = new());
+            base.CreateControllers();
+            movementController = new PlayerMovementController();
         }
 
         #endregion

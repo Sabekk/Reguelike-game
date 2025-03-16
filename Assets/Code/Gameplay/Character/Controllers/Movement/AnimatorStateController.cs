@@ -25,7 +25,7 @@ namespace Gameplay.Character.Animations
 
         #region PROPERTIES
 
-        public Animator ChracterAnimator => animator;
+        public Animator CharacterAnimator => Character.CharacterInGame.Aniamtor;
         private int MoveDirectionX => Animator.StringToHash("MoveDirX");
         private int MoveDirectionY => Animator.StringToHash("MoveDirY");
 
@@ -50,10 +50,10 @@ namespace Gameplay.Character.Animations
         public override void Initialize(CharacterBase character)
         {
             base.Initialize(character);
-            if (animator == null)
-                animator = Character.GetComponent<Animator>();
+            //if (animator == null)
+            //    animator = Character.GetComponent<Animator>();
 
-            animator.avatar = Character.BodyContainer.AnimatorAvatar;
+            //animator.avatar = Character.CharacterInGame.AnimatorAvatar;
         }
 
         protected virtual void MoveInDirection(Vector2 direction)

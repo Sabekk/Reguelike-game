@@ -41,14 +41,14 @@ namespace Gameplay.Character.Equipment
             //Character.EquipmentModule.bo
         }
 
-        protected override void AttachEvents()
+        public override void AttachEvents()
         {
             base.AttachEvents();
             Character.EquipmentController.OnBodyItemEquip += HandleBodyItemEquip;
             Character.EquipmentController.OnBodyItemUnequip += HandleBodyItemUnequip;
         }
 
-        protected override void DetachEvents()
+        public override void DetachEvents()
         {
             base.DetachEvents();
             Character.EquipmentController.OnBodyItemEquip -= HandleBodyItemEquip;

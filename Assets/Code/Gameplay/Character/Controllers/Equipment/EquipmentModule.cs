@@ -33,14 +33,14 @@ namespace Gameplay.Character.Equipment
             return equipedItem != null;
         }
 
-        protected override void AttachEvents()
+        public override void AttachEvents()
         {
             base.AttachEvents();
             Character.EquipmentController.OnItemEquip += HandleItemEquip;
             Character.EquipmentController.OnItemUnequip += HandleItemUnequip;
         }
 
-        protected override void DetachEvents()
+        public override void DetachEvents()
         {
             base.DetachEvents();
             Character.EquipmentController.OnItemEquip -= HandleItemEquip;

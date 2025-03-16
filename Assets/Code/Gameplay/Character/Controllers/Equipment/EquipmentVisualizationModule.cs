@@ -20,7 +20,7 @@ namespace Gameplay.Character.Equipment
 
         #region METHODS
 
-        protected override void AttachEvents()
+        public override void AttachEvents()
         {
             base.AttachEvents();
             Character.EquipmentController.OnItemEquip += HandleItemEquip;
@@ -30,7 +30,7 @@ namespace Gameplay.Character.Equipment
             Character.EquipmentController.OnBodyItemUnequip += HandleBodyItemUnequip;
         }
 
-        protected override void DetachEvents()
+        public override void DetachEvents()
         {
             base.DetachEvents();
             Character.EquipmentController.OnItemEquip -= HandleItemEquip;
@@ -46,7 +46,7 @@ namespace Gameplay.Character.Equipment
             {
                 foreach (var incompatibileSocket in visualization.IncompatibleSockets)
                 {
-                    if (Character.BodyContainer.BodySockets.TryGetValue(incompatibileSocket, out BodySocket socket))
+                    if (Character.CharacterInGame.BodySockets.TryGetValue(incompatibileSocket, out BodySocket socket))
                         socket.transform.gameObject.SetActiveOptimize(state);
                 }
             }
@@ -58,7 +58,7 @@ namespace Gameplay.Character.Equipment
             List<ItemElementVisualization> elementVisualizationsTmp = null;
 
             foreach (var visualization in item.Visualizations)
-                if (Character.BodyContainer.BodySockets.TryGetValue(visualization.Key, out BodySocket bodySocket))
+                if (Character.CharacterInGame.BodySockets.TryGetValue(visualization.Key, out BodySocket bodySocket))
                 {
                     if (bodySocket.transform.childCount > 0)
                     {

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Gameplay.Character.Equipment
 {
     [Serializable]
-    public class EquipmentController : CharacterControllerWithModules
+    public class EquipmentController : CharacterControllerBase
     {
         #region ACTIONS
 
@@ -39,6 +39,15 @@ namespace Gameplay.Character.Equipment
         #endregion
 
         #region METHODS
+
+        public override void CreateModules()
+        {
+            base.CreateModules();
+            bodyModule = new BodyModule();
+            equipmentModule = new EquipmentModule();
+            inventoryModule = new InventoryModule();
+            visualizationModule = new EquipmentVisualizationModule();
+        }
 
         public override void SetModules()
         {

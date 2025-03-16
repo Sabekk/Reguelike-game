@@ -1,13 +1,24 @@
 using Gameplay.Items;
+using ObjectPooling;
 using Sirenix.OdinInspector;
+using System;
 using UnityEngine;
 
 namespace Gameplay.Character.Body
 {
-    public class CharacterBodyContainer : MonoBehaviour
+    public class CharacterInGame : MonoBehaviour, IPoolable
     {
+        #region ACTION
+
+        public event Action OnKill;
+
+        #endregion
+
         #region VARIABLES
 
+        [SerializeField, FoldoutGroup("Components")] private Animator animator;
+        [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
+        [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
         [SerializeField] private SerializableDictionary<ItemVisualizationSocketType, BodySocket> bodySockets;
         [SerializeField] private Transform rootBone;
         [SerializeField] private SerializableDictionary<int, BodyBone> bodyBones;
@@ -17,14 +28,23 @@ namespace Gameplay.Character.Body
 
         #region PROPERTIES
 
-        public Avatar AnimatorAvatar => animatorAvatar;
+        public CapsuleCollider CapsuleCollider => capsuleCollider;
+        public Rigidbody Rb => rb;
+        public Animator Aniamtor => animator;
         public Transform RootBone => rootBone;
         public SerializableDictionary<int, BodyBone> BodyBones => bodyBones;
         public SerializableDictionary<ItemVisualizationSocketType, BodySocket> BodySockets => bodySockets;
+        public CharacterBase Character { get; set; }
+        public PoolObject Poolable { get; set; }
 
         #endregion
 
         #region METHODS
+
+        public void Initialize(CharacterBase character)
+        {
+            Character = character;
+        }
 
         public BodyBone GetBodyBoneById(int id)
         {
@@ -52,6 +72,12 @@ namespace Gameplay.Character.Body
         public BodySocket GetBodySocket(ItemVisualizationSocketType socketType)
         {
             return null;
+
+        }
+
+        public void AssignPoolable(PoolObject poolable)
+        {
+            Poolable = poolable;
         }
 
         [Button]

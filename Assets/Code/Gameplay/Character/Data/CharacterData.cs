@@ -18,15 +18,15 @@ namespace Gameplay.Character.Data
         [SerializeField, FoldoutGroup("Starting values")] private List<CharacterStartingValue> startingValues;
         [SerializeField, FoldoutGroup("Starting values")] private List<MovementStartingValue> movementStartingValues;
         [SerializeReference, FoldoutGroup("Starting values")] private StartingBodyData startingBody;
-        [SerializeField, FoldoutGroup("Pool"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CHARACTER_BASE_METHOD)] private int characterPoolId;
         [SerializeField, FoldoutGroup("Pool"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CATEGORIES_METHOD)] private int characterCategoryPoolId;
+        [SerializeField, FoldoutGroup("Pool"), ValueDropdown(ObjectPoolDatabase.GET_POOL_CHARACTER_BASE_METHOD)] private int characterInGamePoolId;
 
         #endregion
 
         #region PROPERTIES
 
         public int Id => id;
-        public int CharacterPoolId => characterPoolId;
+        public int CharacterInGamePoolId => characterInGamePoolId;
         public int CharacterCategoryPoolId => characterCategoryPoolId;
         public string CharacterName => characterName;
         public List<CharacterStartingValue> StartingValues => startingValues;

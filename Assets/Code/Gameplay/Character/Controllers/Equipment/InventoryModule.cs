@@ -27,13 +27,7 @@ namespace Gameplay.Character.Equipment
         #endregion
 
         #region METHODS
-
-        public bool ContainItem(EquipmentItem item)
-        {
-            return items.ContainsId(item.Id);
-        }
-
-        protected override void AttachEvents()
+        public override void AttachEvents()
         {
             base.AttachEvents();
             Character.EquipmentController.OnItemEquip += HandleItemEquip;
@@ -43,7 +37,7 @@ namespace Gameplay.Character.Equipment
             Character.EquipmentController.OnItemRemove += HandleItemRemove;
         }
 
-        protected override void DetachEvents()
+        public override void DetachEvents()
         {
             base.DetachEvents();
             Character.EquipmentController.OnItemEquip -= HandleItemEquip;
@@ -51,6 +45,11 @@ namespace Gameplay.Character.Equipment
 
             Character.EquipmentController.OnItemCollect -= HandleItemCollect;
             Character.EquipmentController.OnItemRemove -= HandleItemRemove;
+        }
+
+        public bool ContainItem(EquipmentItem item)
+        {
+            return items.ContainsId(item.Id);
         }
 
         private void AddItem(EquipmentItem item)

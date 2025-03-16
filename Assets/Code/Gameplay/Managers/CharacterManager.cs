@@ -12,6 +12,9 @@ public class CharacterManager : GameplayManager<CharacterManager>
 
     [SerializeField, ValueDropdown(CharacterDatabase.GET_DATA_METHOD)] private int defaultPlayerId;
     [SerializeField] private Player player;
+    [SerializeField] private List<CharacterBase> characters = new();
+
+    private Dictionary<CharacterBase, bool> charactersTmp = new();
 
     #endregion
 
@@ -21,7 +24,28 @@ public class CharacterManager : GameplayManager<CharacterManager>
 
     #endregion
 
+    #region UNITY_METHODS
+
+    private void Update()
+    {
+        foreach (var characterTmp in charactersTmp)
+        {
+            if (characterTmp.Value)
+                characters.Add(characterTmp.Key);
+            else
+                characters.Remove(characterTmp.Key);
+        }
+
+        charactersTmp.Clear();
+
+        for (int i = 0; i < characters.Count; i++)
+            characters[i].OnUpdate();
+    }
+
+    #endregion
+
     #region METHODS
+
 
     /// <summary>
     /// Spawn setted character
@@ -29,7 +53,7 @@ public class CharacterManager : GameplayManager<CharacterManager>
     /// <typeparam name="T">Type of character like player or enemy</typeparam>
     /// <param name="dataId">Id of character data into CharacterDatabase</param>
     /// <returns></returns>
-    public T SpawnCharacter<T>(int dataId) where T : CharacterBase
+    public T SpawnCharacter<T>(int dataId) where T : CharacterBase, new()
     {
         CharacterData data = MainDatabases.Instance.CharacterDatabase.GetData(dataId);
         return SpawnCharacter<T>(data);
@@ -43,16 +67,25 @@ public class CharacterManager : GameplayManager<CharacterManager>
     /// <param name="data">Base data for character</param>
     /// <param name="poolCategoryId">Optional pool category of pooled character id [Optimization]</param>
     /// <returns></returns>
-    public T SpawnCharacter<T>(CharacterData data) where T : CharacterBase
+    public T SpawnCharacter<T>(CharacterData data) where T : CharacterBase, new()
     {
-        T character = ObjectPool.Instance.GetFromPool(data.CharacterPoolId, data.CharacterCategoryPoolId).GetComponent<T>();
+        T character = new T();
+        //T character = ObjectPool.Instance.GetFromPool(data.CharacterPoolId, data.CharacterCategoryPoolId).GetComponent<T>();
 
         character.SetData(data);
         character.Initialize();
         character.SetStartingValues();
-        character.transform.SetParent(transform);
+        if (character.TryCreateVisualization(transform))
+            charactersTmp.Add(character, true);
 
         return character;
+    }
+
+    public void RemoveCharacter<T>(T character) where T : CharacterBase
+    {
+        character.CleanUp();
+        character.DetachEvents();
+        charactersTmp.Add(character, false);
     }
 
     public void SpawnPlayer()

@@ -38,8 +38,8 @@ namespace Gameplay.Arena
                     continue;
 
                 Enemy enemy = await CreateEnemyAsync(enemyData);
-                if (enemy)
-                    enemy.transform.position = spawnPoints[i].transform.position;
+                //if (enemy)
+                //    enemy.transform.position = spawnPoints[i].transform.position;
             }
         }
 

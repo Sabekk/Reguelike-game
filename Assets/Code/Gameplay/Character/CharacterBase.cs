@@ -5,11 +5,20 @@ using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
 using Gameplay.Character.Equipment;
+using Gameplay.Character.Movement;
+using ObjectPooling;
+using System;
 
 namespace Gameplay.Character
 {
-    public abstract class CharacterBase : MonoBehaviour, ICameraFollowTarget
+    public abstract class CharacterBase : ICameraFollowTarget
     {
+        #region ACTIONS
+
+        public event Action OnCharacterInGameCreated;
+
+        #endregion
+
         #region VARIABLES
 
         [SerializeField, FoldoutGroup("Values")] private CharacterValues values;
@@ -18,12 +27,12 @@ namespace Gameplay.Character
         [SerializeField, ReadOnly] private int characterDataId;
         [SerializeField, HideInInspector] private bool isInitialzied;
 
-        [SerializeField] private CharacterBodyContainer bodyContainer;
-        [SerializeField, FoldoutGroup("Components")] private Rigidbody rb;
-        [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
+        [SerializeField] private CharacterInGame characterInGame;
         [SerializeField, FoldoutGroup("Components")] private Transform cameraFollowTarget;
 
-        [SerializeField, FoldoutGroup("Controllers")] private EquipmentController equipmentController;
+        [SerializeField, FoldoutGroup("Controllers")] protected EquipmentController equipmentController;
+        [SerializeField, FoldoutGroup("Controllers")] protected CharacterMovementController movementController;
+
         [SerializeField, HideInInspector] protected List<CharacterControllerBase> controllers;
 
         private CharacterData data;
@@ -32,11 +41,9 @@ namespace Gameplay.Character
 
         #region PROPERTIES
 
-        public CharacterBodyContainer BodyContainer => bodyContainer;
+        public CharacterInGame CharacterInGame => characterInGame;
         public CharacterValues Values => values;
         public MovementValues MovementValues => movementValues;
-        public CapsuleCollider CapsuleCollider => capsuleCollider;
-        public Rigidbody Rb => rb;
         public Transform CameraFollowTarget => cameraFollowTarget;
         public EquipmentController EquipmentController => equipmentController;
 
@@ -61,19 +68,7 @@ namespace Gameplay.Character
 
         public CharacterBase()
         {
-
-        }
-
-        #endregion
-
-        #region UNITY_METHODS
-
-        protected virtual void Update()
-        {
-            if (!isInitialzied)
-                return;
-
-            UpdateControllers();
+            CreateControllers();
         }
 
         #endregion
@@ -85,11 +80,31 @@ namespace Gameplay.Character
             values = new();
             values.Initialze();
 
-            InitializeBodyContainer();
+            //InitializeBodyContainer();
             SetControllers();
             InitializeControllers();
 
             isInitialzied = true;
+        }
+
+
+        public void CleanUp()
+        {
+            CleanUpControllers();
+            if (CharacterInGame)
+            {
+                CharacterInGame.OnKill -= HandleCharacterKill;
+                ObjectPool.Instance.ReturnToPool(CharacterInGame);
+            }
+        }
+
+
+        public void OnUpdate()
+        {
+            if (!isInitialzied)
+                return;
+
+            UpdateControllers();
         }
 
         public void SetData(CharacterData data)
@@ -104,42 +119,104 @@ namespace Gameplay.Character
                 Values.SetStartingValues(new List<StartingValue>(Data.StartingValues));
         }
 
+        public void AttachEvents()
+        {
+            AttachControllers();
+        }
+
+        public void DetachEvents()
+        {
+            DetachControllers();
+        }
+
+
+        protected virtual void CreateControllers()
+        {
+            equipmentController = new EquipmentController();
+            movementController = new CharacterMovementController();
+        }
+
         protected virtual void SetControllers()
         {
             controllers = new();
             controllers.Add(equipmentController);
+            controllers.Add(movementController);
+        }
+
+        protected void AttachControllers()
+        {
+            controllers.ForEach(c => c.AttachEvents());
+        }
+
+        protected void DetachControllers()
+        {
+            controllers.ForEach(c => c.DetachEvents());
         }
 
         protected void InitializeControllers()
         {
-            controllers.ForEach(m => m.Initialize(this));
+            controllers.ForEach(c => c.Initialize(this));
         }
 
         protected void UpdateControllers()
         {
-            controllers?.ForEach(m => m.OnUpdate());
+            controllers.ForEach(c => c.OnUpdate());
         }
 
         protected void CleanUpControllers()
         {
-            controllers.ForEach(m => m.CleanUp());
+            controllers.ForEach(c => c.CleanUp());
+        }
+
+
+        public bool TryCreateVisualization(Transform parent = null)
+        {
+            if (Data == null)
+                return false;
+
+            if (characterInGame != null)
+                return true;
+
+            characterInGame = ObjectPool.Instance.GetFromPool(Data.CharacterInGamePoolId, Data.CharacterCategoryPoolId).GetComponent<CharacterInGame>();
+            if (characterInGame != null)
+            {
+                characterInGame.Initialize(this);
+                //characterInGame.OnKill += HandleCharacterKill;
+                characterInGame.transform.SetParent(parent);
+                OnCharacterInGameCreated?.Invoke();
+                return true;
+            }
+            else
+                return false;
         }
 
         private void InitializeBodyContainer()
         {
-            if (bodyContainer == null)
+            if (characterInGame == null)
             {
                 if (Data == null)
                     return;
 
-                bodyContainer = ObjectPooling.ObjectPool.Instance.GetFromPool(Data.StartingBody.BodyContainerId).GetComponent<CharacterBodyContainer>();
-                if (bodyContainer == null)
+                characterInGame = ObjectPool.Instance.GetFromPool(Data.StartingBody.BodyContainerId).GetComponent<CharacterInGame>();
+                if (characterInGame == null)
                 {
                     Debug.LogError($"Wrong settings in character data ID [{Data.Id}]");
                 }
             }
-            bodyContainer.transform.SetParent(transform);
         }
+
+        #region HANDLERS
+
+        private void HandleCharacterKill()
+        {
+            if (CharacterInGame)
+                CharacterInGame.OnKill -= HandleCharacterKill;
+            Debug.Log("DEATH");
+
+            CharacterManager.Instance.RemoveCharacter(this);
+        }
+
+        #endregion
 
         #endregion
     }

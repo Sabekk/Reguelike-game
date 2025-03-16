@@ -15,16 +15,31 @@ namespace Gameplay.Character.Module
 
         #region PROPERTIES
 
+        public virtual bool WaitingForCharacterInGame => false;
         public CharacterBase Character => character;
+        public bool IsInitialized { get; set; }
 
         #endregion
 
         #region METHODS
 
+        /// <summary>
+        /// Initialization when character (in manager) is created
+        /// </summary>
+        /// <param name="character"></param>
         public virtual void Initialize(CharacterBase character)
         {
-            this.character = character;
-            AttachEvents();
+            if (WaitingForCharacterInGame == false)
+                this.character = character;
+        }
+
+        /// <summary>
+        /// Initialization when character in game was created
+        /// </summary>
+        public virtual void LateInitialize()
+        {
+            if (WaitingForCharacterInGame)
+                IsInitialized = true;
         }
 
         public virtual void CleanUp()
@@ -37,11 +52,11 @@ namespace Gameplay.Character.Module
 
         }
 
-        protected virtual void AttachEvents()
+        public virtual void AttachEvents()
         {
 
         }
-        protected virtual void DetachEvents()
+        public virtual void DetachEvents()
         {
 
         }

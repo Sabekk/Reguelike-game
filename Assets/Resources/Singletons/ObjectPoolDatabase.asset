@@ -2442,20 +2442,14 @@ MonoBehaviour:
         poolObject: {fileID: 6819262612543691299, guid: 6b7eb8798d7baf740bc3df92ee65cde8, type: 3}
         size: 2
   - id: -1917852970
-    categoryName: Character
+    categoryName: CharacterInGame
     groups:
-    - groupName: Player
+    - groupName: Characters
       instances:
-      - id: -1932464151
-        name: DefaultPlayer
-        poolObject: {fileID: 4751481180049056021, guid: 78e953f9c60f29c4e877b830dcc04f34, type: 3}
-        size: 1
-    - groupName: Enemy
-      instances:
-      - id: 486982860
-        name: DefaultEnemy
-        poolObject: {fileID: 3665806011371310988, guid: 94b49064959a3584bb9b65b07d99ff67, type: 3}
-        size: 5
+      - id: -95356317
+        name: Human
+        poolObject: {fileID: 1752634011024786, guid: 668fe7f591eb61b40a9ba303fe0c9189, type: 3}
+        size: 3
   - id: 1602937048
     categoryName: Body
     groups:
@@ -3055,12 +3049,3 @@ MonoBehaviour:
         name: Body_Male_Eyebrow_7
         poolObject: {fileID: 2637968236968493569, guid: a0df25cc30f14ec4f96c118c868309f7, type: 3}
         size: 2
-  - id: 966285569
-    categoryName: Container
-    groups:
-    - groupName: Human_container
-      instances:
-      - id: 343394664
-        name: Human_container
-        poolObject: {fileID: 1752634011024786, guid: 668fe7f591eb61b40a9ba303fe0c9189, type: 3}
-        size: 5

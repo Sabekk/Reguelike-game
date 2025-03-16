@@ -1,4 +1,5 @@
 using Gameplay.Character;
+using Gameplay.Character.Body;
 using ObjectPooling;
 using Sirenix.OdinInspector;
 using StudioJAW;
@@ -49,11 +50,11 @@ namespace Gameplay.Items
         private void ApplyPlayerBones()
         {
             settingBones.Clear();
-            Player player = FindAnyObjectByType<Player>();
+            CharacterInGame characterInGame = FindAnyObjectByType<CharacterInGame>();
 
             for (int i = 0; i < bonesIds.Length; i++)
             {
-                BodyBone bone = player.BodyContainer.GetBodyBoneById(bonesIds[i]);
+                BodyBone bone = characterInGame.GetBodyBoneById(bonesIds[i]);
                 if (bone != null)
                     settingBones.Add(bone.transform);
             }
@@ -101,11 +102,11 @@ namespace Gameplay.Items
             EditorUtility.SetDirty(this);
             bonesIds = null;
 
-            Player player = FindAnyObjectByType<Player>();
+            CharacterInGame characterInGame = FindAnyObjectByType<CharacterInGame>();
             List<int> ids = new();
             for (int i = 0; i < itemCoreBones.Length; i++)
             {
-                BodyBone bone = player.BodyContainer.GetBodyBone(itemCoreBones[i].name);
+                BodyBone bone = characterInGame.GetBodyBone(itemCoreBones[i].name);
                 if (bone != null)
                     ids.Add(bone.Id);
             }

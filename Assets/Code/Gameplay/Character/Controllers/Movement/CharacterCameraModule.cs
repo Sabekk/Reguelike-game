@@ -27,7 +27,7 @@ namespace Gameplay.Character.Camera
         public Quaternion RotationOfTarget => CharacterCamera.Target.rotation;
         private Player Player => Character as Player;
         private FollowingCamera CharacterCamera => CamerasManager.Instance != null ? CamerasManager.Instance.PersonCameraInGame : null;
-        private CharacterMovementModule_Player MovementController => Player.PlayerMovementController.MovementModule;
+        private CharacterMovementModule_Player MovementController => Player.PlayerMovementController.PlayerMovementModule;
 
         #endregion
 
@@ -54,21 +54,21 @@ namespace Gameplay.Character.Camera
             }
         }
 
-        protected override void AttachEvents()
+        public override void AttachEvents()
         {
             base.AttachEvents();
             Events.Gameplay.Move.OnLookInDirection += HandleLookInDirection;
 
-            if (Player)
+            if (Player != null)
                 MovementController.OnStartMoving += HandleTurningAfterLookingAround;
         }
 
-        protected override void DetachEvents()
+        public override void DetachEvents()
         {
             base.DetachEvents();
             Events.Gameplay.Move.OnLookInDirection -= HandleLookInDirection;
 
-            if (Player)
+            if (Player != null)
                 MovementController.OnStartMoving -= HandleTurningAfterLookingAround;
         }
 

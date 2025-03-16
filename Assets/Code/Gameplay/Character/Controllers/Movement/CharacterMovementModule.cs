@@ -30,19 +30,20 @@ namespace Gameplay.Character.Movement
 
         #region PROPERTIES
 
+        public override bool WaitingForCharacterInGame => true;
         public bool IsMoving => direction != Vector2.zero;
-        protected Transform CharacterTransform => Character.transform;
-        protected bool IsGrounded => Physics.Raycast(Character.transform.position + CapsuleCollider.center, Vector3.down, (CapsuleCollider.height * 0.5f + 0.2f));
-        protected Rigidbody Rb => Character.Rb;
-        protected CapsuleCollider CapsuleCollider => Character.CapsuleCollider;
+        protected Transform CharacterTransform => Character.CharacterInGame.transform;
+        protected bool IsGrounded => Physics.Raycast(Character.CharacterInGame.transform.position + CapsuleCollider.center, Vector3.down, (CapsuleCollider.height * 0.5f + 0.2f));
+        protected Rigidbody Rb => Character.CharacterInGame.Rb;
+        protected CapsuleCollider CapsuleCollider => Character.CharacterInGame.CapsuleCollider;
 
         #endregion
 
         #region METHODS
 
-        public override void Initialize(CharacterBase character)
+        public override void LateInitialize()
         {
-            base.Initialize(character);
+            base.LateInitialize();
             baseDrag = Rb.drag;
         }
 
