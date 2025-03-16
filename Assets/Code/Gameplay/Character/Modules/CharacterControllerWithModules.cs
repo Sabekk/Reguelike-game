@@ -1,16 +1,15 @@
-using Gameplay.Character.Controller;
 using Gameplay.Character.Module;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character
+namespace Gameplay.Character.Controller
 {
-    public abstract class CharacterControllersModule : CharacterModule
+    public abstract class CharacterControllerWithModules : CharacterControllerBase
     {
         #region VARIABLES
 
-        [SerializeField, HideInInspector] protected List<ControllerBase> controllers;
+        [SerializeField, HideInInspector] protected List<ModuleBase> modules;
 
         #endregion
 
@@ -23,24 +22,24 @@ namespace Gameplay.Character
         public override void Initialize(CharacterBase character)
         {
             this.character = character;
-            SetControllers();
+            SetModules();
 
-            controllers.ForEach(c => c.Initialize(character));
+            modules.ForEach(c => c.Initialize(character));
         }
 
         public override void CleanUp()
         {
-            controllers.ForEach(c => c.CleanUp());
+            modules.ForEach(c => c.CleanUp());
         }
 
         public override void OnUpdate()
         {
-            controllers.ForEach(c => c.OnUpdate());
+            modules.ForEach(c => c.OnUpdate());
         }
 
-        public virtual void SetControllers()
+        public virtual void SetModules()
         {
-            controllers = new();
+            modules = new();
         }
 
         #endregion

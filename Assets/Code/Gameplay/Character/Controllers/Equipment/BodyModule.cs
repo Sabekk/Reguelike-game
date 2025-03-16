@@ -1,17 +1,18 @@
 using Gameplay.Character.Body;
 using Gameplay.Character.Controller;
+using Gameplay.Character.Module;
 using Gameplay.Items;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character
+namespace Gameplay.Character.Equipment
 {
     /// <summary>
     /// Controller to collect default body elements
     /// </summary>
     [Serializable]
-    public class BodyController : ControllerBase
+    public class BodyModule : ModuleBase
     {
         #region VARIABLES
 
@@ -43,15 +44,15 @@ namespace Gameplay.Character
         protected override void AttachEvents()
         {
             base.AttachEvents();
-            Character.EquipmentModule.OnBodyItemEquip += HandleBodyItemEquip;
-            Character.EquipmentModule.OnBodyItemUnequip += HandleBodyItemUnequip;
+            Character.EquipmentController.OnBodyItemEquip += HandleBodyItemEquip;
+            Character.EquipmentController.OnBodyItemUnequip += HandleBodyItemUnequip;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
-            Character.EquipmentModule.OnBodyItemEquip -= HandleBodyItemEquip;
-            Character.EquipmentModule.OnBodyItemUnequip -= HandleBodyItemUnequip;
+            Character.EquipmentController.OnBodyItemEquip -= HandleBodyItemEquip;
+            Character.EquipmentController.OnBodyItemUnequip -= HandleBodyItemUnequip;
         }
 
         #region HANDLERS

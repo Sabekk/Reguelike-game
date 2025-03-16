@@ -1,9 +1,10 @@
 using Gameplay.Character.Body;
 using Gameplay.Character.Data;
-using Gameplay.Character.Module;
+using Gameplay.Character.Controller;
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using UnityEngine;
+using Gameplay.Character.Equipment;
 
 namespace Gameplay.Character
 {
@@ -22,8 +23,8 @@ namespace Gameplay.Character
         [SerializeField, FoldoutGroup("Components")] private CapsuleCollider capsuleCollider;
         [SerializeField, FoldoutGroup("Components")] private Transform cameraFollowTarget;
 
-        [SerializeField, FoldoutGroup("Modules")] private EquipmentModule equipmentModule;
-        [SerializeField, HideInInspector] protected List<CharacterModule> modules;
+        [SerializeField, FoldoutGroup("Controllers")] private EquipmentController equipmentController;
+        [SerializeField, HideInInspector] protected List<CharacterControllerBase> controllers;
 
         private CharacterData data;
 
@@ -37,7 +38,7 @@ namespace Gameplay.Character
         public CapsuleCollider CapsuleCollider => capsuleCollider;
         public Rigidbody Rb => rb;
         public Transform CameraFollowTarget => cameraFollowTarget;
-        public EquipmentModule EquipmentModule => equipmentModule;
+        public EquipmentController EquipmentController => equipmentController;
 
         public CharacterData Data
         {
@@ -72,7 +73,7 @@ namespace Gameplay.Character
             if (!isInitialzied)
                 return;
 
-            UpdateModules();
+            UpdateControllers();
         }
 
         #endregion
@@ -85,8 +86,8 @@ namespace Gameplay.Character
             values.Initialze();
 
             InitializeBodyContainer();
-            SetModules();
-            InitializeModules();
+            SetControllers();
+            InitializeControllers();
 
             isInitialzied = true;
         }
@@ -103,25 +104,25 @@ namespace Gameplay.Character
                 Values.SetStartingValues(new List<StartingValue>(Data.StartingValues));
         }
 
-        protected virtual void SetModules()
+        protected virtual void SetControllers()
         {
-            modules = new();
-            modules.Add(equipmentModule);
+            controllers = new();
+            controllers.Add(equipmentController);
         }
 
-        protected void InitializeModules()
+        protected void InitializeControllers()
         {
-            modules.ForEach(m => m.Initialize(this));
+            controllers.ForEach(m => m.Initialize(this));
         }
 
-        protected void UpdateModules()
+        protected void UpdateControllers()
         {
-            modules?.ForEach(m => m.OnUpdate());
+            controllers?.ForEach(m => m.OnUpdate());
         }
 
-        protected void CleanUpModules()
+        protected void CleanUpControllers()
         {
-            modules.ForEach(m => m.CleanUp());
+            controllers.ForEach(m => m.CleanUp());
         }
 
         private void InitializeBodyContainer()

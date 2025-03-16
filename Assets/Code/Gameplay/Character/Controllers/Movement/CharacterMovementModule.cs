@@ -1,14 +1,10 @@
-using Gameplay.Character.Animations;
-using GlobalEventSystem;
+using Gameplay.Character.Module;
 using Sirenix.OdinInspector;
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character.Controller
+namespace Gameplay.Character.Movement
 {
-    public class CharacterMovementController : ControllerBase
+    public class CharacterMovementModule : ModuleBase
     {
         #region ACTIONS
 

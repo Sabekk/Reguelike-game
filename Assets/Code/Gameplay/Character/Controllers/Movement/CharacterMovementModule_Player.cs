@@ -1,11 +1,12 @@
+using Gameplay.Character.Camera;
 using GlobalEventSystem;
 using System;
 using UnityEngine;
 
-namespace Gameplay.Character.Controller
+namespace Gameplay.Character.Movement
 {
     [Serializable]
-    public class CharacterMovementController_Player : CharacterMovementController
+    public class CharacterMovementModule_Player : CharacterMovementModule
     {
         #region ACTIONS
 
@@ -31,7 +32,7 @@ namespace Gameplay.Character.Controller
         }
 
         protected Player Player => Character as Player;
-        private CharacterCameraController CameraController => Player.ControllersModule.CameraController;
+        private CharacterCameraModule CameraController => Player.PlayerMovementController.CameraModule;
         private Quaternion RotationOfCamera => CameraController.RotationOfTarget;
         private bool RotateWithCamera => IsReturningRotation || CameraController.IsFocusing;
 
@@ -60,7 +61,7 @@ namespace Gameplay.Character.Controller
         protected override void RotateCharacterByLookDirection()
         {
             //Ignoring rotation when player is looking around
-            if (Player.ControllersModule.CameraController.IsLookingAround)
+            if (Player.PlayerMovementController.CameraModule.IsLookingAround)
                 return;
 
             if (RotateWithCamera)
@@ -91,7 +92,7 @@ namespace Gameplay.Character.Controller
         }
         protected override void MoveInDirection(Vector2 direction)
         {
-            if (Player.ControllersModule.CameraController.IsLookingAround)
+            if (Player.PlayerMovementController.CameraModule.IsLookingAround)
             {
                 IsReturningRotation = true;
                 OnStartMoving?.Invoke();

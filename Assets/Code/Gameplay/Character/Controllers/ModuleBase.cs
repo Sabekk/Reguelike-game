@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character.Controller
+namespace Gameplay.Character.Module
 {
-    public abstract class ControllerBase
+    public abstract class ModuleBase
     {
         #region VARIABLES
 

@@ -1,13 +1,14 @@
 using Gameplay.Character.Body;
+using Gameplay.Character.Module;
 using Gameplay.Items;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character.Controller
+namespace Gameplay.Character.Equipment
 {
     [Serializable]
-    public class EquipmentVisualizationController : ControllerBase
+    public class EquipmentVisualizationModule : ModuleBase
     {
         #region VARIABLES
 
@@ -22,21 +23,21 @@ namespace Gameplay.Character.Controller
         protected override void AttachEvents()
         {
             base.AttachEvents();
-            Character.EquipmentModule.OnItemEquip += HandleItemEquip;
-            Character.EquipmentModule.OnItemUnequip += HandleItemUnequip;
+            Character.EquipmentController.OnItemEquip += HandleItemEquip;
+            Character.EquipmentController.OnItemUnequip += HandleItemUnequip;
 
-            Character.EquipmentModule.OnBodyItemEquip += HandleBodyItemEquip;
-            Character.EquipmentModule.OnBodyItemUnequip += HandleBodyItemUnequip;
+            Character.EquipmentController.OnBodyItemEquip += HandleBodyItemEquip;
+            Character.EquipmentController.OnBodyItemUnequip += HandleBodyItemUnequip;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
-            Character.EquipmentModule.OnItemEquip -= HandleItemEquip;
-            Character.EquipmentModule.OnItemUnequip -= HandleItemUnequip;
+            Character.EquipmentController.OnItemEquip -= HandleItemEquip;
+            Character.EquipmentController.OnItemUnequip -= HandleItemUnequip;
 
-            Character.EquipmentModule.OnBodyItemEquip -= HandleBodyItemEquip;
-            Character.EquipmentModule.OnBodyItemUnequip -= HandleBodyItemUnequip;
+            Character.EquipmentController.OnBodyItemEquip -= HandleBodyItemEquip;
+            Character.EquipmentController.OnBodyItemUnequip -= HandleBodyItemUnequip;
         }
 
         private void TryToggleIncompatibileVisualizations(ItemBase item, bool state)
@@ -53,7 +54,7 @@ namespace Gameplay.Character.Controller
 
         private void CreateVisualization(ItemBase item)
         {
-            item.CreateVisualization(Character.EquipmentModule.BodyController.BodyType);
+            item.CreateVisualization(Character.EquipmentController.BodyModule.BodyType);
             List<ItemElementVisualization> elementVisualizationsTmp = null;
 
             foreach (var visualization in item.Visualizations)

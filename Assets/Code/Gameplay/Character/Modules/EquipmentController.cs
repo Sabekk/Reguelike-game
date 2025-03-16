@@ -1,13 +1,12 @@
-using Gameplay.Character.Body;
 using Gameplay.Character.Controller;
 using Gameplay.Items;
 using System;
 using UnityEngine;
 
-namespace Gameplay.Character
+namespace Gameplay.Character.Equipment
 {
     [Serializable]
-    public class EquipmentModule : CharacterControllersModule
+    public class EquipmentController : CharacterControllerWithModules
     {
         #region ACTIONS
 
@@ -23,48 +22,48 @@ namespace Gameplay.Character
 
         #region VARIABLES
 
-        [SerializeField] private BodyController bodyController;
-        [SerializeField] private EquipmentController equipmentController;
-        [SerializeField] private InventoryController inventoryController;
-        [SerializeField] private EquipmentVisualizationController visualizationController;
+        [SerializeField] private BodyModule bodyModule;
+        [SerializeField] private EquipmentModule equipmentModule;
+        [SerializeField] private InventoryModule inventoryModule;
+        [SerializeField] private EquipmentVisualizationModule visualizationModule;
 
         #endregion
 
         #region PROPERTIES
 
-        public BodyController BodyController => bodyController;
-        public EquipmentController EquipmentController => equipmentController;
-        public InventoryController InventoryController => inventoryController;
-        public EquipmentVisualizationController VisualizationController => visualizationController;
+        public BodyModule BodyModule => bodyModule;
+        public EquipmentModule EquipmentModule => equipmentModule;
+        public InventoryModule InventoryModule => inventoryModule;
+        public EquipmentVisualizationModule VisualizationModule => visualizationModule;
 
         #endregion
 
         #region METHODS
 
-        public override void SetControllers()
+        public override void SetModules()
         {
-            base.SetControllers();
-            controllers.Add(BodyController);
-            controllers.Add(EquipmentController);
-            controllers.Add(InventoryController);
-            controllers.Add(VisualizationController);
+            base.SetModules();
+            modules.Add(BodyModule);
+            modules.Add(EquipmentModule);
+            modules.Add(InventoryModule);
+            modules.Add(VisualizationModule);
         }
 
         #region EQUIP ITEMS
 
         public bool IsEquiped(EquipmentItem item)
         {
-            return EquipmentController.IsEquiped(item);
+            return EquipmentModule.IsEquiped(item);
         }
 
         public bool IsItemTypeEquiped(EquipmentItemType type, out EquipmentItem equipedItem)
         {
-            return EquipmentController.IsItemTypeEquiped(type, out equipedItem);
+            return EquipmentModule.IsItemTypeEquiped(type, out equipedItem);
         }
 
         public void EquipItem(EquipmentItem item)
         {
-            if (!InventoryController.ContainItem(item))
+            if (!InventoryModule.ContainItem(item))
                 return;
 
             if (IsItemTypeEquiped(item.ElementData.EquipmentItemType, out EquipmentItem equipedItem))
@@ -105,7 +104,7 @@ namespace Gameplay.Character
         {
             UnequipItem(item);
 
-            if (InventoryController.ContainItem(item))
+            if (InventoryModule.ContainItem(item))
                 OnItemRemove?.Invoke(item);
         }
 
@@ -116,7 +115,7 @@ namespace Gameplay.Character
 
         public void EquipBodyItem(BodyItem bodyItem)
         {
-            if (BodyController.ItemsInUse.TryGetValue(bodyItem.BodyItemData.ElementType, out _))
+            if (BodyModule.ItemsInUse.TryGetValue(bodyItem.BodyItemData.ElementType, out _))
             {
                 Debug.LogWarning($"[{GetType().Name}] Body item of type [{bodyItem.BodyItemData.ElementType}] is already in use. Check settings");
                 return;

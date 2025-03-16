@@ -4,7 +4,7 @@ using System;
 namespace Gameplay.Character.Animations
 {
     [Serializable]
-    public class AnimatorStateController_Player : AnimatorStateController
+    public class AnimatorStateModule_Player : AnimatorStateController
     {
         #region VARIABLES
 
@@ -22,14 +22,14 @@ namespace Gameplay.Character.Animations
         {
             base.AttachEvents();
             Events.Gameplay.Move.OnMoveInDirection += MoveInDirection;
-            Player.ControllersModule.MovementController.OnStartMoving += HandleStartMoving;
+            Player.PlayerMovementController.MovementModule.OnStartMoving += HandleStartMoving;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
             Events.Gameplay.Move.OnMoveInDirection -= MoveInDirection;
-            Player.ControllersModule.MovementController.OnStartMoving -= HandleStartMoving;
+            Player.PlayerMovementController.MovementModule.OnStartMoving -= HandleStartMoving;
         }
 
         #region HANDLERS

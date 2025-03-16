@@ -51,7 +51,7 @@ namespace Gameplay.Items
 
         public void AddItemToCharacter(CharacterBase character, ItemBase item)
         {
-            character.EquipmentModule.CollectItem(item);
+            character.EquipmentController.CollectItem(item);
         }
 
         #region EDITOR_METHODS

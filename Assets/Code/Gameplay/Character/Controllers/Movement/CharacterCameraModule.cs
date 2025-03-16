@@ -1,14 +1,13 @@
-using Gameplay.Character.Camera;
+using Gameplay.Character.Module;
+using Gameplay.Character.Movement;
 using GlobalEventSystem;
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character.Controller
+namespace Gameplay.Character.Camera
 {
     [Serializable]
-    public class CharacterCameraController : ControllerBase
+    public class CharacterCameraModule : ModuleBase
     {
         #region VARIABLES
 
@@ -28,7 +27,7 @@ namespace Gameplay.Character.Controller
         public Quaternion RotationOfTarget => CharacterCamera.Target.rotation;
         private Player Player => Character as Player;
         private FollowingCamera CharacterCamera => CamerasManager.Instance != null ? CamerasManager.Instance.PersonCameraInGame : null;
-        private CharacterMovementController_Player MovementController => Player.ControllersModule.MovementController;
+        private CharacterMovementModule_Player MovementController => Player.PlayerMovementController.MovementModule;
 
         #endregion
 

@@ -1,3 +1,4 @@
+using Gameplay.Character.Movement;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -7,14 +8,14 @@ namespace Gameplay.Character
     {
         #region VARIABLES
 
-        [SerializeField, FoldoutGroup("Modules")] private PlayerControllersModule controllersModule;
+        [SerializeField, FoldoutGroup("Controllers")] private PlayerMovementController playerMovementController;
 
         #endregion
 
         #region PROPERTIES
 
-        public PlayerControllersModule ControllersModule => controllersModule;
-        public override bool IsMoving => ControllersModule.MovementController.IsMoving;
+        public PlayerMovementController PlayerMovementController => playerMovementController;
+        public override bool IsMoving => PlayerMovementController.MovementModule.IsMoving;
 
         #endregion
 
@@ -24,10 +25,10 @@ namespace Gameplay.Character
 
         #region METHODS
 
-        protected override void SetModules()
+        protected override void SetControllers()
         {
-            base.SetModules();
-            modules.Add(controllersModule = new());
+            base.SetControllers();
+            controllers.Add(playerMovementController = new());
         }
 
         #endregion

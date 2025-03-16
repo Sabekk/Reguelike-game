@@ -1,13 +1,13 @@
+using Gameplay.Character.Module;
 using Gameplay.Items;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Gameplay.Character.Controller
+namespace Gameplay.Character.Equipment
 {
     [System.Serializable]
-    public class InventoryController : ControllerBase
+    public class InventoryModule : ModuleBase
     {
         #region ACTIONS
 
@@ -36,21 +36,21 @@ namespace Gameplay.Character.Controller
         protected override void AttachEvents()
         {
             base.AttachEvents();
-            Character.EquipmentModule.OnItemEquip += HandleItemEquip;
-            Character.EquipmentModule.OnItemUnequip += HandleItemUnequip;
+            Character.EquipmentController.OnItemEquip += HandleItemEquip;
+            Character.EquipmentController.OnItemUnequip += HandleItemUnequip;
 
-            Character.EquipmentModule.OnItemCollect += HandleItemCollect;
-            Character.EquipmentModule.OnItemRemove += HandleItemRemove;
+            Character.EquipmentController.OnItemCollect += HandleItemCollect;
+            Character.EquipmentController.OnItemRemove += HandleItemRemove;
         }
 
         protected override void DetachEvents()
         {
             base.DetachEvents();
-            Character.EquipmentModule.OnItemEquip -= HandleItemEquip;
-            Character.EquipmentModule.OnItemUnequip -= HandleItemUnequip;
+            Character.EquipmentController.OnItemEquip -= HandleItemEquip;
+            Character.EquipmentController.OnItemUnequip -= HandleItemUnequip;
 
-            Character.EquipmentModule.OnItemCollect -= HandleItemCollect;
-            Character.EquipmentModule.OnItemRemove -= HandleItemRemove;
+            Character.EquipmentController.OnItemCollect -= HandleItemCollect;
+            Character.EquipmentController.OnItemRemove -= HandleItemRemove;
         }
 
         private void AddItem(EquipmentItem item)

@@ -1,4 +1,5 @@
 using Gameplay.Character.Controller;
+using Gameplay.Character.Module;
 using System;
 using UnityEngine;
 
@@ -7,7 +8,7 @@ namespace Gameplay.Character.Animations
     [RequireComponent(typeof(Animator))]
 
     [Serializable]
-    public class AnimatorStateController : ControllerBase
+    public class AnimatorStateController : ModuleBase
     {
         #region VARIABLES
 

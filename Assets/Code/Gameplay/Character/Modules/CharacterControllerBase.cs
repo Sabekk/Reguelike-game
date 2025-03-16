@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Gameplay.Character.Module
+namespace Gameplay.Character.Controller
 {
-    public abstract class CharacterModule
+    public abstract class CharacterControllerBase
     {
         [SerializeField, HideInInspector] protected CharacterBase character;
 
